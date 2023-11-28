@@ -2,8 +2,6 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-echo "Hello World @^_^@";
-
 try {
     $conn = new PDO("mysql:host=localhost;dbname=criminalthing", "root");
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -11,4 +9,16 @@ try {
 } catch (PDOException $e) {
     echo "Connection failed: " . $e->getMessage(); // Display error message if connection fails
 }
+
+$sql = "SELECT * FROM criminals";
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+echo 'Criminals information: <br />';
+while ($row = $stmt->fetch()) {
+    echo '----------------------------------------<br />';
+    foreach ($row as $columnName => $columnValue) {
+        echo $columnName . ': ' . $columnValue . '<br />';
+    }
+}
+
 ?>

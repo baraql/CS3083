@@ -43,6 +43,8 @@ include 'connect.php';
             <th>State</th>
             <th>Zip</th>
             <th>Phone</th>
+            <th>Operations</th>
+
 
           </tr>
         </thead>
@@ -72,15 +74,31 @@ include 'connect.php';
                     <td>'.$state.'</td>
                     <td>'.$zip.'</td>
                     <td>'.$phone.'</td>
+                    
+                    <td>
+                    <a href="" class="more">
+                        <button type="button">More</button>
+                    </a>
+                    </td>
+                
                 </tr>';
             }
         }
     ?>
 
+        <script>
+            const from = document.getElementByID('form')
+
+
+
+
+
+        </script>
+
+
+  
         </tbody>
       </table>
-
-
 
 
 

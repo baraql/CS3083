@@ -31,7 +31,7 @@ include 'connect.php';
         </nav>
         <nav class="header-main-logout">
             <ul>
-            <li><a href="logout.php">LOGOUT</a></li>
+                <li><a href="logout.php">LOGOUT</a></li>
             </ul>
         </nav>
     </header>
@@ -40,36 +40,36 @@ include 'connect.php';
 
     <table class="content-table">
         <thead>
-          <tr>
-            <th>ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Precinct</th>
-            <th>Badge</th>
-            <th>Phone</th>
-            <th>Status</th>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Precinct</th>
+                <th>Badge</th>
+                <th>Phone</th>
+                <th>Status</th>
 
-          </tr>
+            </tr>
         </thead>
         <tbody>
 
 
 
-        <?php
-                $sql = "SELECT * FROM `officers`";
-                $result = mysqli_query($con, $sql);
+            <?php
+            $sql = "SELECT * FROM `officers`";
+            $result = mysqli_query($con, $sql);
 
-                if ($result) {
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        $id = $row['officer_ID'];
-                        $fname = $row['officer_name_first'];
-                        $lname = $row['officer_name_last'];
-                        $precinct = $row['officer_precinct'];
-                        $badge = $row['officer_badge'];
-                        $phone = $row['officer_phone'];
-                        $status = $row['officer_status'];
+            if ($result) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $id = $row['officer_ID'];
+                    $fname = $row['officer_name_first'];
+                    $lname = $row['officer_name_last'];
+                    $precinct = $row['officer_precinct'];
+                    $badge = $row['officer_badge'];
+                    $phone = $row['officer_phone'];
+                    $status = $row['officer_status'];
 
-                        echo '<tr>
+                    echo '<tr>
                             <th scope="row">' . $id . '</th>
                             <td>' . $fname . '</td>
                             <td>' . $lname . '</td>
@@ -78,9 +78,9 @@ include 'connect.php';
                             <td>' . $phone . '</td>
                             <td>' . $status . '</td>
                         </tr>';
-                    }
                 }
-                ?>
+            }
+            ?>
 
 
 

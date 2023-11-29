@@ -3,15 +3,15 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 try {
-    $conn = new PDO("mysql:host=localhost;dbname=criminalthing", "root");
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+     = new PDO("mysql:host=localhost;dbname=criminalthing", "root");
+    $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     echo "Connected successfully"; // Display message upon successful connection
 } catch (PDOException $e) {
     echo "Connection failed: " . $e->getMessage(); // Display error message if connection fails
 }
 
 $sql = "SELECT * FROM criminals";
-$stmt = $conn->prepare($sql);
+$stmt = $con->prepare($sql);
 $stmt->execute();
 echo 'Criminals information: <br />';
 while ($row = $stmt->fetch()) {

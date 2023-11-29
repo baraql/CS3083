@@ -28,7 +28,7 @@ include 'connect.php';
         </nav>
         <nav class = "header-main-logout">
         <ul>
-            <li><a href="#">LOGOUT</a></li>
+        <li><a href="logout.php">LOGOUT</a></li>
         
         </ul>
         </nav>

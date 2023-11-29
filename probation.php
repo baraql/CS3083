@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("Location: index.html");
+    exit();
+}
 include 'connect.php';
 ?>
 
@@ -29,7 +34,7 @@ include 'connect.php';
         </nav>
         <nav class = "header-main-logout">
         <ul>
-            <li><a href="#">LOGOUT</a></li>
+        <li><a href="logout.php">LOGOUT</a></li>
         
         </ul>
         </nav>

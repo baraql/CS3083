@@ -15,7 +15,7 @@ $password = $_POST['pwd'];
 $sql = "INSERT into users(firstname, lastname, username, password) values('$firstname','$lastname','$username','$password')";
 $result = mysqli_query($con, $sql);
 if($result){
-	echo $firstname. " is registred succesfully!";
+	echo $firstname. " is registered succesfully!";
 }
 
 	$con->close();

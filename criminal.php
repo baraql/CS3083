@@ -101,7 +101,7 @@ include 'connect.php';
 
 
                     <td>
-                    <a href="#" class="more" onclick="submitFormWithId($id)">
+                    <a href="#" class="more" onclick="submitFormWithId(' . $id . ')">
                         <button type="button">More</button>
                     </a>
                     </td>

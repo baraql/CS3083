@@ -97,7 +97,7 @@ include 'connect.php';
         
         form.submit();
     }
-</script>
+            </script>
 
 
                     <td>
@@ -111,9 +111,6 @@ include 'connect.php';
             }
             ?>
 
-            <script>
-                const from = document.getElementByID('form')
-            </script>
 
 
 

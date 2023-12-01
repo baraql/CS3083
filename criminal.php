@@ -82,40 +82,61 @@ include 'connect.php';
                     <td>' . $phone . '</td>
                     
                     <script>
-    function submitFormWithId(id) {
-        var form = document.createElement("form");
-        form.method = "POST";
-        form.action = "popup.php";
-        
-        var input = document.createElement("input");
-        input.type = "hidden";
-        input.name = "id";
-        input.value = id;
-        
-        form.appendChild(input);
-        document.body.appendChild(form);
-        
-        form.submit();
-    }
-            </script>
+                    function submitFormWithId(id) {
+                        var form = document.createElement("form");
+                        form.method = "POST";
+                        form.action = "popup.php";
+                        
+                        var input = document.createElement("input");
+                        input.type = "hidden";
+                        input.name = "id";
+                        input.value = id;
+                        
+                        form.appendChild(input);
+                        document.body.appendChild(form);
+                        
+                        form.submit();
+                    }
+                    </script>
 
 
                     <td>
-                    <a href="#" class="more" onclick="submitFormWithId(' . $id . ')">
-                        <button type="button">More</button>
-                    </a>
+                        <a href="#" class="more" onclick="submitFormWithId(' . $id . ')">
+                            <button type="button">More</button>
+                        </a>
                     </td>
+                    
                 
                 </tr>';
                 }
             }
             ?>
 
-
-
-
         </tbody>
     </table>
+
+
+    <script>
+    function redirectToNewPage() {
+        // Assuming you want to redirect to a page named 'file_input.php'
+        // You can change this URL based on your actual file input page
+        var newPageUrl = 'addcriminal.php';
+        
+        // Redirect to the new page
+        window.location.href = newPageUrl;
+    }
+</script>
+
+
+<a href="#" class="more" onclick="redirectToNewPage()" style="float: right;">
+    <button type="button">
+        <span style="margin-right: 5px;">Add</span>
+    </button>
+</a>
+
+
+
+    
 
 
 

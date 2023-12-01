@@ -1,11 +1,26 @@
 <?php
 session_start();
+include_once 'criminal_functions.php';
+
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     // echo "not logged in";
     header("Location: index.html");
     exit();
 }
 include 'connect.php';
+
+$result = [];
+$method = array_key_exists('m', $_GET) ? $_GET['m'] : 'l';
+if ($method == 's') {
+    $result = search_cirminal();
+} elseif ($method == 'd') {
+    delete_criminal();
+    header("location:criminal.php");
+}
+else {
+    $result = list_criminal();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -31,6 +46,29 @@ include 'connect.php';
                 <li><a href="cc.php">CRIME CODES </a></li>
             </ul>
         </nav>
+        <nav class="header-main-nav">
+            <ul>
+            <li>
+                <form id="search_form" method="post" action="criminal.php?m=s">
+                    <input type="search" name="search_text">
+                    <select id="field" name="field">
+                        <option value="criminal_ID">id</option>
+                        <option value="criminal_name_first">First Name</option>
+                        <option value="criminal_name_last">Last Name</option>
+                        <option value="criminal_street">Street</option>
+                        <option value="criminal_city">City</option>
+                        <option value="criminal_state">State</option>
+                        <option value="criminal_zip">Zip</option>
+                        <option value="criminal_phone">Phone</option>
+                    </select>
+                    <input type="submit" value="Search"> 
+                </form>
+            </li>
+            <li>
+                    <input type="button" value="Add new" onclick="location.href='criminal_add_and_edit.php'"/>
+            </li>
+            </ul>
+        </nav>
         <nav class="header-main-logout">
             <ul>
                 <li><a href="logout.php">LOGOUT</a></li>
@@ -50,26 +88,20 @@ include 'connect.php';
                 <th>Zip</th>
                 <th>Phone</th>
                 <th>Operations</th>
-
-
             </tr>
         </thead>
         <tbody>
 
-            <?php
-            $sql = "SELECT * FROM `criminals`";
-            $result = mysqli_query($con, $sql);
-
-            if ($result) {
-                while ($row = mysqli_fetch_assoc($result)) {
-                    $id = $row['criminal_ID'];
-                    $fname = $row['criminal_name_first'];
-                    $lname = $row['criminal_name_last'];
-                    $street = $row['criminal_street'];
-                    $city = $row['criminal_city'];
-                    $state = $row['criminal_state'];
-                    $zip = $row['criminal_zip'];
-                    $phone = $row['criminal_phone'];
+        <?php
+            foreach ($result as $row) {
+                    $id = $row->id;
+                    $fname = $row->fname;
+                    $lname = $row->lname;
+                    $street = $row->street;
+                    $city = $row->city;
+                    $state = $row->state;
+                    $zip = $row->zip;
+                    $phone = $row->phone;
 
                     echo '<tr>
                     <th scope="row">' . $id . '</th>
@@ -82,35 +114,55 @@ include 'connect.php';
                     <td>' . $phone . '</td>
                     
                     <script>
-                    function submitFormWithId(id) {
-                        var form = document.createElement("form");
-                        form.method = "POST";
-                        form.action = "popup.php";
+                        function submitFormWithId(id) {
+                            var form = document.createElement("form");
+                            form.method = "POST";
+                            form.action = "popup.php";
+                            
+                            var input = document.createElement("input");
+                            input.type = "hidden";
+                            input.name = "id";
+                            input.value = id;
+                            
+                            form.appendChild(input);
+                            document.body.appendChild(form);
+                            
+                            form.submit();
+                        };
                         
-                        var input = document.createElement("input");
-                        input.type = "hidden";
-                        input.name = "id";
-                        input.value = id;
-                        
-                        form.appendChild(input);
-                        document.body.appendChild(form);
-                        
-                        form.submit();
-                    }
+                        function deleteWithId(id, name) {
+                            if (window.confirm("Sure to delete criminal infromation from \'" + name + "\'?")) {
+                                var form1 = document.createElement("form");
+                                form1.method = "POST";
+                                form1.action = "criminal.php?m=d";
+
+                                var input = document.createElement("input");
+                                input.type = "hidden";
+                                input.name = "id";
+                                input.value = id;
+
+                                form1.appendChild(input);
+                                document.body.appendChild(form1);
+                                form1.submit();
+                            }
+                        }
                     </script>
 
 
                     <td>
-                        <a href="#" class="more" onclick="submitFormWithId(' . $id . ')">
-                            <button type="button">More</button>
-                        </a>
-                    </td>
+                    <a href="#" class="more" onclick="submitFormWithId(' . $id . ')">
+                        <button type="button">More</button>
+                    </a>
+                    <a href="#" class="more" onclick="deleteWithId(' . $id . ', \'' . $fname . ' ' . $lname . '\')">
+                        <button type="button">Delete</button>
+                    </a>
 
-                    
-                    
+                    <a href="criminal_add_and_edit.php?m=e&criminal_ID='. $id .'" class="more")">
+                        <button type="button">Edit</button>
+                    </a>
+                    </td>
                 
                 </tr>';
-                }
             }
             ?>
 

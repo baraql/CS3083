@@ -105,6 +105,8 @@ include 'connect.php';
                             <button type="button">More</button>
                         </a>
                     </td>
+
+                    
                     
                 
                 </tr>';

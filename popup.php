@@ -50,7 +50,10 @@ if (isset($_POST['id'])) {
         <div class="column"> 
 
         <div class = "box" onclick="toggleJudges()"> 
-        <h2>Criminal</h2>
+        <h2>Criminal 
+        <a href="addCrimes.php?id=<?php echo $id; ?>"><button>Update</button></a>
+
+        </h2>
         </div>
         
         
@@ -282,6 +285,9 @@ if (isset($_POST['id'])) {
             transition: 1s;
             overflow: hidden;
             margin-bottom: 10px; 
+            border-radius: 2vw ;
+
+
 
         }
 
@@ -300,6 +306,7 @@ if (isset($_POST['id'])) {
         .box:hover {
             overflow: auto;
             background: #F1F0E8 
+
         }
 
         .box2:hover {
@@ -349,6 +356,8 @@ if (isset($_POST['id'])) {
         visibility: hidden;
         overflow-y: auto; /* Enable vertical scrolling */
         transition: transform 0.4s, top 0.4s;
+        border-radius: 2vw ;
+
     }
 
         .open-popup {
@@ -365,6 +374,8 @@ if (isset($_POST['id'])) {
             margin-bottom: 10px;
             overflow: hidden;
             overflow-y: auto; /* Enable vertical scrolling */
+            border-radius: 2vw ;
+
 
 
         }
@@ -373,6 +384,8 @@ if (isset($_POST['id'])) {
         .box3:hover {
             overflow: auto;
             background: #F1F0E8 
+            border-radius: 2vw ;
+
         }
 
         .box3:hover {

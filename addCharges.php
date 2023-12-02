@@ -1,15 +1,13 @@
 <?php
-// Assuming you have a valid database connection stored in $con
-// Ensure that the connection is established before this code
+// new.php
 
-include 'connect.php';
-// Check if the criminal ID is provided in the query parameter
+if (isset($_POST['crimeID'])) {
+    $crimeID = $_POST['crimeID'];
+    // Perform additional queries using $crimeID
 
-// Check if the crime ID is provided in the URL
-if(isset($_GET['crimeID'])) {
-    $crimeID = $_GET['crimeID'];
-    /* echo "Crime ID: " . $crimeID;*/ 
+    // Display the crimeID (you can replace this with your actual logic)
+    echo "Crime ID: $crimeID";
 } else {
-    echo "Crime ID not provided";
+    echo "No crime ID received";
 }
 ?>

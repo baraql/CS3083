@@ -182,14 +182,6 @@ else {
 </script>
 
 
-<a href="#" class="more" onclick="redirectToNewPage()" style="float: right;">
-    <button type="button">
-        <span style="margin-right: 5px;">Add</span>
-    </button>
-</a>
-
-
-
     
 
 

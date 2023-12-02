@@ -3,6 +3,15 @@ session_start();
 include_once("setting.php");
 include_once 'criminal_functions.php';
 
+<<<<<<< HEAD
+=======
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    // echo "not logged in";
+    header("Location: index.html");
+    exit();
+}
+>>>>>>> 380fa2a17698db43d043391e9dd5ef171faa2779
+
 
 $method = array_key_exists('m', $_GET) ? $_GET['m'] : null;
 

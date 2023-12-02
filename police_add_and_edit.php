@@ -60,13 +60,13 @@ if($method == 'a'){
                 lname.focus();
             }  else if(precinct.value.trim() == '') {
                 alert('The Precinct must be 1-4 characters.');
-                street.focus();
+                precinct.focus();
             } else if(badge.value.trim() == '') {
                 alert('The Badge mustbe 1-14 characters.');
-                city.focus();
+                badge.focus();
             } else if(phone.value.trim().length != 2) {
                 alert('The Phone must be 10 characters.');
-                state.focus();
+                phone.focus();
             } else {
                 $result = true;
             }

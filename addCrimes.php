@@ -65,7 +65,7 @@ if ($method == 'a') {
                 hearing_date.focus();
             } else if(appeal_cut_date.value.trim() == '') {
                 alert('The Appeal Cut Date cannot be null.');
-                sappeal_cut_datetate.focus();
+                sappeal_cut_date.focus();
             } else {
                 $result = true;
             }

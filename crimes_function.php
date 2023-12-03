@@ -91,7 +91,7 @@ function update_crime() {
     try {
         $con->begin_transaction();
         $stmt = $con->prepare($sql);
-        $stmt->bind_param("iisssssi", 
+        $stmt->bind_param("iisssss", 
                         $crime->crime_ID,
                         $crime->criminal_ID,
                         $crime->crime_classification,
@@ -99,7 +99,7 @@ function update_crime() {
                         $crime->crime_status,
                         $crime->hearing_date,
                         $crime->appeal_cut_date,
-                        $crime->crime_ID);
+                        );
 
         $stmt->execute();
         $con->commit();

@@ -1,14 +1,14 @@
 <?php
 include 'connect.php';
 include 'queries.php'; 
-$id = '111111';
 ?>
 
 <?php
 
-if (isset($_POST['id'])) {
-    $id = $_POST['id'];
-    
+if (isset($_REQUEST['criminal_ID'])) {
+    // Retrieve the value of 'id'
+    $criminal_id = $_REQUEST['criminal_ID'];
+
 } else {
     echo "No ID received";
 }
@@ -22,6 +22,24 @@ if (isset($_POST['id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script>
+        function deleteWithId(id) {
+            if (window.confirm("Sure to delete crimes infromation with id \'" + id + "\'?")) {
+                var form1 = document.createElement("form");
+                form1.method = "POST";
+                form1.action = "addCrimes.php?m=d&criminal_ID=<?PHP echo $criminal_id?>";
+
+                var input = document.createElement("input");
+                input.type = "hidden";
+                input.name = "crime_ID";
+                input.value = id;
+
+                form1.appendChild(input);
+                document.body.appendChild(form1);
+                form1.submit();
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="container">
@@ -30,7 +48,7 @@ if (isset($_POST['id'])) {
 
         <div class = "box" onclick="toggleJudges()"> 
         <h2>Criminal 
-        <a href="addCrimes.php?id=<?php echo $id; ?>"><button>Add Alias</button></a>
+        <a href="addCrimes.php?criminal_ID=<?php echo $criminal_id; ?>"><button>Update</button></a>
 
         </h2>
         </div>
@@ -45,12 +63,12 @@ if (isset($_POST['id'])) {
             <!-- ----------------------------------------------------------------------------------->
 
             <h2>Sentencing 
-            <a href="addSentences.php?id=<?php echo $id; ?>"><button>Add</button></a>
+            <a href="addSentences.php?criminal_ID=<?php echo $criminal_id; ?>"><button>Add</button></a>
             </h2>
 
 
             <?php
-                $sql = "SELECT * FROM sentences WHERE criminal_ID = '" . mysqli_real_escape_string($con, $id) . "'";
+                $sql = "SELECT * FROM sentences WHERE criminal_ID = '" . mysqli_real_escape_string($con, $criminal_id) . "'";
                 $result = mysqli_query($con, $sql);
 
                 if ($result && mysqli_num_rows($result) > 0) {
@@ -99,14 +117,14 @@ if (isset($_POST['id'])) {
 
 
         <h2> CRIMES       
-        <a href="addCrimes.php?id=<?php echo $id; ?>"><button>Add</button></a>
+        <a href="addCrimes.php?criminal_ID=<?php echo $criminal_id; ?>"><button>Add</button></a>
         </h2>
 
-
+       
         <?php
 
         //SHOW EACH POSSIBLE CRIME THE CRIMINAL COULD HAVE COMMITTED 
-        $sql = "SELECT * FROM crimes WHERE criminal_ID = '" . mysqli_real_escape_string($con, $id) . "'";
+        $sql = "SELECT * FROM crimes WHERE criminal_ID = '" . mysqli_real_escape_string($con, $criminal_id) . "'";
         $result = mysqli_query($con, $sql);
 
         if ($result && mysqli_num_rows($result) > 0) {
@@ -118,10 +136,15 @@ if (isset($_POST['id'])) {
                 echo '<p>Start Date: ' . $crime['crime_status'] . '</p>';
                 echo '<p>End Date: ' . $crime['hearing_date'] . '</p>';
                 echo '<p>Violations: ' . $crime['appeal_cut_date'] . '</p>';
+
+                // Add the Edit button
+                echo '<a href="addCrimes.php?m=e&criminal_ID=' . $criminal_id . '&crime_ID=' . $crime['crime_ID'] . '">';
+                echo '<button class="popup-button">Edit</button>';
+                echo '</a>';
+        
+                // Add the Delete button
+                echo '<button class="popup-button" onclick="deleteWithId(' . $crime['crime_ID'] . ');">Delete</button>';
                 
-
-
-
                 /* FOR EACH OF THE CRIME SHPOW CRIME OFFICERS, APPEALS, AND CRIME CHARGES */
              
 

@@ -121,7 +121,7 @@ else {
                             
                             var input = document.createElement("input");
                             input.type = "hidden";
-                            input.name = "id";
+                            input.name = "criminal_ID";
                             input.value = id;
                             
                             form.appendChild(input);

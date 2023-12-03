@@ -149,7 +149,7 @@ function update_police_info() {
                                     `officer_precinct`= ?,
                                     `officer_badge`= ?,
                                     `officer_phone`= ?,
-                                    `officer_status`= ?,
+                                    `officer_status`= ?
                                      WHERE officer_ID = ?";
     // die($sql);                                    
     $police = Police::fromResultRow($_POST);

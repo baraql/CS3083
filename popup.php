@@ -222,7 +222,6 @@ if (isset($_POST['id'])) {
                 /* ---------------------------CHARGES---------------------------------- */ 
 
 
-               echo '<button onclick="addCrimeStuff(\'' . $crime['crime_ID'] . '\', \'' . "crimeOfficers" . '\')">Delete Crime</button>'; 
 
 
                 echo '</div>'; // Closing box2

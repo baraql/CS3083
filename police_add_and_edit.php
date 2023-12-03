@@ -64,7 +64,7 @@ if($method == 'a'){
             } else if(badge.value.trim() == '') {
                 alert('The Badge mustbe 1-14 characters.');
                 badge.focus();
-            } else if(phone.value.trim().length != 2) {
+            } else if(phone.value.trim().length != 10) {
                 alert('The Phone must be 10 characters.');
                 phone.focus();
             } else {

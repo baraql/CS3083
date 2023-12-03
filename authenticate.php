@@ -4,7 +4,8 @@ include "connect.php";
 
 // Get the values from the form
 $un = $_POST['uname'];
-$pass = $_POST['pwd'];
+$pass = md5($_POST['pwd']);
+
 
 $sql = "SELECT * FROM users WHERE username LIKE '$un' and password LIKE '$pass'";
 $result = mysqli_query($con, $sql);

@@ -1,8 +1,6 @@
 <?PHP
-session_start();
-include_once("setting.php");
-include_once 'criminal_functions.php';
 
+session_start();
 
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     // echo "not logged in";
@@ -10,23 +8,28 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     exit();
 }
 
+$criminal_id = array_key_exists("criminal_ID", $_GET) ? $_GET['criminal_ID'] : null;
+if ($criminal_id == null) {
+    header("Localtion: criminal.php");
+}
 
-$method = array_key_exists('m', $_GET) ? $_GET['m'] : null;
+include 'connect.php';
+include_once "sentence_function.php";
+
+$method = array_key_exists("m", $_REQUEST) ? $_REQUEST['m'] : null;
+
+$sentence = new Sentence;
 
 if ($method == 'a') {
-    add_criminal_info();
+    add_sentence();
 } elseif ($method == 'e') {
-    $criminal_info = get_criminal_info_from_db();
+    $sentence = get_sentence_info_from_db();
 } elseif ($method == 'u') {
-    update_criminal_info();
-}
-else {
-    $criminal_info = new Criminal();
+    update_sentence();
+} elseif ($method == 'd'){
+    delete_sentence();
 }
 ?>
-
-
-
 
 
 <!DOCTYPE html>
@@ -35,55 +38,39 @@ else {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Add Sentence</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="styleNav.css">
     <link rel="stylesheet" href="styleTable.css">
     <script>
-        <?php
-        if ($method == 'e' && array_key_exists("success", $_GET)) {
-            echo "window.onload = function() {";
-            echo "        setTimeout(\"alert('Update success!')\", 0);";
-            echo "}";
-        }
-        ?>
-
         function check(form) {
-            var id = form['criminal_ID'];
-            var fname = form['criminal_name_first'];
-            var lname = form['criminal_name_last'];
-            var street = form['criminal_street'];
-            var city = form['criminal_city'];
-            var state = form['criminal_state'];
-            var zip = form['criminal_zip'];
-            var phone = form['criminal_phone'];
+            var sentence_ID = form['sentence_ID'];
+            var sentence_type = form['sentence_type'];
+            var prob_ID= form['prob_ID'];
+            var start_date = form['start_date'];
+            var end_date = form['end_date'];
+            var violations = form['violations'];
 
             $result = false;
-            console.log(Number.isNaN(id.value));
-            if (isNaN(id.value) || id.value.trim().length < 6) {
-                alert('The Criminal ID must be a 6 length numeric value.');
-                id.focus();
-            } else if (fname.value.trim() == '') {
-                alert('The First Name must be 1-15 characters.');
-                fname.focus();
-            } else if(lname.value.trim() == '') {
-                alert('The Last Name mustbe 1-10 characters.');
-                lname.focus();
-            }  else if(street.value.trim() == '') {
-                alert('The Street must be 1-30 characters.');
-                street.focus();
-            } else if(city.value.trim() == '') {
-                alert('The City mustbe 1-20 characters.');
-                city.focus();
-            } else if(state.value.trim().length != 2) {
-                alert('The state must be 2 characters.');
-                state.focus();
-            } else if(zip.value.trim().length != 5) {
-                alert('The ZIP must be 5 characters.');
-                zip.focus();
-            } else if(isNaN(phone.value) || phone.value.trim().length != 10) {
-                alert('The Phone must be 10 characters.');
-                phone.focus();
+
+            if (isNaN(sentence_ID.value) || sentence_ID.value.trim().length < 6) {
+                alert('The Sentence ID must be a 6 length numeric value.');
+                sentence_ID.focus();
+            } else if (sentence_type.value.trim() == '') {
+                alert('The Sentence Type cannot be null.');
+                sentence_type.focus();
+            } else if(prob_ID.value.trim() == '') {
+                alert('The Probation ID cannot be null.');
+                prob_ID.focus();
+            }  else if(start_date.trim() == '') {
+                alert('The Start Date cannot be null.');
+                start_date.focus();
+            } else if(end_date.value.trim() == '') {
+                alert('The End Date cannot be null.');
+                end_date.focus();
+            } else if(violations.value.trim() == '') {
+                alert('The Violation cannot be null.');
+                violations.focus();
             } else {
                 $result = true;
             }
@@ -96,49 +83,40 @@ else {
     <header class="header-main">
         <nav class="header-main-nav">
             <ul>
-                <li class="active"><a href="#">Add Sentences</a></li>
+                <li class="active"><a href="#">Add sentence information</a></li>
             </ul>
         </nav>
     </header>
 
-    <form action="criminal_add_and_edit.php?m=<?php echo is_null($method) ? 'a' : 'u'?>" onsubmit="return check(this);" method="post">
+    <form action="addSentences.php?m=<?php echo is_null($method) ? 'a' : 'u'?>" onsubmit="return check(this);" method="post">
+    <input type="hidden" name="criminal_ID" value="<?php echo $criminal_id; ?>">
     <table class="content-table">
         <tbody>
             <tr>
                 <th>Sentence ID</th> 
-                <td><input type="text" class="input" name="criminal_ID" maxlength="6" value="<?PHP echo $criminal_info->id;?>"></td>
+                <td><input type="text" class="input" name="sentence_ID" maxlength="6" value="<?PHP echo $sentence->sentence_ID;?>"></td>
             </tr>
-        
             <tr>
                 <th>Sentence Type</th>
-                <td>
-                    <select class="input" name="criminal_violent_status" value="<?PHP echo $criminal_info->violent_status;?>">
-                        <option value="Y">P</option>    
-                        <option value="N">N</option>
-                    </select>
-                </td>
-
+                <td><input type="text" class="input" name="sentence_type" maxlength="1" value="<?PHP echo $sentence->sentence_type;?>"></td>
             </tr>
-
             <tr>
-                <th>Probation Officer ID</th> 
-                <td><input type="text" class="input" name="criminal_ID" maxlength="6" value="<?PHP echo $criminal_info->id;?>"></td>
+                <th>Probation ID</th>
+                <td><input type="text" class="input" name="prob_ID" maxlength="5" value="<?PHP echo $sentence->prob_ID;?>"></td>
             </tr>
-
             <tr>
                 <th>Start Date</th>
-                <td><input type="date" name="endDate" required></td><br>
-
+                <td><input type="date" class="input" name="start_date" value="<?PHP echo $sentence->start_date;?>"></td>
             </tr>
             <tr>
                 <th>End Date</th>
-                <td><input type="date" name="endDate" required></td><br>
+                <td><input type="date" class="input" name="end_date" value="<?PHP echo $sentence->end_date;?>"></td>
             </tr>
             <tr>
-                <th>Violation</th>
-                <td><input type="date" name="endDate" required></td><br>
+                <th>Violations</th>
+                <td><input type="text" class="input" name="violations" maxlength="3" value="<?PHP echo $sentence->violations;?>"></td>
             </tr>
-  
+            <tr>
                 <th>Operation:</th>
                 <td>
                     <input type="submit" value="Submit" class="submit">
@@ -153,3 +131,4 @@ else {
 </body>
 
 </html>
+

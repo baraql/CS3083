@@ -4,7 +4,7 @@ include 'queries.php';
 ?>
 
 <?php
-
+$criminal_id = '111111'; 
 if (isset($_REQUEST['criminal_ID'])) {
     // Retrieve the value of 'id'
     $criminal_id = $_REQUEST['criminal_ID'];
@@ -131,11 +131,12 @@ if (isset($_REQUEST['criminal_ID'])) {
             while ($crime = mysqli_fetch_assoc($result)) {
                 echo '<div class="box2" style="font-family: Fira Sans; line-height: 1.5;">';
                 echo '<h3>Crime ID: ' . $crime['crime_ID'] . '</h3>';
-                echo '<p>Sentence Type: ' . $crime['crime_classification'] . '</p>';
-                echo '<p>Probation Officer ID: ' . $crime['date_charged'] . '</p>';
-                echo '<p>Start Date: ' . $crime['crime_status'] . '</p>';
-                echo '<p>End Date: ' . $crime['hearing_date'] . '</p>';
-                echo '<p>Violations: ' . $crime['appeal_cut_date'] . '</p>';
+                echo '<p>Crime Classification: ' . $crime['crime_classification'] . '</p>';
+                echo '<p>Date Charged: ' . $crime['date_charged'] . '</p>';
+                echo '<p>Crime Status: ' . $crime['crime_status'] . '</p>';
+                echo '<p>Hearing Date: ' . $crime['hearing_date'] . '</p>';
+                echo '<p>Appeal Deadline: ' . $crime['appeal_cut_date'] . '</p>';
+                
 
                 // Add the Edit button
                 echo '<a href="addCrimes.php?m=e&criminal_ID=' . $criminal_id . '&crime_ID=' . $crime['crime_ID'] . '">';

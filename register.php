@@ -8,7 +8,8 @@ $valid_password = 'pass';
 $firstname = $_POST['fname'];
 $lastname = $_POST['lname'];
 $username = $_POST['uname'];
-$password = $_POST['pwd'];
+$password = md5($_POST['pwd']);
+
 
 
 // database connection

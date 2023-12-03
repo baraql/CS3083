@@ -12,7 +12,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
 $criminal_id = array_key_exists("criminal_ID", $_GET) ? $_GET['criminal_ID'] : null;
 if ($criminal_id == null) {
-    header("Localtion: criminal.php");
+    header("Location: criminal.php");
 }
 
 include 'connect.php';
@@ -39,6 +39,8 @@ if ($method == 'a') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Crime</title>
+    <link rel="stylesheet" href="styleNav.css">
+    <link rel="stylesheet" href="styleTable.css">
     <script>
         function check(form) {
             var crime_ID = form['crime_ID'];
@@ -47,7 +49,9 @@ if ($method == 'a') {
             var crime_status = form['crime_status'];
             var hearing_date = form['hearing_date'];
             var appeal_cut_date = form['appeal_cut_date'];
+
             $result = false;
+
             if (isNaN(crime_ID.value) || crime_ID.value.trim().length < 6) {
                 alert('The Crime ID must be a 9 length numeric value.');
                 crime_ID.focus();
@@ -65,7 +69,7 @@ if ($method == 'a') {
                 hearing_date.focus();
             } else if(appeal_cut_date.value.trim() == '') {
                 alert('The Appeal Cut Date cannot be null.');
-                sappeal_cut_date.focus();
+                appeal_cut_date.focus();
             } else {
                 $result = true;
             }
@@ -108,7 +112,8 @@ if ($method == 'a') {
     <input type="date" name="hearing_date"  value="<?PHP echo $crime->hearing_date?>" required><br>
 
     <label for="endDate">Appeal Cut Date:</label>
-    <input type="date" name="appeal_cut_date" value="<?PHP echo $crime->appeal_cut_date?>" required><br>
+    <input type="date" name="
+                             " value="<?PHP echo $crime->appeal_cut_date?>" required><br>
 
 
     <button type="submit">Submit</button>
@@ -116,66 +121,61 @@ if ($method == 'a') {
         <a href="popup.php?criminal_ID=<?PHP echo $criminal_id?>" style="text-decoration: none; color: inherit;">Go Back</a>
     </button>
 
+<body>
+    <header class="header-main">
+        <nav class="header-main-nav">
+            <ul>
+                <li class="active"><a href="#">Add crime information</a></li>
+            </ul>
+        </nav>
+    </header>
 
-</form>
+    <form action="addCrimes.php?m=<?php echo is_null($method) ? 'a' : 'u'?>" onsubmit="return check(this);" method="post">
+    <input type="hidden" name="criminal_ID" value="<?php echo $criminal_id; ?>">
+    <table class="content-table">
+        <tbody>
+            <tr>
+                <th>Crime ID</th> 
+                <td><input type="text" class="input" name="crime_ID" maxlength="9" value="<?PHP echo $crime->crime_ID;?>"></td>
+            </tr>
+            <tr>
+                <th>Crime Classification</th>
+                <td><input type="text" class="input" name="crime_classification" maxlength="1" value="<?PHP echo $crime->crime_classification;?>"></td>
+            </tr>
+            <tr>
+                <th>Date Charged</th>
+                <td><input type="date" class="input" name="date_charged" value="<?PHP echo $crime->date_charged;?>"></td>
+            </tr>
+            <tr>
+                <th>Hearing Date</th>
+                <td><input type="date" class="input" name="hearing_date" value="<?PHP echo $crime->hearing_date;?>"></td>
+            </tr>
+            <tr>
+                <th>Appeal Cut Date</th>
+                <td><input type="date" class="input" name="appeal_cut_date" value="<?PHP echo $crime->appeal_cut_date;?>"></td>
+            </tr>
+            </tr>
+            <tr>
+                <th>Crime Status</th>
+                <td>
+                    <select class="input" name="crime_status" value="<?PHP echo $crime->crime_status;?>">
+                        <option value="P">P</option>
+                        <option  value="C">C</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>Operation:</th>
+                <td>
+                    <input type="submit" value="Submit" class="submit">
+                    <input type="button" class="submit" value="Back" onclick="location.href='popup.php'">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    </form>
 
 </body>
-<script>
-    document.getElementById("crime_status").value = "<?PHP echo $crime->crime_status?>";
-</script>
+
 </html>
-
-<style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        form {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            width: 300px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        input {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 16px;
-            box-sizing: border-box;
-        }
-
-        button {
-            background-color: #4caf50;
-            color: #fff;
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-        .success-message {
-            color: #4caf50;
-        }
-
-        .error-message {
-            color: #f44336;
-        }
-     
-    </style>

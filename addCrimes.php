@@ -78,6 +78,48 @@ if ($method == 'a') {
         }
     </script>
 </head>
+<body>
+
+<!-- Your form to collect information about the new crime -->
+<form method="post" action="addCrimes.php" onsubmit="return check(this);">
+
+<?PHP if ($method == null) {
+    echo '<input type="hidden" name="m" value="a"/>';
+} elseif ($method == 'e') {
+    echo '<input type="hidden" name="m" value="u"/>';
+}
+?>
+    <input type="hidden" name="criminal_ID" value="<?PHP echo $criminal_id?>"/>
+
+    <label for="crimeID">Crime ID:</label>
+    <input type="text" name="crime_ID" value="<?PHP echo $crime->crime_ID?>" maxlength="9" required><br>
+
+    
+    <label for="crimeClass">Crime Classification:</label>
+    <input type="text" name="crime_classification" maxlength="1" value="<?PHP echo $crime->crime_classification?>" required><br>
+
+
+    <label for="crimeStatus">Crime Status:</label>
+    <select id="crime_status" name="crime_status" required style="width: 100%; padding: 8px; margin-bottom: 16px; box-sizing: border-box;">
+        <option value="P">P</option>
+        <option value="C">C</option>
+    </select><br>
+
+    <label for="startDate">Date Charged:</label>
+    <input type="date" name="date_charged" value="<?PHP echo $crime->date_charged?>" required><br>
+
+    <label for="endDate">Hearing Date:</label>
+    <input type="date" name="hearing_date"  value="<?PHP echo $crime->hearing_date?>" required><br>
+
+    <label for="endDate">Appeal Cut Date:</label>
+    <input type="date" name="
+                             " value="<?PHP echo $crime->appeal_cut_date?>" required><br>
+
+
+    <button type="submit">Submit</button>
+    <button type="goback">    
+        <a href="popup.php?criminal_ID=<?PHP echo $criminal_id?>" style="text-decoration: none; color: inherit;">Go Back</a>
+    </button>
 
 <body>
     <header class="header-main">

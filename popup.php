@@ -139,7 +139,7 @@ if (isset($_REQUEST['criminal_ID'])) {
                 
 
                 // Add the Edit button
-                echo '<a href="addCrimes.php?m=e&criminal_ID=' . $criminal_id . '&crime_ID=' . $crime['crime_ID'] . '">';
+                echo '<a href="addCrimes.php?m=&criminal_ID=' . $criminal_id . '&crime_ID=' . $crime['crime_ID'] . '">';
                 echo '<button class="popup-button">Edit</button>';
                 echo '</a>';
         
@@ -189,11 +189,13 @@ if (isset($_REQUEST['criminal_ID'])) {
                
 
                 /* ---------------------------APPEALS---------------------------------- */ 
-                echo '<div class="box3" id = "appeals">';
-                echo '<h4>
-                APPEALS 
-                <button onclick="addCrimeStuff(\'' . $crime['crime_ID'] . '\' , \'' . "appeals" . '\')">Add Appeals</button>
-                </h4>';
+                echo '<div class="box3" id="appeals">';
+                echo '<h4>';
+                echo 'APPEALS ';
+                echo '<a href="addAppeals.php?m=e&criminal_ID=' . $criminal_id . '&crime_ID=' . $crime['crime_ID'] . '">';
+                echo '<button class="popup-button">Add Appeals</button>';
+                echo '</a>';
+                echo '</h4>';
 
                 $appealsQuery = "SELECT * FROM appeals WHERE crime_ID = '" . mysqli_real_escape_string($con, $crime['crime_ID']) . "'";
                 $appealsResult = mysqli_query($con, $appealsQuery);
@@ -205,6 +207,8 @@ if (isset($_REQUEST['criminal_ID'])) {
                         echo '<p>Filing Date: ' . $appeals['filing_date'] . '</p>';
                         echo '<p>Hearing Date: ' . $appeals['hearing_date'] . '</p>';
                         echo '<p>Appeal Status: ' . $appeals['appeal_status'] . '</p>';
+                        
+
                         echo '<button id = "appealsDelete">Delete</button>';
                         echo '</div>'; 
 

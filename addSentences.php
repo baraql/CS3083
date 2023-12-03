@@ -2,19 +2,36 @@
 // Assuming you have a valid database connection stored in $con
 // Ensure that the connection is established before this code
 
-include 'connect.php';
-// Check if the criminal ID is provided in the query parameter
-if(isset($_GET['id'])) {
-    $criminalID = $_GET['id'];
-} else {
-    // If the criminal ID is not provided, display an error message or redirect the user
-    echo '<p>Error: Criminal ID not provided</p>';
-    // You might want to add additional error handling here, such as redirecting the user to an error page.
+session_start();
+
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    // echo "not logged in";
+    header("Location: index.html");
     exit();
 }
+
+$criminal_id = array_key_exists("criminal_ID", $_GET) ? $_GET['criminal_ID'] : null;
+if ($criminal_id == null) {
+    header("Localtion: criminal.php");
+}
+
+include 'connect.php';
+include_once "crimes_function.php";
+
+$method = array_key_exists("m", $_REQUEST) ? $_REQUEST['m'] : null;
+
+$crime = new Crime;
+if ($method == 'a') {
+    add_crime();
+} elseif ($method == 'e') {
+    $crime = get_crime_info_form_db();
+} elseif ($method == 'u') {
+    update_crime();
+} elseif ($method == 'd') {
+    delete_crime();
+}
+
 ?>
-
-
 
 
 

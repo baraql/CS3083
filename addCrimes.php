@@ -90,6 +90,7 @@ if ($method == 'a') {
     <label for="crimeID">Crime ID:</label>
     <input type="text" name="crime_ID" value="<?PHP echo $crime->crime_ID?>" maxlength="9" required><br>
 
+    
     <label for="crimeClass">Crime Classification:</label>
     <input type="text" name="crime_classification" maxlength="1" value="<?PHP echo $crime->crime_classification?>" required><br>
 

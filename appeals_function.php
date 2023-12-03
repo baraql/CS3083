@@ -11,15 +11,6 @@ class Appeal {
     public static function fromArrayOrResult($arrOrRes) {
         $appeal = new Appeal;
 
-        $crime->crime_ID = $arrOrRes['crime_ID'];
-        $crime->criminal_ID = $arrOrRes['criminal_ID'];
-        $crime->crime_classification = $arrOrRes['crime_classification'];
-        $crime->date_charged = $arrOrRes['date_charged'];
-        $crime->crime_status = $arrOrRes['crime_status'];
-        $crime->hearing_date = $arrOrRes['hearing_date'];
-        $crime->appeal_cut_date = $arrOrRes['appeal_cut_date'];
-
-
         $appeal->appeal_ID = $arrOrRes['appeal_ID'];
         $appeal->crime_ID = $arrOrRes['crime_ID'];
         $appeal->filing_date = $arrOrRes['filing_date'];
@@ -27,49 +18,51 @@ class Appeal {
         $appeal->appeal_status = $arrOrRes['appeal_status'];
         
 
-
-        return $crime;
+        return $appeal;
     }
 }
 
-function get_crime_info_form_db() {
+
+
+
+function get_appeal_info_form_db() {
     global $con;
 
     $crime_id = array_key_exists('crime_ID', $_GET) ? $_GET['crime_ID'] : die("Crime id required!");
     // $criminal_id = array_key_exists('criminal_id', $_REQUEST) ? $_REQUEST['criminal_id'] : die("Criminal id required!");
 
-    $sql = "select * from crimes where crime_id = $crime_id";
+    $sql = "select * from appeals where crime_id = $crime_id";
     $result = mysqli_query($con, $sql);
     $row = mysqli_fetch_assoc($result);
     return appeals::fromArrayOrResult($row);
 }
 
-function add_crime() {
+function add_appeals() {
     global $con;
     $criminal_id = array_key_exists('criminal_ID', $_REQUEST) ? $_REQUEST['criminal_ID'] : die("Criminal id required!");
 
-    $sql = "INSERT INTO `crimes`(`crime_ID`, 
-                                 `criminal_ID`, 
-                                 `crime_classification`, 
-                                 `date_charged`, 
-                                 `crime_status`, 
-                                 `hearing_date`, 
-                                 `appeal_cut_date`) VALUES (?,?,?,?,?,?,?)";
+    $sql = "INSERT INTO `appeals`(`appeal_ID`, 
+    `crime_ID`, 
+    `filing_date`, 
+    `hearing_date`, 
+    `appeal_status`,) VALUES (?,?,?,?,?,?,?)";
 
-    $crime = Crime::fromArrayOrResult($_POST);
+
+
+    $appeal = Appeal::fromArrayOrResult($_POST);
     
     try {
         $con->begin_transaction();
         $stmt = $con->prepare($sql);
         $stmt->bind_param("iisssss", 
-                        $crime->crime_ID,
-                        $crime->criminal_ID,
-                        $crime->crime_classification,
-                        $crime->date_charged,
-                        $crime->crime_status,
-                        $crime->hearing_date,
-                        $crime->appeal_cut_date);
+                        $appeal->appeal_ID, 
+                        $appeal->crime_ID, 
+                        $appeal->filing_date, 
+                        $appeal->hearing_date, 
+                        $appeal->appeal_status);
 
+
+                    
         $stmt->execute();
         $con->commit();
         header("location:popup.php?criminal_ID=$criminal_id");
@@ -81,33 +74,32 @@ function add_crime() {
 }
 
 
-function update_crime() {
+function update_appeal() {
     global $con;
     $criminal_id = array_key_exists('criminal_ID', $_REQUEST) ? $_REQUEST['criminal_ID'] : die("Criminal id required!");
 
-    $sql = "UPDATE `crimes` SET `crime_ID`= ?,
-                                `criminal_ID`= ?,
-                                `crime_classification`= ?,
-                                `date_charged`= ?,
-                                `crime_status`= ?,
+    $sql = "UPDATE `appeals` SET `appeal_ID`= ?,
+                                `crime_ID`= ?,
+                                `filing_date`= ?,
                                 `hearing_date`= ?,
-                                `appeal_cut_date`= ? 
+                                `appeal_status`= ?,
                             WHERE crime_ID = ?";
 
-    $crime = Crime::fromArrayOrResult($_POST);
-    try {
+    $crime = Appeal::fromArrayOrResult($_POST);
+
+
+ try {
         $con->begin_transaction();
         $stmt = $con->prepare($sql);
-        $stmt->bind_param("iisssssi", 
-                        $crime->crime_ID,
-                        $crime->criminal_ID,
-                        $crime->crime_classification,
-                        $crime->date_charged,
-                        $crime->crime_status,
-                        $crime->hearing_date,
-                        $crime->appeal_cut_date,
-                        $crime->crime_ID);
+        $stmt->bind_param("iisssss", 
+                        $appeal->appeal_ID, 
+                        $appeal->crime_ID, 
+                        $appeal->filing_date, 
+                        $appeal->hearing_date, 
+                        $appeal->appeal_status);
 
+
+                    
         $stmt->execute();
         $con->commit();
         header("location:popup.php?criminal_ID=$criminal_id");
@@ -120,9 +112,9 @@ function update_crime() {
 
 function delete_crime() {
     global $con;
-    $crime_id = array_key_exists('crime_ID', $_POST) ? $_POST['crime_ID'] : die("Crime id required!");
+    $appeal_ID = array_key_exists('appeal_ID', $_POST) ? $_POST['appeal_ID'] : die("Appeal id required!");
     $criminal_id = array_key_exists('criminal_ID', $_GET) ? $_GET['criminal_ID'] : die("Criminal id required!");
-    $sql = "DELETE from crimes where crime_ID=$crime_id";
+    $sql = "DELETE from appeals where crime_ID=$appeal_ID";
     
     $con->begin_transaction();
     try {

@@ -155,7 +155,7 @@ include 'connect.php';
                         <button type="button">Delete</button>
                     </a>
 
-                    <a href="police_add_and_edit.php?m=e&officer_ID='. $id .'" class="more")">
+                    <a href="police_add_and_edit.php?m=e&police_ID='. $id .'" class="more")">
                         <button type="button">Edit</button>
                     </a>
                     </td>

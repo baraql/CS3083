@@ -71,7 +71,6 @@ function search_police() {
 
 //delete 
 function delete_police() {
-    User::checkPerm();
     global $con;
     $id = $_POST['id'];
     $sql = "DELETE from officers where officer_ID=$id";
@@ -115,7 +114,6 @@ function get_police_info_from_db() {
 
 // insert new 
 function add_police_info() {
-    User::checkPerm();
     global $con;
 
     $sql = "insert into officers values (?,?,?,?,?,?,?)";
@@ -143,7 +141,6 @@ function add_police_info() {
 
 //update police
 function update_police_info() {
-    User::checkPerm();
     global $con;
 
     $sql = "UPDATE `officers` SET `officer_ID`=?,

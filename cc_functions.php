@@ -59,7 +59,6 @@ function search_crime_code(){
 
 //delete 
 function delete_crime_code() {
-    User::checkPerm();
     global $con;
     $cc = $_POST['cc'];
     $sql = "DELETE from crime_codes where crime_code=$cc";
@@ -103,7 +102,6 @@ function get_crime_code_info_from_db() {
 
 // insert new 
 function add_crime_code_info() {
-    User::checkPerm();
     global $con;
 
     $sql = "insert into crime_codes values (?,?)";
@@ -126,7 +124,6 @@ function add_crime_code_info() {
 
 //update crime_code
 function update_crime_code_info() {
-    User::checkPerm();
     global $con;
 
     $sql = "UPDATE `crime_codes` SET `crime_code`=?,

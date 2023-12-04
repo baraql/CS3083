@@ -78,18 +78,7 @@ if ($method == 'a') {
         }
     </script>
 </head>
-<body>
 
-<!-- Your form to collect information about the new crime -->
-<form method="post" action="addCrimes.php" onsubmit="return check(this);">
-
-<?PHP if ($method == null) {
-    echo '<input type="hidden" name="m" value="a"/>';
-} elseif ($method == 'e') {
-    echo '<input type="hidden" name="m" value="u"/>';
-}
-?>
-    
 <body>
     <header class="header-main">
         <nav class="header-main-nav">

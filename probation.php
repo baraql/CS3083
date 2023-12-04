@@ -172,7 +172,7 @@ include 'connect.php';
                     <button type="button">Delete</button>
                 </a>
 
-                <a href="probation_add_and_edit.php?m=e&prob_ID='. $id .'" class="more")">
+                <a href="probation_add_and_edit.php?m=e&probation_ID='. $id .'" class="more")">
                     <button type="button">Edit</button>
                 </a>
                 </td>

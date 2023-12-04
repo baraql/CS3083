@@ -74,7 +74,6 @@ function search_probation() {
 
 //delete 
 function delete_probation() {
-    User::checkPerm();
     global $con;
     $id = $_POST['id'];
     $sql = "DELETE from prob_officer where prob_ID=$id";
@@ -118,7 +117,6 @@ function get_probation_info_from_db() {
 
 // insert new 
 function add_probation_info() {
-    User::checkPerm();
     global $con;
     $sql = "insert into prob_officer values (?,?,?,?,?,?,?,?,?,?)";
     $probation = Probation::fromResultRow($_POST);
@@ -148,7 +146,6 @@ function add_probation_info() {
 
 //update probation
 function update_probation_info() {
-    User::checkPerm();
     global $con;
 
     $sql = "UPDATE `prob_officer` SET `prob_ID`=?,

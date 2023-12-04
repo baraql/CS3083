@@ -20,6 +20,7 @@ class Sentence{
         $sentence->start_date = $arrOrRes['start_date'];
         $sentence->end_date = $arrOrRes['end_date'];
         $sentence->violations = $arrOrRes['violations'];
+
         return $sentence;
     }
 }
@@ -36,7 +37,6 @@ function get_sentence_info_from_db(){
 }
 
 function add_sentence(){
-    User::checkPerm();
     global $con;
     $criminal_id = array_key_exists('criminal_ID', $_REQUEST) ? $_REQUEST['criminal_ID'] : die("Criminal id required!");
 
@@ -73,7 +73,6 @@ function add_sentence(){
 }
 
 function update_sentence(){
-    User::checkPerm();
     global $con;
     $criminal_id = array_key_exists('criminal_ID', $_REQUEST) ? $_REQUEST['criminal_ID'] : die("Criminal id required!");
 
@@ -112,7 +111,6 @@ function update_sentence(){
 }
 
 function delete_sentence() {
-    User::checkPerm();
     global $con;
     $sentence_id = array_key_exists('sentence_ID', $_POST) ? $_POST['sentence_ID'] : die("Sentence id required!");
     $criminal_id = array_key_exists('criminal_ID', $_GET) ? $_GET['criminal_ID'] : die("Criminal id required!");

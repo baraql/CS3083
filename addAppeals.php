@@ -16,16 +16,24 @@ if ($criminal_ID == null) {
     exit();
 }
 
-if (isset($_GET['appeal_ID'])) {
-    $method = $_GET['m'];
-} else {
-    $method = 'a';
-}
-
+// $method = array_key_exists("m", $_REQUEST) ? $_REQUEST['m'] : null;
+$method = 'a';
 $crime_ID = array_key_exists("crime_ID", $_REQUEST) ? $_REQUEST['crime_ID'] : null;
 
 $appealID = array_key_exists("appeal_ID", $_GET) ? $_GET['appeal_ID'] : null;
 $appeal = new Appeal;
+
+
+// if ($method == 'a') {
+//     add_appeal();
+// } elseif ($method == 'e') {
+//     $appeal = get_appeal_info_from_db();
+// } elseif ($method == 'u') {
+//     update_appeal();
+// } elseif ($method == 'd') {
+//     delete_appeal();
+// }
+
 ?>
 
 <!DOCTYPE html>
@@ -74,38 +82,20 @@ $appeal = new Appeal;
         <input type="hidden" name="crime_ID" value="<?php echo $crime_ID; ?>" />
 
         <label for="appeal_ID">Appeal ID:</label>
-        <?php
-$disabled = '';
-if ($method === 'u') {
-    $disabled = 'readonly';
-}
-?>
-        <input type="text" name="appeal_ID" maxlength="9"
-            value="<?php echo isset($_GET['appeal_ID']) ? htmlspecialchars($_GET['appeal_ID']) : ''; ?>"
-            <?php echo $disabled; ?>><br>
-
-
+        <input type="text" name="appeal_ID" maxlength="9" required><br>
 
         <label for="appeal_status">Appeal Status:</label>
         <select id="appeal_status" name="appeal_status" required
             style="width: 100%; padding: 8px; margin-bottom: 16px; box-sizing: border-box;">
-            <option value="P" <?php if (isset($_GET['appeal_status']) && htmlspecialchars($_GET['appeal_status']) === 'P')
-                echo 'selected'; ?>>
-                Pending</option>
-            <option value="A" <?php if (isset($_GET['appeal_status']) && htmlspecialchars($_GET['appeal_status']) === 'A')
-                echo 'selected'; ?>>
-                Approved</option>
-
+            <option value="P">P</option>
+            <option value="C">A</option>
         </select><br>
 
         <label for="filing_date">Filing Date:</label>
-        <input type="date" name="filing_date" required
-            value="<?php echo isset($_GET['filing_date']) ? htmlspecialchars($_GET['filing_date']) : ''; ?>"><br>
+        <input type="date" name="filing_date" required><br>
 
         <label for="hearing_date">Hearing Date:</label>
-        <input type="date" name="hearing_date" required
-            value="<?php echo isset($_GET['hearing_date']) ? htmlspecialchars($_GET['hearing_date']) : ''; ?>"><br>
-
+        <input type="date" name="hearing_date" required><br>
 
         <button type="submit">Submit</button>
         <button type="button">

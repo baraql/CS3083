@@ -11,7 +11,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 $method = array_key_exists('m', $_GET) ? $_GET['m']: null;
 
 if($method == 'a'){
-    add_crim_code_info();
+    add_crime_code_info();
 }elseif($method == 'e'){
     $crime_code_info = get_crime_code_info_from_db();
 }elseif($method == 'u'){

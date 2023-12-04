@@ -25,6 +25,14 @@ if($result){
 	echo $firstname. " is registered succesfully!";
 }
 
+if ($admin) {
+    $access = "Grant admin to $username WITH admin options";
+    mysqli_query($con, $access);
+}
+else {  
+    $access = "Grant user to $username"; 
+    mysqli_query($con, $access);
+}
 	$con->close();
 
 ?>

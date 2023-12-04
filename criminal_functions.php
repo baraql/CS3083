@@ -3,7 +3,6 @@
  * criminal related functions;
  */
 include 'connect.php';
-include 'user.php';
 
 class Criminal {
     public $id;
@@ -78,7 +77,6 @@ function search_cirminal() {
 
 //delete 
 function delete_criminal() {
-    User::checkPerm();
     global $con;
     $id = $_POST['id'];
     $sql = "DELETE from criminals where criminal_ID=$id";
@@ -122,7 +120,6 @@ function get_criminal_info_from_db() {
 
 // insert new 
 function add_criminal_info() {
-    User::checkPerm();
     global $con;
 
     $sql = "insert into criminals values (?,?,?,?,?,?,?,?,?,?)";
@@ -153,7 +150,6 @@ function add_criminal_info() {
 
 //update criminal
 function update_criminal_info() {
-    User::checkPerm();
     global $con;
 
     $sql = "UPDATE `criminals` SET `criminal_ID`=?,

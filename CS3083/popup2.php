@@ -1,12 +1,14 @@
 <?php
 include 'connect.php';
 include 'queries.php'; 
+$id = '111111';
 ?>
 
 <?php
-$criminal_id = '111111'; 
-if (isset($_REQUEST['criminal_ID'])) {
-    $criminal_id = $_REQUEST['criminal_ID'];
+
+if (isset($_POST['id'])) {
+    $id = $_POST['id'];
+    
 } else {
     echo "No ID received";
 }
@@ -20,107 +22,21 @@ if (isset($_REQUEST['criminal_ID'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script>
-        function deleteWithId(id) {
-            if (window.confirm("Sure to delete crimes information with id \'" + id + "\'?")) {
-                var form1 = document.createElement("form");
-                form1.method = "POST";
-                form1.action = "addCrimes.php?m=d&criminal_ID=<?PHP echo $criminal_id?>";
-
-                var input = document.createElement("input");
-                input.type = "hidden";
-                input.name = "crime_ID";
-                input.value = id;
-
-                form1.appendChild(input);
-                document.body.appendChild(form1);
-                form1.submit();
-            }
-        }
-        function deleteSentence(id){
-            if (window.confirm("Sure to delete sentence information with id \'" + id + "\'?")) {
-                var form1 = document.createElement("form");
-                form1.method = "POST";
-                form1.action = "addSentences.php?m=d&criminal_ID=<?PHP echo $criminal_id?>";
-
-                var input = document.createElement("input");
-                input.type = "hidden";
-                input.name = "sentence_ID";
-                input.value = id;
-
-                form1.appendChild(input);
-                document.body.appendChild(form1);
-                form1.submit();
-            }
-        }
-    </script>
 </head>
 <body>
     <div class="container">
 
-
-            <!-- ----------------------------------------------------------------------------------->
-            <!-- ----------------------------------------------------------------------------------->
-            <!--                               CRIMINAL                                           -->
-            <!-- ----------------------------------------------------------------------------------->
-            <!-- ----------------------------------------------------------------------------------->
-
         <div class="column"> 
 
         <div class = "box" onclick="toggleJudges()"> 
-        <h2>Criminal ID: <?php  echo $criminal_id;?>
-        <a href="addCrimes.php?criminal_ID=<?php echo $criminal_id; ?>"><button>Add Alias</button></a>
+        <h2>Criminal 
+        <a href="addCrimes.php?id=<?php echo $id; ?>"><button>Add Alias</button></a>
+
         </h2>
-
-        <?php
-
-        $sql = "SELECT * FROM criminals WHERE criminal_ID = '" . mysqli_real_escape_string($con, $criminal_id) . "'";
-        $result = mysqli_query($con, $sql);
-
-        if ($result && mysqli_num_rows($result) > 0) {
-            $criminal = mysqli_fetch_assoc($result); // Fetch the data as an associative array
-            echo '<p>Name: ' . $criminal['criminal_name_first'] . ' ' . $criminal['criminal_name_last'] .  '</p>';
-            echo '<p>Address: ' . $criminal['criminal_street'] . ', ' . $criminal['criminal_city'] . ', ' . $criminal['criminal_zip'] . '</p>';
-            echo '<p>Phone: ' . $criminal['criminal_phone'] .  '</p>';
-            echo '<p>Violation Status: ' . $criminal['criminal_violent_status'] .  '</p>';
-            echo '<p>Probation Status: ' . $criminal['criminal_probation_status'] .  '</p>';
-
-
-            //----------------------------------------------------------------------------------->
-            //                              ALIAS                                              -->  
-            //----------------------------------------------------------------------------------->
-          
-            $sql = "SELECT * FROM alias WHERE criminal_ID = '" . mysqli_real_escape_string($con, $criminal_id) . "'";
-            $result = mysqli_query($con, $sql);
-            
-            if ($result && mysqli_num_rows($result) > 0) {
-                while ($row = mysqli_fetch_assoc($result)) {
-                    // Access the data from the current row using $row
-                    echo '<div class="box4" style="font-family: Fira Sans; line-height: 1.5;">';
-                    echo '<h3>' . $row['alias'] . '</h3>';
-                    echo '<button class="popup-button" onclick="deleteWithId(' . $row['alias_ID'] . ');">Delete</button>';
-                    echo '</div>'; 
-                }
-            } else {
-                // Handle the case when no rows are found
-            }
-
-            
-           
-            
-
-        } else {
-            echo 'No criminal found with the specified ID.';
-        }
-
-
-
-
-        ?>
+        </div>
         
-        </div><!-- ENDS CRIMINAL ID-->
-
-        <div class = "column "> 
+        
+        <div class = "column ">
 
             <!-- ----------------------------------------------------------------------------------->
             <!-- ----------------------------------------------------------------------------------->
@@ -129,11 +45,12 @@ if (isset($_REQUEST['criminal_ID'])) {
             <!-- ----------------------------------------------------------------------------------->
 
             <h2>Sentencing 
-            <a href="addSentences.php?criminal_ID=<?php echo $criminal_id; ?>"><button>Add</button></a>
+            <a href="addSentences.php?id=<?php echo $id; ?>"><button>Add</button></a>
             </h2>
 
+
             <?php
-                $sql = "SELECT * FROM sentences WHERE criminal_ID = '" . mysqli_real_escape_string($con, $criminal_id) . "'";
+                $sql = "SELECT * FROM sentences WHERE criminal_ID = '" . mysqli_real_escape_string($con, $id) . "'";
                 $result = mysqli_query($con, $sql);
 
                 if ($result && mysqli_num_rows($result) > 0) {
@@ -146,11 +63,7 @@ if (isset($_REQUEST['criminal_ID'])) {
                         <p>Start Date: <?php echo $sentence['start_date']; ?></p>
                         <p>End Date: <?php echo $sentence['end_date']; ?></p>
                         <p>Violations: <?php echo $sentence['violations']; ?></p>
-                        <a href="addSentences.php?m=e&criminal_ID=<?php echo $criminal_id; ?>&sentence_ID=<?php echo $sentence['sentence_ID']; ?>">
-                            <button class="popup-button">Edit</button>
-                        </a>
-                    
-                        <button class="popup-button" onclick="deleteSentence(<?php echo $sentence['sentence_ID']; ?>);">Delete</button>
+                        <button class="delete-button" onclick="openPopup('popup-sentence')">Delete</button>
 
                     </div>
 
@@ -186,33 +99,25 @@ if (isset($_REQUEST['criminal_ID'])) {
 
 
         <h2> CRIMES       
-        <a href="addCrimes.php?criminal_ID=<?php echo $criminal_id; ?>"><button>Add</button></a>
+        <a href="addCrimes.php?id=<?php echo $id; ?>"><button>Add</button></a>
         </h2>
 
 
         <?php
 
         //SHOW EACH POSSIBLE CRIME THE CRIMINAL COULD HAVE COMMITTED 
-        $sql = "SELECT * FROM crimes WHERE criminal_ID = '" . mysqli_real_escape_string($con, $criminal_id) . "'";
+        $sql = "SELECT * FROM crimes WHERE criminal_ID = '" . mysqli_real_escape_string($con, $id) . "'";
         $result = mysqli_query($con, $sql);
 
         if ($result && mysqli_num_rows($result) > 0) {
             while ($crime = mysqli_fetch_assoc($result)) {
                 echo '<div class="box2" style="font-family: Fira Sans; line-height: 1.5;">';
                 echo '<h3>Crime ID: ' . $crime['crime_ID'] . '</h3>';
-                echo '<p>Crime Classification: ' . $crime['crime_classification'] . '</p>';
-                echo '<p>Date Charged: ' . $crime['date_charged'] . '</p>';
-                echo '<p>Crime Status: ' . $crime['crime_status'] . '</p>';
-                echo '<p>Hearing Date: ' . $crime['hearing_date'] . '</p>';
-                echo '<p>Appeal Deadline: ' . $crime['appeal_cut_date'] . '</p>';
-               
-                echo '<a href="addCrimes.php?m=e&criminal_ID=' . $criminal_id . '&crime_ID=' . $crime['crime_ID'] . '">';
-                echo '<button class="popup-button">Edit</button>';
-                echo '</a>';
-        
-                // Add the Delete button
-                echo '<button class="popup-button" onclick="deleteWithId(' . $crime['crime_ID'] . ');">Delete</button>';
-        
+                echo '<p>Sentence Type: ' . $crime['crime_classification'] . '</p>';
+                echo '<p>Probation Officer ID: ' . $crime['date_charged'] . '</p>';
+                echo '<p>Start Date: ' . $crime['crime_status'] . '</p>';
+                echo '<p>End Date: ' . $crime['hearing_date'] . '</p>';
+                echo '<p>Violations: ' . $crime['appeal_cut_date'] . '</p>';
                 
 
 
@@ -260,17 +165,11 @@ if (isset($_REQUEST['criminal_ID'])) {
                
 
                 /* ---------------------------APPEALS---------------------------------- */ 
-                echo '<div class="box3" id="appeals">';
-                echo '<h4>';
-                echo 'APPEALS ';
-                echo '<a href="addAppeals.php?m=a&criminal_ID=' . $criminal_id . '&crime_ID=' . $crime['crime_ID'] . '">';
-                echo '<button class="popup-button">Add Appeals</button>';
-                echo '</a>';
-                echo '</h4>';
-
-
-      
-
+                echo '<div class="box3" id = "appeals">';
+                echo '<h4>
+                APPEALS 
+                <button onclick="addCrimeStuff(\'' . $crime['crime_ID'] . '\' , \'' . "appeals" . '\')">Add Appeals</button>
+                </h4>';
 
                 $appealsQuery = "SELECT * FROM appeals WHERE crime_ID = '" . mysqli_real_escape_string($con, $crime['crime_ID']) . "'";
                 $appealsResult = mysqli_query($con, $appealsQuery);
@@ -282,24 +181,8 @@ if (isset($_REQUEST['criminal_ID'])) {
                         echo '<p>Filing Date: ' . $appeals['filing_date'] . '</p>';
                         echo '<p>Hearing Date: ' . $appeals['hearing_date'] . '</p>';
                         echo '<p>Appeal Status: ' . $appeals['appeal_status'] . '</p>';
-                      
-                        echo '<form method="post" action="appeals_function.php">';
-                        echo '<input type="hidden" name="appeal_ID" value="' . $appeals['appeal_ID'] . '">';
-                        echo '<input type="hidden" name="criminal_ID" value="' . $criminal_id . '">';
-                        echo '<input type="hidden" name="m" value="d">';
-                        echo '<button type="submit" id="appealsDelete" onclick="return confirm(\'Are you sure you want to delete this appeal?\')">Delete</button>';
-                        echo '</form>';
-
-
-
-                        echo '<a href="addAppeals.php?m=u&criminal_ID=' . $criminal_id . '&crime_ID=' . $crime['crime_ID'] . '&appeal_ID=' . $appeals['appeal_ID'] . '&appeal_status=' . $appeals['appeal_status'] . '&filing_date=' . $appeals['filing_date'] . '&hearing_date=' . $appeals['hearing_date'] . '">';
-                        echo '<input type="hidden" name="appeal_ID" value="' . $appeals['appeal_ID'] . '">';
-                        echo '<input type="hidden" name="criminal_ID" value="' . $criminal_id . '">';
-                        echo '<input type="hidden" name="m" value="u">';
-                        echo '<button class="popup-button">Edit Appeal</button>';
-                        echo '</a>';
+                        echo '<button id = "appealsDelete">Delete</button>';
                         echo '</div>'; 
-
 
                     }
                 } 
@@ -469,8 +352,6 @@ if (isset($_REQUEST['criminal_ID'])) {
             border-radius: 2vw ;
             border: 3px; 
             min-height: 600px; 
-            transition: 1s;
-
 
 
         }
@@ -483,7 +364,7 @@ if (isset($_REQUEST['criminal_ID'])) {
 
         .box2:hover {
             overflow: auto;
-            background: #F1F0E8; 
+            background: #F1F0E8 
         }
 
         .box-content {
@@ -491,8 +372,8 @@ if (isset($_REQUEST['criminal_ID'])) {
             overflow-y: auto;
         }
 
-        .column:hover {           
-
+        .column:hover {
+            background: #ADC4CE;
             overflow: auto;
         }
 
@@ -562,30 +443,6 @@ if (isset($_REQUEST['criminal_ID'])) {
 
         }
 
-        .box4 {
-            height: 50px; /* Set a specific height */
-            width: 100%; /* Set a specific width */
-            padding: 20px;
-            background: #FFF4E3;
-            margin-bottom: 10px;
-            overflow: hidden;
-            overflow-y: auto; /* Enable vertical scrolling */
-            border-radius: 1vw ;
-            height: auto; 
-            min-height: 50px; 
-
-
-
-        }
-
-
-        .box4:hover {
-            overflow: auto;
-            background: #96B6C5 
-            border-radius: 2vw ;
-
-        }
-
 
         .popup-delete {
         width: 50%;
@@ -642,8 +499,6 @@ if (isset($_REQUEST['criminal_ID'])) {
             overflow: hidden;
             border-radius: 1vw ;
             border: 3px; 
-            transition: 1s;
-
 
 
 
@@ -652,7 +507,7 @@ if (isset($_REQUEST['criminal_ID'])) {
 
         .boxfinal:hover {
             overflow: auto;
-            background: #fbfbf8; 
+            background: #F1F0E8
         }
 
 

@@ -29,7 +29,7 @@ if ($method == 'a') {
     delete_crime();
 }
 
-?>
+
 
 
 $criminal_id = array_key_exists("criminal_ID", $_GET) ? $_GET['criminal_ID'] : null;
@@ -155,4 +155,3 @@ if ($method == 'a') {
 </body>
 
 </html>
-

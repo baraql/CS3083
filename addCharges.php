@@ -28,13 +28,8 @@ if (isset($_GET['charge_ID'])) {
 
 $crime_ID = array_key_exists("crime_ID", $_REQUEST) ? $_REQUEST['crime_ID'] : null;
 
-<<<<<<< Updated upstream
 $chargeID = array_key_exists("charge_ID", $_GET) ? $_GET['charge_ID'] : null;
 $charge = new Charge;
-=======
-$appealID = array_key_exists("charge_ID", $_GET) ? $_GET['charge_ID'] : null;
-$appeal = new Appeal;
->>>>>>> Stashed changes
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +41,6 @@ $appeal = new Appeal;
     <title>Add Charges</title>
     <script>
     function check(form) {
-<<<<<<< Updated upstream
         var charge_ID = form['charge_ID'];
         var charge_status = form['charge_status'];
         var total_fine = form['total_fine'];
@@ -73,26 +67,6 @@ $appeal = new Appeal;
         } else if (fine_due.value.trim() == '') {
             alert('The Fine Due cannot be null.');
             fine_due.focus();
-=======
-        var appeal_ID = form['appeal_ID'];
-        var appeal_status = form['appeal_status'];
-        var filing_date = form['filing_date'];
-        var hearing_date = form['hearing_date'];
-        var result = false;
-
-        if (isNaN(appeal_ID.value) || appeal_ID.value.trim().length < 5) {
-            alert('The Appeal ID must be a 5-length numeric value.');
-            appeal_ID.focus();
-        } else if (appeal_status.value.trim() == '') {
-            alert('The Appeal Status cannot be null.');
-            appeal_status.focus();
-        } else if (filing_date.value.trim() == '') {
-            alert('The Filing Date cannot be null.');
-            filing_date.focus();
-        } else if (hearing_date.value.trim() == '') {
-            alert('The Hearing Date cannot be null.');
-            hearing_date.focus();
->>>>>>> Stashed changes
         } else {
             result = true;
         }
@@ -104,11 +78,7 @@ $appeal = new Appeal;
 
 <body>
 
-<<<<<<< Updated upstream
     <form method="post" action="addcharges_function.php" onsubmit="return check(this);">
-=======
-    <form method="post" action="appeals_function.php" onsubmit="return check(this);">
->>>>>>> Stashed changes
         <input type="hidden" name="m" value="<?php echo $method; ?>" />
         <input type="hidden" name="criminal_ID" value="<?php echo $criminal_ID; ?>" />
 
@@ -122,31 +92,19 @@ $appeal = new Appeal;
         }
         ?>
 
-<<<<<<< Updated upstream
 
 
 
         <label for="charge_ID">Charge ID:</label>
 
         <input type="text" name="charge_ID" maxlength="9"
-=======
-     
-
-
-        <label for="appeal_ID">Charge ID:</label>
-    
-        <input type="text" name="charge_ID:" maxlength="9"
->>>>>>> Stashed changes
             value="<?php echo isset($_GET['charge_ID']) ? htmlspecialchars($_GET['charge_ID']) : ''; ?>"
             <?php echo $disabled; ?>><br>
 
 
-<<<<<<< Updated upstream
         <label for="crime_code">Crime Code:</label>
         <input type="text" name="crime_code" required
             value="<?php echo isset($_GET['crime_code']) ? htmlspecialchars($_GET['crime_code']) : ''; ?>"><br>
-=======
->>>>>>> Stashed changes
 
         <label for="charge_status">Charge Status :</label>
         <select id="charge_status" name="charge_status" required
@@ -171,40 +129,33 @@ $appeal = new Appeal;
 
 
 
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
-        <label for="court_fee">Court Fee:</label>
-        <input type="text" name="court_fee" required
-            value="<?php echo isset($_GET['court_fee']) ? htmlspecialchars($_GET['court_fee']) : ''; ?>"><br>
+        <<<<<<< Updated upstream=======>>>>>>> Stashed changes
+            <label for="court_fee">Court Fee:</label>
+            <input type="text" name="court_fee" required
+                value="<?php echo isset($_GET['court_fee']) ? htmlspecialchars($_GET['court_fee']) : ''; ?>"><br>
 
 
-        <label for="amount_paid">Fine Paid:</label>
-        <input type="text" name="amount_paid" required
-            value="<?php echo isset($_GET['amount_paid']) ? htmlspecialchars($_GET['amount_paid']) : ''; ?>"><br>
+            <label for="amount_paid">Fine Paid:</label>
+            <input type="text" name="amount_paid" required
+                value="<?php echo isset($_GET['amount_paid']) ? htmlspecialchars($_GET['amount_paid']) : ''; ?>"><br>
 
 
-        <label for="pay_due_date">Fine Due:</label>
-        <input type="date" name="pay_due_date" required
-            value="<?php echo isset($_GET['pay_due_date']) ? htmlspecialchars($_GET['pay_due_date']) : ''; ?>"><br>
+            <label for="pay_due_date">Fine Due:</label>
+            <input type="date" name="pay_due_date" required
+                value="<?php echo isset($_GET['pay_due_date']) ? htmlspecialchars($_GET['pay_due_date']) : ''; ?>"><br>
 
 
-        <button type="submit">Submit</button>
+            <button type="submit">Submit</button>
 
-        <button type="button">
-            <a href="popup.php?criminal_ID=<?php echo $criminal_ID; ?>"
-                style="text-decoration: none; color: inherit;">Go Back</a>
-        </button>
+            <button type="button">
+                <a href="popup.php?criminal_ID=<?php echo $criminal_ID; ?>"
+                    style="text-decoration: none; color: inherit;">Go Back</a>
+            </button>
 
     </form>
 
     <script>
-<<<<<<< Updated upstream
     document.getElementById("charge_status").value = "<?php echo $charge->charge_status; ?>";
-=======
-    document.getElementById("appeal_status").value = "<?php echo $appeal->appeal_status; ?>";
->>>>>>> Stashed changes
     </script>
 
 

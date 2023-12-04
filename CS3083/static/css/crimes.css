@@ -1,0 +1,61 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    width: 80%;
+    margin: 20px auto;
+  }
+  
+  .card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  
+  .card-header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 15px 20px;
+    font-size: 18px;
+  }
+  
+  .card-body {
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  
+  .card-body p {
+    font-size: 16px;
+    line-height: 1.6;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #fff;
+    border-left: 4px solid #007bff;
+    box-shadow: inset 0 0 10px #eaeaea;
+  }
+  
+  /* If you want to add some hover effect on the cards */
+  .card:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Make sure h1 stands out */
+  .container > h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+  }
+  
+  /* This will handle null dates */
+  .card-body .null-date {
+    color: #999;
+  }
+
+  
+  

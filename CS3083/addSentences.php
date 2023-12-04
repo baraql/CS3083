@@ -14,30 +14,6 @@ if ($criminal_id == null) {
 }
 
 include 'connect.php';
-include_once "crimes_function.php";
-
-$method = array_key_exists("m", $_REQUEST) ? $_REQUEST['m'] : null;
-
-$crime = new Crime;
-if ($method == 'a') {
-    add_crime();
-} elseif ($method == 'e') {
-    $crime = get_crime_info_form_db();
-} elseif ($method == 'u') {
-    update_crime();
-} elseif ($method == 'd') {
-    delete_crime();
-}
-
-
-
-
-$criminal_id = array_key_exists("criminal_ID", $_GET) ? $_GET['criminal_ID'] : null;
-if ($criminal_id == null) {
-    header("Localtion: criminal.php");
-}
-
-include 'connect.php';
 include_once "sentence_function.php";
 
 $method = array_key_exists("m", $_REQUEST) ? $_REQUEST['m'] : null;

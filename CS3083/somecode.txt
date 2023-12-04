@@ -1,7 +1,0 @@
-add button: redirects you to a barebone popup page: 
-
-<a href="#" class="more" onclick="submitFormWithId(' . $id . ')"  style="float: right;">
-    <button type="button">
-        <span style="margin-right: 5px;">Add</span>
-    </button>
-</a>

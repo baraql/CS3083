@@ -129,7 +129,7 @@ include 'connect.php';
                 <button type="button">Delete</button>
             </a>
 
-            <a href="cc_add_and_edit.php?m=e&cc='. $cc .'" class="more")">
+            <a href="cc_add_and_edit.php?m=e&crime_code='. $cc .'" class="more")">
                 <button type="button">Edit</button>
             </a>
             </td>

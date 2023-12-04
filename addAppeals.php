@@ -77,7 +77,7 @@ $appeal = new Appeal;
         <?php
 $disabled = '';
 if ($method === 'u') {
-    $disabled = 'disabled';
+    $disabled = 'readonly';
 }
 ?>
         <input type="text" name="appeal_ID" maxlength="9"

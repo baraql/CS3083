@@ -11,7 +11,6 @@ class Appeal
     public static function fromArrayOrResult($arrOrRes)
     {
         $appeal = new Appeal;
-
         $appeal->appeal_ID = $arrOrRes['appeal_ID'];
         $appeal->crime_ID = $arrOrRes['crime_ID'];
         $appeal->filing_date = $arrOrRes['filing_date'];
@@ -82,7 +81,7 @@ function update_appeal()
     $appeal = Appeal::fromArrayOrResult($_POST);
 
     try {
-        echo "UPDATE";
+        // echo "UPDATE";
         $con->begin_transaction();
         $stmt = $con->prepare($sql);
         $stmt->bind_param(
@@ -98,7 +97,7 @@ function update_appeal()
 
         $stmt->execute();
         $con->commit();
-        // header("location:popup.php?criminal_ID=$criminal_ID");
+        header("location:popup.php?criminal_ID=$criminal_ID");
     } catch (mysqli_sql_exception $exception) {
         $con->rollback();
         die($exception);

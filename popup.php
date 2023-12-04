@@ -258,6 +258,9 @@ if (isset($_REQUEST['criminal_ID'])) {
 
 
                             echo '<a href="addAppeals.php?m=u&criminal_ID=' . $criminal_id . '&crime_ID=' . $crime['crime_ID'] . '&appeal_ID=' . $appeals['appeal_ID'] . '&appeal_status=' . $appeals['appeal_status'] . '&filing_date=' . $appeals['filing_date'] . '&hearing_date=' . $appeals['hearing_date'] . '">';
+                            echo '<input type="hidden" name="appeal_ID" value="' . $appeals['appeal_ID'] . '">';
+                            echo '<input type="hidden" name="criminal_ID" value="' . $criminal_id . '">';
+                            echo '<input type="hidden" name="m" value="u">';
                             echo '<button class="popup-button">Edit Appeal</button>';
                             echo '</a>';
 

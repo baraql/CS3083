@@ -1,0 +1,77 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #96B6C5;
+  margin: 0;
+  padding: 0;
+}
+
+.top-bar {
+  background-color: #96B6C5;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logout-btn, .nav-btn, .search-btn {
+  background-color: #EEE0C9;
+  border: none;
+  padding: 15px 20px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.nav-btn.active {
+  background-color: #F1F0E8;
+  color: rgb(8, 7, 7);
+}
+
+.search-container {
+  display: flex;
+}
+
+.search-input {
+  padding: 10px;
+  margin-right: 5px;
+}
+
+.table-container {
+  background-color: #96B6C5;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 15px;
+  text-align: left;
+}
+
+th {
+  background-color: #3596c2;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #EEE0C9;
+}
+
+tr:nth-child(odd) {
+    background-color: #F1F0E8;
+  }
+
+
+/* Add this at the end of your styles.css file */
+.clickable {
+    cursor: pointer; /* Changes the cursor to the pointer hand icon */
+    transition: background-color 0.3s ease; /* Smooth background color transition */
+  }
+  
+  .clickable:hover {
+    background-color: #e8e8e8; /* Darkens the row slightly on hover */
+  }

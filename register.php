@@ -9,11 +9,20 @@ $firstname = $_POST['fname'];
 $lastname = $_POST['lname'];
 $username = $_POST['uname'];
 $password = md5($_POST['pwd']);
+// $admin = array_key_exists('isAdmin', $_POST) ? true : false;
 
+if (isset($_POST['isAdmin'])) {
+    $admin = $_POST['isAdmin'];
+    // The variable $_POST['isAdmin'] exists, and you can use $admin as needed
+    echo "isAdmin exists, and its value is: " . $admin;
+} else {
+    // $_POST['isAdmin'] doesn't exist or is set to null/empty
+    $admin = 0;
+}
 
 
 // database connection
-$sql = "INSERT into users(firstname, lastname, username, password) values('$firstname','$lastname','$username','$password')";
+$sql = "INSERT into users(firstname, lastname, username, password, isAdmin) values('$firstname','$lastname','$username','$password', '$admin')";
 $result = mysqli_query($con, $sql);
 if($result){
 	echo $firstname. " is registered succesfully!";

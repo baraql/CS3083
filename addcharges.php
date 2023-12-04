@@ -80,11 +80,11 @@ $appeal = new Appeal;
         }
         ?>
 
-     
+
 
 
         <label for="appeal_ID">Charge ID:</label>
-    
+
         <input type="text" name="charge_ID:" maxlength="9"
             value="<?php echo isset($_GET['charge_ID']) ? htmlspecialchars($_GET['charge_ID']) : ''; ?>"
             <?php echo $disabled; ?>><br>

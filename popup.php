@@ -255,7 +255,7 @@ if (isset($_REQUEST['criminal_ID'])) {
                         //add 
                         echo '<form method="post" action="addco_functions.php">'; //form 1 
                         echo '<input type="hidden" name="crime_ID" value="' . $crime['crime_ID'] . '">';
-                        echo '<input type="hidden" name="criminal_ID" value="' . $criminal_id . '">';
+                        echo '<input type="hidden" name="officer_ID" value="' . $officerID . '">';
 
 
                         //delete 
@@ -267,18 +267,12 @@ if (isset($_REQUEST['criminal_ID'])) {
                         //edit 
                         echo '<a href="addco.php?m=u&criminal_ID=' . $criminal_id . '&crime_ID=' . $crime['crime_ID'] . '&officer_ID=' . $officerID .  '">';
                         echo '<input type="hidden" name="officer_ID" value="' . $officerID .'">';
-                        echo '<input type="hidden" name="criminal_ID" value="' . $criminal_id . '">';
+                        echo '<input type="hidden" name="crime_ID" value="' . $crime['crime_ID'] . '">';
                         echo '<input type="hidden" name="m" value="u">'; //u &m idk when and where this will be important 
                         echo '<button class="popup-button">Edit Crime Officer</button>';
                         echo '</a>';
 
-
-
-
-
-
-
-                    
+ 
                         echo '</div>'; //closes crime officers boxfinal 
 
 
@@ -300,10 +294,6 @@ if (isset($_REQUEST['criminal_ID'])) {
                 echo '</a>';
                 echo '</h4>';
 
-
-
-    
-
                 $appealsQuery = "SELECT * FROM appeals WHERE crime_ID = '" . mysqli_real_escape_string($con, $crime['crime_ID']) . "'";
                 $appealsResult = mysqli_query($con, $appealsQuery);
 
@@ -315,7 +305,7 @@ if (isset($_REQUEST['criminal_ID'])) {
                         echo '<p>Hearing Date: ' . $appeals['hearing_date'] . '</p>';
                         echo '<p>Appeal Status: ' . $appeals['appeal_status'] . '</p>';
                       
-                        //add appeals 
+                        //What does this do? 
                         echo '<form method="post" action="appeals_function.php">'; //form 1 
                         echo '<input type="hidden" name="appeal_ID" value="' . $appeals['appeal_ID'] . '">';
                         echo '<input type="hidden" name="criminal_ID" value="' . $criminal_id . '">';
@@ -323,7 +313,6 @@ if (isset($_REQUEST['criminal_ID'])) {
                         echo '<input type="hidden" name="m" value="d">';
                         echo '<button type="submit" id="appealsDelete" onclick="return confirm(\'Are you sure you want to delete this appeal?\')">Delete</button>';
                         echo '</form>'; //form 2 
-
 
                         //edit appeals
                         echo '<a href="addAppeals.php?m=u&criminal_ID=' . $criminal_id . '&crime_ID=' . $crime['crime_ID'] . '&appeal_ID=' . $appeals['appeal_ID'] . '&appeal_status=' . $appeals['appeal_status'] . '&filing_date=' . $appeals['filing_date'] . '&hearing_date=' . $appeals['hearing_date'] . '">';
@@ -344,33 +333,57 @@ if (isset($_REQUEST['criminal_ID'])) {
 
 
                 /* ---------------------------CHARGES---------------------------------- */ 
-               echo '<div class="box3" id = "charges">';
-               echo '<h4>
-               CHARGES 
-               <button onclick="addCrimeStuff(\'' . $crime['crime_ID'] . '\', \'' . "charges" . '\')">Add Charges</button>
-               </h4>';
-               
+                echo '<div class="box3" id = "charges">';
+                echo '<h4>'; 
+                echo 'CHARGES ';
+                echo '<a href="addcharges.php?m=a&criminal_ID=' . $criminal_id . '&crime_ID=' . $crime['crime_ID'] . '">';
+                echo '<button class="popup-button">Add Charges</button>';
+                echo '</a>';               
+                echo '</h4>';
 
-               $chargesQuery = "SELECT * FROM crime_charges WHERE crime_ID = '" . mysqli_real_escape_string($con, $crime['crime_ID']) . "'";
-               $chargesResult = mysqli_query($con, $chargesQuery);
+                $chargesQuery = "SELECT * FROM crime_charges WHERE crime_ID = '" . mysqli_real_escape_string($con, $crime['crime_ID']) . "'";
+                $chargesResult = mysqli_query($con, $chargesQuery);
+    
+                if ($chargesResult && mysqli_num_rows($chargesResult) > 0) {
+                    while ($charges = mysqli_fetch_assoc($chargesResult)) {
+                        echo '<div class = "boxfinal" id = "indivisualCharges">'; 
+    
+                        echo '<p>Charge ID: ' . $charges['charge_ID'] . '</p>';
+                        echo '<p>Charge Status: ' . $charges['charge_status'] . '</p>';
+                        echo '<p>Fine Amount: ' . $charges['fine_amount'] . '</p>';
+                        echo '<p>Court Fee: ' . $charges['court_fee'] . '</p>';
+                        echo '<p>Amount Paid: ' . $charges['amount_paid'] . '</p>';
+                        echo '<p>Due Date: ' . $charges['pay_due_date'] . '</p>';
 
-               if ($chargesResult && mysqli_num_rows($chargesResult) > 0) {
-                   while ($charges = mysqli_fetch_assoc($appealsResult)) {
-                       echo '<div class = "boxfinal" id = "indivisualCharges">'; 
 
-                       echo '<p>Charge ID: ' . $appeals['charge_ID'] . '</p>';
-                       echo '<p>Charge Status: ' . $appeals['charge_status'] . '</p>';
-                       echo '<p>Fine Amount: ' . $appeals['fine_amount'] . '</p>';
-                       echo '<p>Court Fee: ' . $appeals['court_fee'] . '</p>';
-                       echo '<p>Amount Paid: ' . $appeals['amount_paid'] . '</p>';
-                       echo '<p>Due Date: ' . $appeals['pay_due_date'] . '</p>';
-                       echo '<button id = "appealsDelete">Delete</button>';
-                       echo '</div>'; //closing boxfinal 
+                        //what does this do? 
+                        echo '<form method="post" action="addcharges.php">'; //form 1 
+                        echo '<input type="hidden" name="charge_ID" value="' . $charges['charge_ID'] . '">';
+                        echo '<input type="hidden" name="criminal_ID" value="' . $criminal_id . '">';
+                        echo '<input type="hidden" name="crime_ID" value="' . $crime['crime_ID'] . '">';
 
-                   }
-               } 
-               echo '</div>';  //closing box 3 charges 
+                        //echo charges 
+                        echo '<input type="hidden" name="m" value="d">';
+                        echo '<button type="submit" id="chargesDelete" onclick="return confirm(\'Are you sure you want to delete this Charge?\')">Delete</button>';
+                        echo '</form>'; //form 2 
+
+
+                        //edit charges
+                        echo '<a href="addcharges.php?m=u&criminal_ID=' . $criminal_id . '&crime_ID=' . $crime['crime_ID'] . '&charge_ID=' . $charges['charge_ID'] . '">';
+                        echo '<input type="hidden" name="charge_ID" value="' . $charges['charge_ID'] . '">';
+                        echo '<input type="hidden" name="crime_ID" value="' . $crime['crime_ID'] . '">';
+                        echo '<input type="hidden" name="m" value="u">';
+                        echo '<button class="popup-button">Edit Charges</button>';
+                        echo '</a>';
+                        echo '</div>'; 
+    
+                    }
+                } 
+                echo '</div>';  //closing box 3 charges 
+     
                 /* ---------------------------CHARGES---------------------------------- */ 
+
+                
 
 
 

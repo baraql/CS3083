@@ -16,7 +16,7 @@ if ($criminal_ID == null) {
     exit();
 }
 
-if (isset($_GET['appeal_ID'])) {
+if (isset($_GET['charge_ID'])) {
     $method = $_GET['m'];
 } else {
     $method = 'a';
@@ -24,7 +24,7 @@ if (isset($_GET['appeal_ID'])) {
 
 $crime_ID = array_key_exists("crime_ID", $_REQUEST) ? $_REQUEST['crime_ID'] : null;
 
-$appealID = array_key_exists("appeal_ID", $_GET) ? $_GET['appeal_ID'] : null;
+$appealID = array_key_exists("charge_ID", $_GET) ? $_GET['charge_ID'] : null;
 $appeal = new Appeal;
 ?>
 
@@ -34,7 +34,7 @@ $appeal = new Appeal;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Appeals</title>
+    <title>Add Charges</title>
     <script>
     function check(form) {
         var appeal_ID = form['appeal_ID'];
@@ -73,54 +73,76 @@ $appeal = new Appeal;
         <input type="hidden" name="m" value="<?php echo $method; ?>" />
         <input type="hidden" name="crime_ID" value="<?php echo $crime_ID; ?>" />
 
-        <label for="appeal_ID">Appeal ID:</label>
-        
         <?php
-$disabled = '';
-if ($method === 'u') {
-    $disabled = 'readonly';
-}
-?>
-        <input type="text" name="appeal_ID" maxlength="9"
-            value="<?php echo isset($_GET['appeal_ID']) ? htmlspecialchars($_GET['appeal_ID']) : ''; ?>"
+        $disabled = '';
+        if ($method === 'u') {
+            $disabled = 'readonly';
+        }
+        ?>
+
+     
+
+
+        <label for="appeal_ID">Charge ID:</label>
+    
+        <input type="text" name="charge_ID:" maxlength="9"
+            value="<?php echo isset($_GET['charge_ID']) ? htmlspecialchars($_GET['charge_ID']) : ''; ?>"
             <?php echo $disabled; ?>><br>
 
 
 
-        <label for="appeal_status">Appeal Status:</label>
-        <select id="appeal_status" name="appeal_status" required
+        <label for="charge_status">Charge Status :</label>
+        <select id="charge_status" name="charge_status" required
             style="width: 100%; padding: 8px; margin-bottom: 16px; box-sizing: border-box;">
-            <option value="P" <?php if (isset($_GET['appeal_status']) && htmlspecialchars($_GET['appeal_status']) === 'P')
+            <option value="P" <?php if (isset($_GET['charge_status']) && htmlspecialchars($_GET['charge_status']) === 'P')
                 echo 'selected'; ?>>
                 Pending</option>
-            <option value="A" <?php if (isset($_GET['appeal_status']) && htmlspecialchars($_GET['appeal_status']) === 'A')
+            <option value="G" <?php if (isset($_GET['charge_status']) && htmlspecialchars($_GET['charge_status']) === 'A')
                 echo 'selected'; ?>>
-                Approved</option>
-            <option value="D" <?php if (isset($_GET['appeal_status']) && htmlspecialchars($_GET['appeal_status']) === 'A')
+                Guilty</option>
+            <option value="N" <?php if (isset($_GET['charge_status']) && htmlspecialchars($_GET['charge_status']) === 'A')
                 echo 'selected'; ?>>
-                Disapproved</option>
+                Not Guilty</option>
 
         </select><br>
 
-        <label for="filing_date">Filing Date:</label>
-        <input type="date" name="filing_date" required
-            value="<?php echo isset($_GET['filing_date']) ? htmlspecialchars($_GET['filing_date']) : ''; ?>"><br>
 
-        <label for="hearing_date">Hearing Date:</label>
-        <input type="date" name="hearing_date" required
-            value="<?php echo isset($_GET['hearing_date']) ? htmlspecialchars($_GET['hearing_date']) : ''; ?>"><br>
+
+        <label for="fine_amount">Total Fine:</label>
+        <input type="text" name="fine_amount" required
+            value="<?php echo isset($_GET['fine_amount']) ? htmlspecialchars($_GET['fine_amount']) : ''; ?>"><br>
+
+
+
+        <label for="court_fee">Court Fee:</label>
+        <input type="text" name="court_fee" required
+            value="<?php echo isset($_GET['court_fee']) ? htmlspecialchars($_GET['court_fee']) : ''; ?>"><br>
+
+
+        <label for="amount_paid">Fine Paid:</label>
+        <input type="text" name="amount_paid" required
+            value="<?php echo isset($_GET['amount_paid']) ? htmlspecialchars($_GET['amount_paid']) : ''; ?>"><br>
+
+
+        <label for="pay_due_date">Fine Due:</label>
+        <input type="date" name="pay_due_date" required
+            value="<?php echo isset($_GET['pay_due_date']) ? htmlspecialchars($_GET['pay_due_date']) : ''; ?>"><br>
 
 
         <button type="submit">Submit</button>
+
         <button type="button">
             <a href="popup.php?criminal_ID=<?php echo $criminal_ID; ?>"
                 style="text-decoration: none; color: inherit;">Go Back</a>
         </button>
+
     </form>
 
     <script>
     document.getElementById("appeal_status").value = "<?php echo $appeal->appeal_status; ?>";
     </script>
+
+
 
     <style>
     body {

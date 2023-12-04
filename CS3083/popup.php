@@ -22,39 +22,39 @@ if (isset($_REQUEST['criminal_ID'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script>
-        function deleteWithId(id) {
-            if (window.confirm("Sure to delete crimes information with id \'" + id + "\'?")) {
-                var form1 = document.createElement("form");
-                form1.method = "POST";
-                form1.action = "addCrimes.php?m=d&criminal_ID=<?PHP echo $criminal_id ?>";
+    function deleteWithId(id) {
+        if (window.confirm("Sure to delete crimes information with id \'" + id + "\'?")) {
+            var form1 = document.createElement("form");
+            form1.method = "POST";
+            form1.action = "addCrimes.php?m=d&criminal_ID=<?PHP echo $criminal_id ?>";
 
-                var input = document.createElement("input");
-                input.type = "hidden";
-                input.name = "crime_ID";
-                input.value = id;
+            var input = document.createElement("input");
+            input.type = "hidden";
+            input.name = "crime_ID";
+            input.value = id;
 
-                form1.appendChild(input);
-                document.body.appendChild(form1);
-                form1.submit();
-            }
+            form1.appendChild(input);
+            document.body.appendChild(form1);
+            form1.submit();
         }
+    }
 
-        function deleteSentence(id) {
-            if (window.confirm("Sure to delete sentence information with id \'" + id + "\'?")) {
-                var form1 = document.createElement("form");
-                form1.method = "POST";
-                form1.action = "addSentences.php?m=d&criminal_ID=<?PHP echo $criminal_id ?>";
+    function deleteSentence(id) {
+        if (window.confirm("Sure to delete sentence information with id \'" + id + "\'?")) {
+            var form1 = document.createElement("form");
+            form1.method = "POST";
+            form1.action = "addSentences.php?m=d&criminal_ID=<?PHP echo $criminal_id ?>";
 
-                var input = document.createElement("input");
-                input.type = "hidden";
-                input.name = "sentence_ID";
-                input.value = id;
+            var input = document.createElement("input");
+            input.type = "hidden";
+            input.name = "sentence_ID";
+            input.value = id;
 
-                form1.appendChild(input);
-                document.body.appendChild(form1);
-                form1.submit();
-            }
+            form1.appendChild(input);
+            document.body.appendChild(form1);
+            form1.submit();
         }
+    }
     </script>
 </head>
 
@@ -120,18 +120,18 @@ if (isset($_REQUEST['criminal_ID'])) {
                 </div>
 
                 <!-- ------------------------------------------------------------ -->
-                        <!-- ------------------------------------------------------------ -->
-                        <!--        DELETE SENTENCES POPUP                                -->
-                        <!-- ------------------------------------------------------------ -->
-                        <!-- ------------------------------------------------------------ -->
+                <!-- ------------------------------------------------------------ -->
+                <!--        DELETE SENTENCES POPUP                                -->
+                <!-- ------------------------------------------------------------ -->
+                <!-- ------------------------------------------------------------ -->
 
-                        <div class="popup" id="popup-sentence">
-                            <h2>Confirm Deletion</h2>
-                            <p>Are you sure you want to delete this Sentence?</p>
-                            <button onclick="confirmDelete('popup-sentence')">Yes</button>
-                            <button onclick="closePopup('popup-sentence')">No</button>
-                        </div>
-                        <?php
+                <div class="popup" id="popup-sentence">
+                    <h2>Confirm Deletion</h2>
+                    <p>Are you sure you want to delete this Sentence?</p>
+                    <button onclick="confirmDelete('popup-sentence')">Yes</button>
+                    <button onclick="closePopup('popup-sentence')">No</button>
+                </div>
+                <?php
                     }
                 }
                 ?>
@@ -257,12 +257,18 @@ if (isset($_REQUEST['criminal_ID'])) {
 
 
 
-                            echo '<a href="addAppeals.php?m=u&criminal_ID=' . $criminal_id . '&crime_ID=' . $crime['crime_ID'] . '&appeal_ID=' . $appeals['appeal_ID'] . '&appeal_status=' . $appeals['appeal_status'] . '&filing_date=' . $appeals['filing_date'] . '&hearing_date=' . $appeals['hearing_date'] . '">';
-                            echo '<input type="hidden" name="appeal_ID" value="' . $appeals['appeal_ID'] . '">';
-                            echo '<input type="hidden" name="criminal_ID" value="' . $criminal_id . '">';
-                            echo '<input type="hidden" name="m" value="u">';
+                            echo '<a href="addAppeals.php?m=u&criminal_ID=' . $criminal_id . '&crime_ID=' . $crime_ID . '&charge_ID=' . $charge_ID . '&crime_code=' . $crime_code . '&charge_status=' . $charge_status . '&fine_amount=' . $fine_amount . '&court_fee=' . $court_fee . '&amount_paid=' . $amount_paid . '&pay_due_date=' . $pay_due_date . '">';
+                            echo '<input type="hidden" name="charge_ID" value="' . $charge_ID . '">';
+                            echo '<input type="hidden" name="crime_ID" value="' . $crime_ID . '">';
+                            echo '<input type="hidden" name="crime_code" value="' . $crime_code . '">';
+                            echo '<input type="hidden" name="charge_status" value="' . $charge_status . '">';
+                            echo '<input type="hidden" name="fine_amount" value="' . $fine_amount . '">';
+                            echo '<input type="hidden" name="court_fee" value="' . $court_fee . '">';
+                            echo '<input type="hidden" name="amount_paid" value="' . $amount_paid . '">';
+                            echo '<input type="hidden" name="pay_due_date" value="' . $pay_due_date . '">';
                             echo '<button class="popup-button">Edit Appeal</button>';
                             echo '</a>';
+
 
 
 
@@ -329,36 +335,36 @@ if (isset($_REQUEST['criminal_ID'])) {
 
     '
     <script>
-        function addCrimeStuff(crimeID, identifier) {
-            var form = document.createElement("form");
-            form.method = "POST";
-            if (identifier == "appeals") {
-                form.action = "addAppeals.php";
+    function addCrimeStuff(crimeID, identifier) {
+        var form = document.createElement("form");
+        form.method = "POST";
+        if (identifier == "appeals") {
+            form.action = "addAppeals.php";
 
 
 
-            } else if (identifier == "crimeOfficers") {
-                form.action = "addCrimeOfficers.php";
+        } else if (identifier == "crimeOfficers") {
+            form.action = "addCrimeOfficers.php";
 
 
 
-            } else {
-                form.action = "addCharges.php";
+        } else {
+            form.action = "addCharges.php";
 
-            }
-
-
-
-            var inputCrimeID = document.createElement("input");
-            inputCrimeID.type = "hidden";
-            inputCrimeID.name = "crimeID";
-            inputCrimeID.value = crimeID;
-
-            form.appendChild(inputCrimeID);
-            document.body.appendChild(form);
-
-            form.submit();
         }
+
+
+
+        var inputCrimeID = document.createElement("input");
+        inputCrimeID.type = "hidden";
+        inputCrimeID.name = "crimeID";
+        inputCrimeID.value = crimeID;
+
+        form.appendChild(inputCrimeID);
+        document.body.appendChild(form);
+
+        form.submit();
+    }
     </script>
 
 
@@ -373,243 +379,243 @@ if (isset($_REQUEST['criminal_ID'])) {
 
 
     <style>
-        * {
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
-        }
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
 
-        body,
-        html {
-            height: 100%;
-            /* Set the body and html height to 100% */
-        }
+    body,
+    html {
+        height: 100%;
+        /* Set the body and html height to 100% */
+    }
 
-        .container {
-            width: 70%;
-            padding: 20px;
-            margin: 30px auto;
-            /* Add top and bottom margin, keep auto for horizontal centering */
-            display: flex;
-            background: #ddd;
-            justify-content: space-between;
-            height: 90vh;
-            /* Set the container height to 100% of the viewport height */
-            max-width: 950px;
+    .container {
+        width: 70%;
+        padding: 20px;
+        margin: 30px auto;
+        /* Add top and bottom margin, keep auto for horizontal centering */
+        display: flex;
+        background: #ddd;
+        justify-content: space-between;
+        height: 90vh;
+        /* Set the container height to 100% of the viewport height */
+        max-width: 950px;
 
-        }
-
-
-        .column {
-            flex: 1;
-            max-height: 100%;
-            padding: 20px;
-            background: #96B6C5;
-            max-width: 100%;
-            transition: 1s;
-            overflow: auto;
-            flex-direction: column;
-            /* Set flex direction to column for vertical stacking */
+    }
 
 
-        }
-
-        .box {
-            height: 300px;
-            padding: 20px;
-            background: #EEE0C9;
-            max-width: 100%;
-            transition: 1s;
-            overflow: hidden;
-            transition: 1s;
-            overflow: hidden;
-            margin-bottom: 10px;
-            border-radius: 2vw;
+    .column {
+        flex: 1;
+        max-height: 100%;
+        padding: 20px;
+        background: #96B6C5;
+        max-width: 100%;
+        transition: 1s;
+        overflow: auto;
+        flex-direction: column;
+        /* Set flex direction to column for vertical stacking */
 
 
+    }
 
-        }
-
-        .box2 {
-            height: auto;
-            /* Set a specific height */
-            width: 100%;
-            /* Set a specific width */
-            padding: 20px;
-            background: #EEE0C9;
-            margin-bottom: 10px;
-            overflow: hidden;
-            border-radius: 2vw;
-            border: 3px;
-            min-height: 600px;
-
-
-        }
-
-        .box:hover {
-            overflow: auto;
-            background: #F1F0E8
-        }
-
-        .box2:hover {
-            overflow: auto;
-            background: #F1F0E8
-        }
-
-        .box-content {
-            max-height: 300px;
-            overflow-y: auto;
-        }
-
-        .column:hover {
-            background: #ADC4CE;
-            overflow: auto;
-        }
-
-        .column-content {
-            max-height: 300px;
-            overflow-y: auto;
-        }
-
-        .table-container {
-            text-align: center;
-            /* Center-align the content */
-            margin: auto;
-            /* Center the container horizontally */
-            max-width: 100%;
-            /* Ensure the container doesn't exceed the viewport width */
-        }
-
-        table {
-            width: 100%;
-            /* Make the table take the full width of its container */
-        }
+    .box {
+        height: 300px;
+        padding: 20px;
+        background: #EEE0C9;
+        max-width: 100%;
+        transition: 1s;
+        overflow: hidden;
+        transition: 1s;
+        overflow: hidden;
+        margin-bottom: 10px;
+        border-radius: 2vw;
 
 
 
-        .popup {
-            width: 30%;
-            max-height: 80%;
-            /* Set a maximum height for scrollability */
-            background: #fff;
-            border-radius: 6px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.1);
-            text-align: center;
-            padding: 30px;
-            color: #333;
-            visibility: hidden;
-            overflow-y: auto;
-            /* Enable vertical scrolling */
-            transition: transform 0.4s, top 0.4s;
-            border-radius: 2vw;
+    }
 
-        }
-
-        .open-popup {
-            visibility: visible;
-            top: 50%;
-            transform: translate(-50%, -50%) scale(1);
-        }
-
-        .box3 {
-            height: 200px;
-            /* Set a specific height */
-            width: 100%;
-            /* Set a specific width */
-            padding: 20px;
-            background: #FFF4E3;
-            margin-bottom: 10px;
-            overflow: hidden;
-            overflow-y: auto;
-            /* Enable vertical scrolling */
-            border-radius: 1vw;
-            height: auto;
-            min-height: 100px;
+    .box2 {
+        height: auto;
+        /* Set a specific height */
+        width: 100%;
+        /* Set a specific width */
+        padding: 20px;
+        background: #EEE0C9;
+        margin-bottom: 10px;
+        overflow: hidden;
+        border-radius: 2vw;
+        border: 3px;
+        min-height: 600px;
 
 
+    }
 
-        }
+    .box:hover {
+        overflow: auto;
+        background: #F1F0E8
+    }
 
+    .box2:hover {
+        overflow: auto;
+        background: #F1F0E8
+    }
 
-        .box3:hover {
-            overflow: auto;
-            background: #96B6C5 border-radius: 2vw;
+    .box-content {
+        max-height: 300px;
+        overflow-y: auto;
+    }
 
-        }
+    .column:hover {
+        background: #ADC4CE;
+        overflow: auto;
+    }
 
+    .column-content {
+        max-height: 300px;
+        overflow-y: auto;
+    }
 
-        .popup-delete {
-            width: 50%;
-            max-height: 50%;
-            background: #fff;
-            border-radius: 6px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.1);
-            text-align: center;
-            padding: 30px;
-            color: #333;
-            visibility: hidden;
-            overflow-y: auto;
-            transition: transform 0.4s, top 0.4s, visibility 0s linear 0.4s;
-            /* Added visibility transition delay */
-            border-radius: 2vw;
-        }
+    .table-container {
+        text-align: center;
+        /* Center-align the content */
+        margin: auto;
+        /* Center the container horizontally */
+        max-width: 100%;
+        /* Ensure the container doesn't exceed the viewport width */
+    }
 
-        .popup.open-popup {
-            visibility: visible;
-            top: 50%;
-            transform: translate(-50%, -50%) scale(1);
-        }
-
-
-        .boxSentencing {
-            height: 200px;
-            /* Set a specific height */
-            width: 100%;
-            /* Set a specific width */
-            padding: 20px;
-            background: #EEE0C9;
-            margin-bottom: 10px;
-            overflow: hidden;
-            border-radius: 2vw;
-            border: 3px;
+    table {
+        width: 100%;
+        /* Make the table take the full width of its container */
+    }
 
 
 
-        }
+    .popup {
+        width: 30%;
+        max-height: 80%;
+        /* Set a maximum height for scrollability */
+        background: #fff;
+        border-radius: 6px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.1);
+        text-align: center;
+        padding: 30px;
+        color: #333;
+        visibility: hidden;
+        overflow-y: auto;
+        /* Enable vertical scrolling */
+        transition: transform 0.4s, top 0.4s;
+        border-radius: 2vw;
+
+    }
+
+    .open-popup {
+        visibility: visible;
+        top: 50%;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    .box3 {
+        height: 200px;
+        /* Set a specific height */
+        width: 100%;
+        /* Set a specific width */
+        padding: 20px;
+        background: #FFF4E3;
+        margin-bottom: 10px;
+        overflow: hidden;
+        overflow-y: auto;
+        /* Enable vertical scrolling */
+        border-radius: 1vw;
+        height: auto;
+        min-height: 100px;
 
 
-        .boxSentencing:hover {
-            overflow: auto;
-            background: #F1F0E8
-        }
 
-        .boxfinal {
-            height: auto height-min: 100px;
-            /* Set a specific height */
-            width: 100%;
-            /* Set a specific width */
-            padding: 20px;
-            background: #FFF4E3;
-            margin-bottom: 10px;
-            overflow: hidden;
-            border-radius: 1vw;
-            border: 3px;
+    }
 
 
+    .box3:hover {
+        overflow: auto;
+        background: #96B6C5 border-radius: 2vw;
 
-        }
+    }
 
 
-        .boxfinal:hover {
-            overflow: auto;
-            background: #F1F0E8
-        }
+    .popup-delete {
+        width: 50%;
+        max-height: 50%;
+        background: #fff;
+        border-radius: 6px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.1);
+        text-align: center;
+        padding: 30px;
+        color: #333;
+        visibility: hidden;
+        overflow-y: auto;
+        transition: transform 0.4s, top 0.4s, visibility 0s linear 0.4s;
+        /* Added visibility transition delay */
+        border-radius: 2vw;
+    }
+
+    .popup.open-popup {
+        visibility: visible;
+        top: 50%;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+
+    .boxSentencing {
+        height: 200px;
+        /* Set a specific height */
+        width: 100%;
+        /* Set a specific width */
+        padding: 20px;
+        background: #EEE0C9;
+        margin-bottom: 10px;
+        overflow: hidden;
+        border-radius: 2vw;
+        border: 3px;
+
+
+
+    }
+
+
+    .boxSentencing:hover {
+        overflow: auto;
+        background: #F1F0E8
+    }
+
+    .boxfinal {
+        height: auto height-min: 100px;
+        /* Set a specific height */
+        width: 100%;
+        /* Set a specific width */
+        padding: 20px;
+        background: #FFF4E3;
+        margin-bottom: 10px;
+        overflow: hidden;
+        border-radius: 1vw;
+        border: 3px;
+
+
+
+    }
+
+
+    .boxfinal:hover {
+        overflow: auto;
+        background: #F1F0E8
+    }
     </style>
 </body>
 

@@ -42,12 +42,12 @@ function add_appeal()
     global $con;
     $criminal_ID = array_key_exists('criminal_ID', $_REQUEST) ? $_REQUEST['criminal_ID'] : die("Criminal ID required!");
 
-    // Validate and sanitize input
+
     $appeal_ID = filter_input(INPUT_POST, 'appeal_ID', FILTER_VALIDATE_INT);
-    $crime_ID = $_POST['crime_ID']; // You might want to validate this as well
-    $filing_date = $_POST['filing_date']; // Add proper validation
-    $hearing_date = $_POST['hearing_date']; // Add proper validation
-    $appeal_status = $_POST['appeal_status']; // Add proper validation
+    $crime_ID = $_POST['crime_ID'];
+    $filing_date = $_POST['filing_date'];
+    $hearing_date = $_POST['hearing_date'];
+    $appeal_status = $_POST['appeal_status'];
 
     $sql = "INSERT INTO `appeals`(`appeal_ID`, `crime_ID`, `filing_date`, `hearing_date`, `appeal_status`) VALUES (?,?,?,?,?)";
 

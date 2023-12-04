@@ -1,7 +1,7 @@
 <?php
 
 include 'connect.php';
-include_once "appeals_function.php";
+include_once "addcharges_function.php";
 
 session_start();
 
@@ -24,8 +24,8 @@ if (isset($_GET['charge_ID'])) {
 
 $crime_ID = array_key_exists("crime_ID", $_REQUEST) ? $_REQUEST['crime_ID'] : null;
 
-$appealID = array_key_exists("charge_ID", $_GET) ? $_GET['charge_ID'] : null;
-$appeal = new Appeal;
+$chargeID = array_key_exists("charge_ID", $_GET) ? $_GET['charge_ID'] : null;
+$charge = new Charge;
 ?>
 
 <!DOCTYPE html>
@@ -37,24 +37,32 @@ $appeal = new Appeal;
     <title>Add Charges</title>
     <script>
     function check(form) {
-        var appeal_ID = form['appeal_ID'];
-        var appeal_status = form['appeal_status'];
-        var filing_date = form['filing_date'];
-        var hearing_date = form['hearing_date'];
+        var charge_ID = form['charge_ID'];
+        var charge_status = form['charge_status'];
+        var total_fine = form['total_fine'];
+        var court_fee = form['court_fee'];
+        var fine_paid = form['fine_paid'];
+        var fine_due = form['fine_due'];
         var result = false;
 
-        if (isNaN(appeal_ID.value) || appeal_ID.value.trim().length < 5) {
-            alert('The Appeal ID must be a 5-length numeric value.');
-            appeal_ID.focus();
-        } else if (appeal_status.value.trim() == '') {
-            alert('The Appeal Status cannot be null.');
-            appeal_status.focus();
-        } else if (filing_date.value.trim() == '') {
-            alert('The Filing Date cannot be null.');
-            filing_date.focus();
-        } else if (hearing_date.value.trim() == '') {
-            alert('The Hearing Date cannot be null.');
-            hearing_date.focus();
+        if (isNaN(charge_ID.value) || charge_ID.value.trim().length < 5) {
+            alert('The charge ID must be a 5-length numeric value.');
+            charge_ID.focus();
+        } else if (charge_status.value.trim() == '') {
+            alert('The charge Status cannot be null.');
+            charge_status.focus();
+        } else if (total_fine.value.trim() == '') {
+            alert('The Total Fine cannot be null.');
+            total_fine.focus();
+        } else if (court_fee.value.trim() == '') {
+            alert('The Court Fee cannot be null.');
+            court_fee.focus();
+        } else if (fine_paid.value.trim() == '') {
+            alert('The Fine Paid cannot be null.');
+            fine_paid.focus();
+        } else if (fine_due.value.trim() == '') {
+            alert('The Fine Due cannot be null.');
+            fine_due.focus();
         } else {
             result = true;
         }
@@ -66,7 +74,7 @@ $appeal = new Appeal;
 
 <body>
 
-    <form method="post" action="appeals_function.php" onsubmit="return check(this);">
+    <form method="post" action="addcharges_function.php" onsubmit="return check(this);">
         <input type="hidden" name="m" value="<?php echo $method; ?>" />
         <input type="hidden" name="criminal_ID" value="<?php echo $criminal_ID; ?>" />
 
@@ -83,13 +91,16 @@ $appeal = new Appeal;
 
 
 
-        <label for="appeal_ID">Charge ID:</label>
+        <label for="charge_ID">Charge ID:</label>
 
-        <input type="text" name="charge_ID:" maxlength="9"
+        <input type="text" name="charge_ID" maxlength="9"
             value="<?php echo isset($_GET['charge_ID']) ? htmlspecialchars($_GET['charge_ID']) : ''; ?>"
             <?php echo $disabled; ?>><br>
 
 
+        <label for="crime_code">Crime Code:</label>
+        <input type="text" name="crime_code" required
+            value="<?php echo isset($_GET['crime_code']) ? htmlspecialchars($_GET['crime_code']) : ''; ?>"><br>
 
         <label for="charge_status">Charge Status :</label>
         <select id="charge_status" name="charge_status" required
@@ -111,6 +122,7 @@ $appeal = new Appeal;
         <label for="fine_amount">Total Fine:</label>
         <input type="text" name="fine_amount" required
             value="<?php echo isset($_GET['fine_amount']) ? htmlspecialchars($_GET['fine_amount']) : ''; ?>"><br>
+
 
 
 
@@ -139,7 +151,7 @@ $appeal = new Appeal;
     </form>
 
     <script>
-    document.getElementById("appeal_status").value = "<?php echo $appeal->appeal_status; ?>";
+    document.getElementById("charge_status").value = "<?php echo $charge->charge_status; ?>";
     </script>
 
 

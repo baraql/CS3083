@@ -49,23 +49,22 @@ function get_charge_info_from_db()
 
 function add_charge()
 {
-
+    var_dump($_POST);
 
 
     global $con;
     $criminal_ID = array_key_exists('criminal_ID', $_REQUEST) ? $_REQUEST['criminal_ID'] : die("Criminal ID required!");
+    echo "criminal_ID: $criminal_ID";
+    $charge_ID = $_POST['charge_ID'];
+    $crime_ID = $_POST['crime_ID'];
+    $crime_code = $_POST['crime_code'];
+    $charge_status = $_POST['charge_status'];
+    $fine_amount = $_POST['fine_amount'];
+    $court_fee = $_POST['court_fee'];
+    $amount_paid = $_POST['amount_paid'];
+    $pay_due_date = $_POST['pay_due_date'];
 
-    // Validate and sanitize input
-    $charge_ID = filter_input(INPUT_POST, 'charge_ID', FILTER_VALIDATE_INT);
-    $crime_ID = $_POST['crime_code']; // You might want to validate this as well
-    $crime_code = $_POST['crime_ID']; // You might want to validate this as well
-    $charge_status = $_POST['charge_status']; // Add proper validation
-    $fine_amount = $_POST['fine_amount']; // Add proper validation
-    $court_fee = $_POST['court_fee']; // Add proper validation
-    $amount_paid = $_POST['amount_paid']; // Add proper validation
-    $pay_due_date = $_POST['pay_due_date']; // Add proper validation
-
-    $sql = "INSERT INTO `crime_charges`(`charge_ID`, `crime_ID`, `crime_code`, `charge_status`, `fine_amount`, `court_fee`, `amount_paid`, `pay_due_date`) VALUES (?,?,?,?,?)";
+    $sql = "INSERT INTO `crime_charges`(`charge_ID`, `crime_ID`, `crime_code`, `charge_status`, `fine_amount`, `court_fee`, `amount_paid`, `pay_due_date`) VALUES (?,?,?,?,?,?,?,?)";
 
     try {
         $con->begin_transaction();
@@ -74,11 +73,11 @@ function add_charge()
             "iiisiiis",
             $charge_ID,
             $crime_ID,
-            $crime_code, 
-            $charge_status, 
-            $fine_amount, 
-            $court_fee, 
-            $amount_paid, 
+            $crime_code,
+            $charge_status,
+            $fine_amount,
+            $court_fee,
+            $amount_paid,
             $pay_due_date
         );
 
@@ -95,20 +94,6 @@ function update_appeal()
 {
 
 
-    /* 
-        m
-        charge_ID
-        crime_ID
-        crime_code
-        charge_status 
-        fine_amount 
-        court_fee
-        amount_paid 
-        pay_due_date
-        
-        */ 
-
-
     global $con;
     $criminal_ID = array_key_exists('criminal_ID', $_REQUEST) ? $_REQUEST['criminal_ID'] : die("Criminal ID required!");
 
@@ -116,7 +101,6 @@ function update_appeal()
     $charge = Charge::fromArrayOrResult($_POST);
 
     try {
-        // echo "UPDATE";
         $con->begin_transaction();
         $stmt = $con->prepare($sql);
         $stmt->bind_param(
@@ -126,8 +110,8 @@ function update_appeal()
             $charge->crime_code,
             $charge->charge_status,
             $charge->fine_amount,
-            $charge->court_fee, 
-            $charge->amount_paid, 
+            $charge->court_fee,
+            $charge->amount_paid,
             $charge->pay_due_date
         );
 
@@ -145,7 +129,6 @@ function delete_charge()
 {
     global $con;
     $charge_ID = array_key_exists('charge_ID', $_POST) ? $_POST['charge_ID'] : die("Charge ID required!");
-    // $criminal_ID = array_key_exists('criminal_ID', $_GET) ? $_GET['criminal_ID'] : die("Criminal ID required!");
     $criminal_ID = $_POST['criminal_ID'];
 
     $sql = "DELETE FROM crime_charges WHERE charge_ID = ?";
@@ -169,9 +152,6 @@ if (isset($_POST['m'])) {
 } else {
     return;
 }
-
-// echo "method: " . $method . "<br>";
-// echo "criminal ID: " . $_POST['criminal_ID'] . "<br>";
 
 if ($method == 'a') {
     add_charge();

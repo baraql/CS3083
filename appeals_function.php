@@ -25,6 +25,7 @@ function get_appeal_info_from_db()
 {
     global $con;
 
+    $criminal_ID = array_key_exists('crime_ID', $_REQUEST) ? $_REQUEST['crime_ID'] : die("Crime ID required!");
     //is this also a typo? 
 
     $sql = "SELECT * FROM appeals WHERE crime_ID = ?";

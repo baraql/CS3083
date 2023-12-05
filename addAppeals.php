@@ -86,7 +86,6 @@ if ($method === 'u') {
             <?php echo $disabled; ?>><br>
 
 
-
         <label for="appeal_status">Appeal Status:</label>
         <select id="appeal_status" name="appeal_status" required
             style="width: 100%; padding: 8px; margin-bottom: 16px; box-sizing: border-box;">

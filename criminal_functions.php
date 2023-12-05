@@ -46,6 +46,7 @@ class Criminal {
     }
 }
 
+
 function list_criminal() {
     global $con;
 
@@ -184,7 +185,7 @@ function update_criminal_info() {
                             $criminal->id);
         $stmt->execute();
         $con->commit();
-        header("location:criminal_add_and_edit.php?m=e&success=t&criminal_ID=$criminal->id");
+        header("location:criminal.php");
     } catch (mysqli_sql_exception $exception) {
         $con->rollback();
         die($exception);

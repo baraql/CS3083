@@ -3,6 +3,7 @@
  * police related functions;
  */
 include 'connect.php';
+include 'user.php';
 
 class Police{
     public $id;

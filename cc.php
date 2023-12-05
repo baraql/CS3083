@@ -29,7 +29,6 @@ include 'connect.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="styleNav.css">
     <link rel="stylesheet" href="styleTable.css">
 
@@ -84,20 +83,6 @@ include 'connect.php';
         <tbody>
 
         <?php
-        // $sql = "SELECT * FROM `crime_codes`";
-        // $result = mysqli_query($con, $sql);
-
-        // if ($result) {
-        //     while ($row = mysqli_fetch_assoc($result)) {
-        //         $crimeCode = $row['crime_code'];
-        //         $codeDescription = $row['code_description'];
-
-        //         echo '<tr>
-        //             <th scope="row">'.$crimeCode.'</th>
-        //             <td>'.$codeDescription.'</td>
-                    
-        //         </tr>';
-        //     }
         foreach($result as $row){
             $cc = $row->cc;
             $cd = $row->cd;

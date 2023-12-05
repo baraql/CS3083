@@ -3,12 +3,12 @@
 include 'connect.php';
 include_once "addcharges_function.php";
 
-session_start();
+// session_start();
 
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    header("Location: index.html");
-    exit();
-}
+// if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+//     header("Location: index.html");
+//     exit();
+// }
 
 $criminal_ID = array_key_exists("criminal_ID", $_GET) ? $_GET['criminal_ID'] : null;
 if ($criminal_ID == null) {

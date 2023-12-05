@@ -3,7 +3,6 @@ session_start();
 include "connect.php";
 include "user.php";
 
-// Get the values from the form
 $un = $_POST['uname'];
 $pass = $_POST['pwd'];
 

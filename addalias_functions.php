@@ -1,5 +1,6 @@
 <?php
 include 'connect.php';
+include 'user.php';
 
 /* 
 criminal_ID 
@@ -7,8 +8,15 @@ crime_ID
 officer_ID 
 */ 
 
+session_start();
+
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("Location: index.html");
+    exit();
+}
 
 function add_alias() {
+    User::checkPerm();
     global $con;
 
     $sql = "INSERT INTO `alias`(`alias_id`, `criminal_ID`, `alias`) VALUES (NULL, ?, ?)";
@@ -35,7 +43,7 @@ function add_alias() {
 }
 
 function delete_alias() {
-
+    User::checkPerm();
     global $con;
     // $officer_ID = array_key_exists('officer_ID', $_POST) ? $_POST['officer_ID'] : die("Officer ID required!");
     $criminal_ID = $_POST['criminal_ID'];

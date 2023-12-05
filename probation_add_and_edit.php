@@ -3,7 +3,6 @@ session_start();
 include_once 'probation_functions.php';
 
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    // echo "not logged in";
     header("Location: index.html");
     exit();
 }
@@ -27,7 +26,6 @@ if($method == 'a'){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="styleNav.css">
     <link rel="stylesheet" href="styleTable.css">
     <script>

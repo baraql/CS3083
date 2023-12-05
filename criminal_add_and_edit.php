@@ -1,10 +1,9 @@
 <?PHP
 session_start();
-include_once("setting.php");
 include_once 'criminal_functions.php';
 
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    // echo "not logged in";
+
     header("Location: index.html");
     exit();
 }

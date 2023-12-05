@@ -27,7 +27,7 @@ function criminalQuery($id) {
     global $con;
 
     if (empty($id)) {
-        $id = '101010'; // Replace '101010' with the ID you want to assign
+        $id = '101010'; 
     }
 
     $sql = "SELECT * FROM criminals WHERE criminal_ID = '" . mysqli_real_escape_string($con, $id) . "'";

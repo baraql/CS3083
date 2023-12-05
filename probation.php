@@ -29,7 +29,6 @@ include 'connect.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="styleNav.css">
     <link rel="stylesheet" href="styleTable.css">
 </head>
@@ -95,36 +94,7 @@ include 'connect.php';
         </thead>
         <tbody>
         <?php
-            // $sql = "SELECT * FROM `prob_officer`";
-            // $result = mysqli_query($con, $sql);
 
-            // if ($result) {
-            //     while ($row = mysqli_fetch_assoc($result)) {
-            //         $id = $row['prob_ID'];
-            //         $fname = $row['prob_name_first'];
-            //         $lname = $row['prob_name_last'];
-            //         $street = $row['prob_street'];
-            //         $city = $row['prob_city'];
-            //         $state = $row['prob_state'];
-            //         $zip = $row['prob_zip'];
-            //         $phone = $row['prob_phone'];
-            //         $email = $row['prob_email'];
-            //         $status = $row['prob_status'];
-
-            //         echo '<tr>
-            //             <th scope="row">' . $id . '</th>
-            //             <td>' . $fname . '</td>
-            //             <td>' . $lname . '</td>
-            //             <td>' . $street . '</td>
-            //             <td>' . $city . '</td>
-            //             <td>' . $state . '</td>
-            //             <td>' . $zip . '</td>
-            //             <td>' . $phone . '</td>
-            //             <td>' . $email . '</td>
-            //             <td>' . $status . '</td>
-            //         </tr>';
-            //     }
-            // }
             foreach($result as $row){
                 $id = $row->id;
                 $fname = $row->fname;

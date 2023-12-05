@@ -90,10 +90,8 @@ function delete_criminal() {
     } catch (mysqli_sql_exception $exception) {
         $con->rollback();
         die($exception);
-        // throw $exception;
     }
 
-    // mysqli_query($con, $sql);
 }
 
 //get criminal by id 
@@ -116,7 +114,6 @@ function get_criminal_info_from_db() {
         }
     } catch (mysqli_sql_exception $exception) {
         die($exception);
-        // throw $exception;
     }
 }
 
@@ -147,7 +144,6 @@ function add_criminal_info() {
     } catch (mysqli_sql_exception $exception) {
         $con->rollback();
         die($exception);
-        // throw $exception;
     }
 }
 
@@ -166,8 +162,7 @@ function update_criminal_info() {
                                     `criminal_phone`= ?,
                                     `criminal_violent_status`= ?,
                                     `criminal_probation_status`= ? 
-                                     WHERE criminal_ID = ?";
-    // die($sql);                                    
+                                     WHERE criminal_ID = ?";                                 
     $criminal = Criminal::fromResultRow($_POST);
 
     try {
@@ -192,7 +187,6 @@ function update_criminal_info() {
     } catch (mysqli_sql_exception $exception) {
         $con->rollback();
         die($exception);
-        // throw $exception;
     }
 }
 ?>

@@ -7,10 +7,8 @@ $dbname = "criminalthing";
 $username = "root";
 $password = "";
 
-// Create a MySQLi connection
 $con = new mysqli($host, $username, $password, $dbname);
 
-// Check the connection
 if ($con->connect_error) {
    die("Connection failed: " . $con->connect_error);
 }

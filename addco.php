@@ -3,12 +3,13 @@
 include 'connect.php';
 include_once "addco_functions.php";
 
-session_start();
+// session_start();
 
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    header("Location: index.html");
-    exit();
-}
+// if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+//     header("Location: index.html");
+//     exit();
+// }
+
 /* 
 criminal_ID 
 crime_ID
@@ -21,15 +22,11 @@ if ($criminal_ID == null) {
     exit();
 }
 
-//im assuming this is for either edit or appeal 
+
 if (isset($_GET['officer_ID'])) {
-    //only delete and update send a 'm' val 
-    //delete: $method = d 
-    //update: $method = u 
     $method = $_GET['m']; 
 
 } else {
-    //add: $method = a 
     $method = 'a';
 } 
 
@@ -43,7 +40,6 @@ if (isset($_GET['officer_ID'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Crime Officers</title>
-    <!-- the whole "check" function, I don't think we need-->
     <script>
     function check(form) {
         return true;

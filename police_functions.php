@@ -84,10 +84,8 @@ function delete_police() {
     } catch (mysqli_sql_exception $exception) {
         $con->rollback();
         die($exception);
-        // throw $exception;
     }
 
-    // mysqli_query($con, $sql);
 }
 
 //get police by id 
@@ -110,7 +108,6 @@ function get_police_info_from_db() {
         }
     } catch (mysqli_sql_exception $exception) {
         die($exception);
-        // throw $exception;
     }
 }
 
@@ -138,7 +135,6 @@ function add_police_info() {
     } catch (mysqli_sql_exception $exception) {
         $con->rollback();
         die($exception);
-        // throw $exception;
     }
 }
 
@@ -154,8 +150,7 @@ function update_police_info() {
                                     `officer_badge`= ?,
                                     `officer_phone`= ?,
                                     `officer_status`= ?
-                                     WHERE officer_ID = ?";
-    // die($sql);                                    
+                                     WHERE officer_ID = ?";                                 
     $police = Police::fromResultRow($_POST);
 
     try {
@@ -177,7 +172,6 @@ function update_police_info() {
     } catch (mysqli_sql_exception $exception) {
         $con->rollback();
         die($exception);
-        // throw $exception;
     }
 }
 ?>

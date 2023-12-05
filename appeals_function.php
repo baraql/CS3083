@@ -1,5 +1,14 @@
 <?php
 include 'connect.php';
+include 'user.php';
+
+session_start();
+
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("Location: index.html");
+    exit();
+}
+
 class Appeal
 {
     public $appeal_ID;
@@ -23,11 +32,8 @@ class Appeal
 
 function get_appeal_info_from_db()
 {
+    
     global $con;
-
-    //$criminal_ID = array_key_exists('crime_ID', $_REQUEST) ? $_REQUEST['crime_ID'] : die("Crime ID required!");
-
-    //is this also a typo? 
 
     $sql = "SELECT * FROM appeals WHERE crime_ID = ?";
     $stmt = $con->prepare($sql);
@@ -41,6 +47,7 @@ function get_appeal_info_from_db()
 
 function add_appeal()
 {
+    User::checkPerm();
     global $con;
     $criminal_ID = array_key_exists('criminal_ID', $_REQUEST) ? $_REQUEST['criminal_ID'] : die("Criminal ID required!");
 
@@ -76,6 +83,7 @@ function add_appeal()
 
 function update_appeal()
 {
+    User::checkPerm();
     global $con;
     $criminal_ID = array_key_exists('criminal_ID', $_REQUEST) ? $_REQUEST['criminal_ID'] : die("Criminal ID required!");
 
@@ -108,9 +116,9 @@ function update_appeal()
 
 function delete_appeal()
 {
+    User::checkPerm();
     global $con;
     $appeal_ID = array_key_exists('appeal_ID', $_POST) ? $_POST['appeal_ID'] : die("Appeal ID required!");
-    // $criminal_ID = array_key_exists('criminal_ID', $_GET) ? $_GET['criminal_ID'] : die("Criminal ID required!");
     $criminal_ID = $_POST['criminal_ID'];
 
     $sql = "DELETE FROM appeals WHERE appeal_ID = ?";
@@ -134,9 +142,6 @@ if (isset($_POST['m'])) {
 } else {
     return;
 }
-
-// echo "method: " . $method . "<br>";
-// echo "criminal ID: " . $_POST['criminal_ID'] . "<br>";
 
 if ($method == 'a') {
     add_appeal();

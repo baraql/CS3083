@@ -61,11 +61,11 @@ else {
                         <option value="criminal_zip">Zip</option>
                         <option value="criminal_phone">Phone</option>
                     </select>
-                    <input type="submit" value="Search"> 
+                    <input type="submit" style="width: 50px; height: 40px; border-radius: 5px; background-color: #246583; color: #ffffff; cursor: pointer; transition: background-color 0.3s ease; border: none; text-align: center;" onmouseover="this.style.backgroundColor='#205070'" onmouseout="this.style.backgroundColor='#246583'" value="Search">
                 </form>
             </li>
             <li>
-                    <input type="button" value="Add new" onclick="location.href='criminal_add_and_edit.php'"/>
+            <input type="button" value="Add new" style="width: 120px; height: 40px; border-radius: 5px; background-color: #246583; color: #ffffff; cursor: pointer; transition: background-color 0.3s ease; border: none; text-align: center; margin-left: 10px;" onclick="location.href='criminal_add_and_edit.php'" onmouseover="this.style.backgroundColor='#205070'" onmouseout="this.style.backgroundColor='#246583'">
             </li>
             </ul>
         </nav>
@@ -190,3 +190,35 @@ else {
 </body>
 
 </html>
+
+
+
+<style>
+
+    .more {
+    display: inline-block; 
+    text-decoration: none; 
+}
+
+.more button {
+    width: 50px;
+    height: 40px; 
+    border-radius: 5px; 
+    background-color: #246583; 
+    color: #ffffff; 
+    cursor: pointer;
+    transition: background-color 0.3s ease; 
+    border: none; 
+}
+
+.more button:hover {
+    background-color: #205070; 
+}
+
+.fira-sans {
+    font-family: 'Fira Sans', sans-serif; 
+  
+  }
+
+
+</style>

@@ -58,29 +58,28 @@ if (isset($_REQUEST['criminal_ID'])) {
     </script>
 </head>
 
-<body>
-    <a href="criminal.php" style="text-decoration: none; color: inherit;">
-        <button type="button"
-            style="padding: 10px 20px; font-size: 16px; background-color: #96B6C5; border: none; color: white; border-radius: 8px;">Go
-            Back</button>
-    </a>
+        <body>
+        <a href="criminal.php" style="text-decoration: none; color: inherit;">
+        <button type="button" style="padding: 10px 20px; font-size: 16px; background-color: #96B6C5; border: none; color: white; border-radius: 8px;">Go Back</button>
+        </a>
 
 
     <div class="container">
 
 
-        <!-- ----------------------------------------------------------------------------------->
-        <!-- ----------------------------------------------------------------------------------->
-        <!--                               CRIMINAL                                           -->
-        <!-- ----------------------------------------------------------------------------------->
-        <!-- ----------------------------------------------------------------------------------->
-
+            <!-- ----------------------------------------------------------------------------------->
+            <!-- ----------------------------------------------------------------------------------->
+            <!--                               CRIMINAL                                           -->
+            <!-- ----------------------------------------------------------------------------------->
+            <!-- ----------------------------------------------------------------------------------->
+          
 
         <div class="column">
 
             <div class="box" onclick="toggleJudges()">
                 <h2>Criminal ID: <?php  echo $criminal_id;?>
-                    <a href="addalias.php?criminal_ID=<?php echo $criminal_id; ?>"><button>Add Alias</button></a>
+                    <a href="addCrimes.php?criminal_ID=<?php echo $criminal_id; ?>"><button class="ourbutton">Add Alias</button></a>
+
                 </h2>
 
                 <?php
@@ -106,18 +105,14 @@ if (isset($_REQUEST['criminal_ID'])) {
             
             if ($result && mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
+                    // Access the data from the current row using $row
                     echo '<div class="box4" style="font-family: Fira Sans; line-height: 1.5;">';
                     echo '<h3>' . $row['alias'] . '</h3>';
-                    echo '<form method="post" action="addalias_functions.php">'; //form 1 
-                    echo '<input type="hidden" name="alias_ID" value="' . $row['alias_ID'] . '">';
-                    echo '<input type="hidden" name="criminal_ID" value="' . $criminal_id . '">';
-                    echo '<input type="hidden" name="m" value="d">';
-                    echo '<button type="submit" id="coDelete" onclick="return confirm(\'Are you sure you want to delete this alias?\')">Delete</button>';
-                    echo '</form>';
+                    echo '<button class="popup-button" onclick="deleteWithId(' . $row['alias_ID'] . ');">Delete</button>';
                     echo '</div>'; 
                 }
             } else {
-                // handle case when no rows found
+                // Handle the case when no rows are found
             }
 
             
@@ -271,11 +266,13 @@ if (isset($_REQUEST['criminal_ID'])) {
                             echo '<p>Officer Name: ' . $officerData['officer_name_first'] . ' ' . $officerData['officer_name_last'] . '</p>';
                         }
 
-                        //delete 
+                        //add 
                         echo '<form method="post" action="addco_functions.php">'; //form 1 
                         echo '<input type="hidden" name="crime_ID" value="' . $crime['crime_ID'] . '">';
                         echo '<input type="hidden" name="officer_ID" value="' . $officerID . '">';
-                        echo '<input type="hidden" name="criminal_ID" value="' . $criminal_id . '">';
+
+
+                        //delete 
                         echo '<input type="hidden" name="m" value="d">'; //u &m idk when and where this will be important 
                         echo '<button type="submit" id="coDelete" onclick="return confirm(\'Are you sure you want to delete this crime officer?\')">Delete</button>';
                         echo '</form>';
@@ -371,6 +368,8 @@ if (isset($_REQUEST['criminal_ID'])) {
                         echo '<p>Court Fee: ' . $charges['court_fee'] . '</p>';
                         echo '<p>Amount Paid: ' . $charges['amount_paid'] . '</p>';
                         echo '<p>Due Date: ' . $charges['pay_due_date'] . '</p>';
+                        echo '<p>Crime Codes: ' . $charges['crime_code'] . '</p>';
+
 
 
                         //what does this do? 
@@ -387,19 +386,20 @@ if (isset($_REQUEST['criminal_ID'])) {
 
                         //edit charges
                         echo '<a href="addCharges.php?m=u&criminal_ID=' . $criminal_id . '&charge_ID=' . urlencode($charges['charge_ID']) . '&crime_ID=' . urlencode($crime['crime_ID']) . '&charge_status=' . urlencode($charges['charge_status']) . '&fine_amount=' . urlencode($charges['fine_amount']) . '&court_fee=' . urlencode($charges['court_fee']) . '&amount_paid=' . urlencode($charges['amount_paid']) . '&pay_due_date=' . urlencode($charges['pay_due_date']) . '">';
-echo '<input type="hidden" name="criminal_ID" value="' . $criminal_id . '">';
-echo '<input type="hidden" name="charge_ID" value="' . $charges['charge_ID'] . '">';
-echo '<input type="hidden" name="crime_ID" value="' . $crime['crime_ID'] . '">';
-// echo '<input type="hidden" name="crime_code" value="' . $crime['crime_code'] . '">';
-echo '<input type="hidden" name="charge_status" value="' . $charges['charge_status'] . '">';
-echo '<input type="hidden" name="fine_amount" value="' . $charges['fine_amount'] . '">';
-echo '<input type="hidden" name="court_fee" value="' . $charges['court_fee'] . '">';
-echo '<input type="hidden" name="amount_paid" value="' . $charges['amount_paid'] . '">';
-echo '<input type="hidden" name="pay_due_date" value="' . $charges['pay_due_date'] . '">';
-echo '<input type="hidden" name="m" value="u">';
-echo '<button class="popup-button">Edit Charges</button>';
-echo '</a>';
-echo '</div>';  //closing box 3 charges 
+                        echo '<input type="hidden" name="criminal_ID" value="' . $criminal_id . '">';
+                        echo '<input type="hidden" name="charge_ID" value="' . $charges['charge_ID'] . '">';
+                        echo '<input type="hidden" name="crime_ID" value="' . $crime['crime_ID'] . '">';
+                        
+                        // echo '<input type="hidden" name="crime_code" value="' . $crime['crime_code'] . '">';
+                        echo '<input type="hidden" name="charge_status" value="' . $charges['charge_status'] . '">';
+                        echo '<input type="hidden" name="fine_amount" value="' . $charges['fine_amount'] . '">';
+                        echo '<input type="hidden" name="court_fee" value="' . $charges['court_fee'] . '">';
+                        echo '<input type="hidden" name="amount_paid" value="' . $charges['amount_paid'] . '">';
+                        echo '<input type="hidden" name="pay_due_date" value="' . $charges['pay_due_date'] . '">';
+                        echo '<input type="hidden" name="m" value="u">';
+                        echo '<button class="popup-button">Edit Charges</button>';
+                        echo '</a>';
+                        echo '</div>';  //closing box 3 charges 
     
                     }
                 } 
@@ -428,6 +428,45 @@ echo '</div>';  //closing box 3 charges
 
 
     '
+    <script>
+    function addCrimeStuff(crimeID, identifier) {
+        var form = document.createElement("form");
+        form.method = "POST";
+        if (identifier == "appeals") {
+            form.action = "addAppeals.php";
+
+
+
+        } else if (identifier == "crimeOfficers") {
+            form.action = "addCrimeOfficers.php";
+
+
+
+        } else {
+            form.action = "addCharges.php";
+
+        }
+
+
+
+        var inputCrimeID = document.createElement("input");
+        inputCrimeID.type = "hidden";
+        inputCrimeID.name = "crimeID";
+        inputCrimeID.value = crimeID;
+
+        form.appendChild(inputCrimeID);
+        document.body.appendChild(form);
+
+        form.submit();
+    }
+    </script>
+
+
+
+
+
+
+
 
     <style>
     * {
@@ -439,16 +478,19 @@ echo '</div>';  //closing box 3 charges
     body,
     html {
         height: 100%;
+        /* Set the body and html height to 100% */
     }
 
     .container {
         width: 70%;
         padding: 20px;
         margin: 30px auto;
+        /* Add top and bottom margin, keep auto for horizontal centering */
         display: flex;
         background: #ddd;
         justify-content: space-between;
         height: 90vh;
+        /* Set the container height to 100% of the viewport height */
         max-width: 950px;
 
     }
@@ -464,6 +506,8 @@ echo '</div>';  //closing box 3 charges
         overflow: auto;
         flex-direction: column;
         /* Set flex direction to column for vertical stacking */
+
+
     }
 
     .box {
@@ -692,6 +736,27 @@ echo '</div>';  //closing box 3 charges
         overflow: auto;
         background: #fbfbf8;
     }
+
+
+    .ourbutton {
+    width: 120px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #246583;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: none;
+    text-align: center;
+    margin-left: 10px;
+    text-decoration: none; 
+    display: inline-block; 
+  }
+
+  .ourbutton:hover {
+    background-color: #205070;
+  }
+
     </style>
 </body>
 

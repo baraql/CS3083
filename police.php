@@ -58,11 +58,11 @@ include 'connect.php';
                         <option value="officer_phone">Phone</option>
                         <option value="officer_status">Status</option>
                     </select>
-                    <input type="submit" value="Search"> 
+                    <input type="submit" style="width: 50px; height: 40px; border-radius: 5px; background-color: #246583; color: #ffffff; cursor: pointer; transition: background-color 0.3s ease; border: none; text-align: center;" onmouseover="this.style.backgroundColor='#205070'" onmouseout="this.style.backgroundColor='#246583'" value="Search">
                 </form>
             </li>
             <li>
-                    <input type="button" value="Add new" onclick="location.href='police_add_and_edit.php'"/>
+            <input type="button" value="Add new" style="width: 120px; height: 40px; border-radius: 5px; background-color: #246583; color: #ffffff; cursor: pointer; transition: background-color 0.3s ease; border: none; text-align: center; margin-left: 10px;" onclick="location.href='police_add_and_edit.php'" onmouseover="this.style.backgroundColor='#205070'" onmouseout="this.style.backgroundColor='#246583'">
             </li>
             </ul>
         </nav>
@@ -173,3 +173,30 @@ include 'connect.php';
 </body>
 
 </html>
+
+
+<style>
+
+
+.more {
+    display: inline-block; 
+    text-decoration: none; 
+}
+
+.more button {
+    width: 50px;
+    height: 40px; 
+    border-radius: 5px; 
+    background-color: #246583; 
+    color: #ffffff; 
+    cursor: pointer;
+    transition: background-color 0.3s ease; 
+    border: none; 
+}
+
+.more button:hover {
+    background-color: #205070; 
+}
+
+
+</style>

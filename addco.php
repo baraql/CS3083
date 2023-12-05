@@ -46,6 +46,9 @@ if (isset($_GET['officer_ID'])) {
     <!-- the whole "check" function, I don't think we need-->
     <script>
     function check(form) {
+        var criminal_ID = form['criminal_ID'];
+        var officer_ID = form['officer_ID'];
+        var crime_ID = form['crime_ID']; 
         return true;
     }
     </script>
@@ -55,10 +58,10 @@ if (isset($_GET['officer_ID'])) {
 </head>
 
 <body>
-    <form method="post" action="addco_functions.php" onsubmit="return check(this);">
+    <form method="post" action="addco_functions.php">
         <input type="hidden" name="m" value="<?php echo $method; ?>" />
         <input type="hidden" name="criminal_ID" value="<?php echo $criminal_ID; ?>" />
-        <input type="hidden" name="crime_ID" value="<?php echo $_GET['crime_ID']; ?>" />
+        <input type="hidden" name="crime_ID" value="<?php echo isset($_GET['charge_ID']) ? htmlspecialchars($_GET['charge_ID']) : ''; ?>" />
 
 
         <label for="crime_officers">Crime Officer:</label>

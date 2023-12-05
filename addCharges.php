@@ -39,6 +39,7 @@ $charge = new Charge;
     function check(form) {
         var charge_ID = form['charge_ID'];
         var charge_status = form['charge_status'];
+        var crime_code = form['crime_code']; 
         var total_fine = form['total_fine'];
         var court_fee = form['court_fee'];
         var fine_paid = form['fine_paid'];
@@ -108,10 +109,10 @@ $charge = new Charge;
             <option value="P" <?php if (isset($_GET['charge_status']) && htmlspecialchars($_GET['charge_status']) === 'P')
                 echo 'selected'; ?>>
                 Pending</option>
-            <option value="G" <?php if (isset($_GET['charge_status']) && htmlspecialchars($_GET['charge_status']) === 'A')
+            <option value="G" <?php if (isset($_GET['charge_status']) && htmlspecialchars($_GET['charge_status']) === 'G')
                 echo 'selected'; ?>>
                 Guilty</option>
-            <option value="N" <?php if (isset($_GET['charge_status']) && htmlspecialchars($_GET['charge_status']) === 'A')
+            <option value="N" <?php if (isset($_GET['charge_status']) && htmlspecialchars($_GET['charge_status']) === 'N')
                 echo 'selected'; ?>>
                 Not Guilty</option>
 

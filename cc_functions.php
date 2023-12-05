@@ -3,7 +3,6 @@
  * crime codes related functions;
  */
 include 'connect.php';
-include 'user.php';
 
 class Crime_code{
     public $cc;
@@ -58,11 +57,9 @@ function search_crime_code(){
 
 }
 
-//delete 
+// 
 function delete_crime_code() {
-    User::checkPerm();
     global $con;
-
     $cc = $_POST['cc'];
     $sql = "DELETE from crime_codes where crime_code=$cc";
     
@@ -83,7 +80,7 @@ function delete_crime_code() {
 function get_crime_code_info_from_db() {
     global $con;
 
-    $id = array_key_exists('crime_code', $_REQUEST) ? $_REQUEST['crime_code'] : null;
+    $id = array_key_exists('cc', $_REQUEST) ? $_REQUEST['cc'] : null;
     if ($id == null) {
         return new Crime_code;
     }
@@ -105,7 +102,6 @@ function get_crime_code_info_from_db() {
 
 // insert new 
 function add_crime_code_info() {
-    User::checkPerm();
     global $con;
 
     $sql = "insert into crime_codes values (?,?)";
@@ -128,7 +124,6 @@ function add_crime_code_info() {
 
 //update crime_code
 function update_crime_code_info() {
-    User::checkPerm();
     global $con;
 
     $sql = "UPDATE `crime_codes` SET `crime_code`=?,
@@ -147,7 +142,7 @@ function update_crime_code_info() {
                             $crime_code->cc);
         $stmt->execute();
         $con->commit();
-        header("location:cc_add_and_edit.php?m=e&success=t&crime_code=$crime_code->cc");
+        header("location:cc.php");
     } catch (mysqli_sql_exception $exception) {
         $con->rollback();
         die($exception);

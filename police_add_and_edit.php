@@ -84,7 +84,7 @@ if($method == 'a'){
     <header class="header-main">
         <nav class="header-main-nav">
             <ul>
-                <li class="active"><a href="#">Add police information</a></li>
+                <li class="active"><a href="#">ADD POLICE INFORMATION</a></li>
             </ul>
         </nav>
     </header>  

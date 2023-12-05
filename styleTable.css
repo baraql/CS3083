@@ -7,59 +7,80 @@
     border-collapse: collapse;
     margin: 25px 0;
     font-size: 1em;
-    min-width: 1500px;
+    width: 100%; /* Make the table width 100% of its container */
+    max-width: 100%; /* Limit the maximum width of the table */
     border-radius: 5px 5px 0 0;
     overflow: hidden;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    text-align: left; 
-    align-items: left;
-    justify-content: center;
-    margin-left: 100px; 
-    margin-top: 20; 
-
+    text-align: left;
+    overflow-x: auto; /* Enable horizontal scrolling for small screens */
+    justify-content: space-between;
 
 }
+
 
 .content-table thead tr {
     background-color: #246583;
     color: #ffffff;
     text-align: left;
     font-weight: bold;
+
 }
 
 .content-table th,
 .content-table td {
     padding: 12px 15px;
+    overflow-x: auto; /* Enable horizontal scrolling for small screens */
+    justify-content: space-between;
+
 }
 
-.content-table tbody tr { 
-    /* border */ 
+.content-table tbody tr {
     border-bottom: 3px solid #a1a1a1;
+    overflow-x: auto; /* Enable horizontal scrolling for small screens */
+    justify-content: space-between;
+
 }
 
 .content-table tbody tr:nth-of-type(even) {
     background-color: #EEE0C9;
+    justify-content: space-between;
+
 }
 
 .content-table tbody tr:nth-of-type(odd) {
     background-color: #e9e4dc;
+    justify-content: space-between;
+
 }
 
 .content-table tbody tr:last-of-type {
     border-bottom: 2px solid #246583;
+    justify-content: space-between;
+
 }
 
 .content-table tbody tr.active-row {
     font-weight: bold;
     color: #7cc9ba;
+    overflow-x: auto; /* Enable horizontal scrolling for small screens */
+
 }
 
 .input {
-    width: 400px;
+    width: 100%; /* Make the input width 100% of its container */
+    max-width: 400px; /* Limit the maximum width of the input */
     height: 30px;
+    overflow-x: auto; /* Enable horizontal scrolling for small screens */
+    justify-content: space-between;
+
 }
 
 .submit {
-    width: 200px;
+    width: 100%; /* Make the submit button width 100% of its container */
+    max-width: 200px; /* Limit the maximum width of the submit button */
     height: 30px;
+    overflow-x: auto; /* Enable horizontal scrolling for small screens */
+    justify-content: space-between;
+
 }

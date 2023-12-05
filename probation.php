@@ -60,11 +60,10 @@ include 'connect.php';
                         <option value="prob_phone">Phone</option>
                         <option value="prob_email">Email</option>
                     </select>
-                    <input type="submit" value="Search"> 
-                </form>
+                    <input type="submit" value="Search" class="fira-sans" style="width: 50px; height: 40px; border-radius: 5px; background-color: #246583; color: #ffffff; cursor: pointer; transition: background-color 0.3s ease; border: none; text-align: center;" onmouseover="this.style.backgroundColor='#205070'" onmouseout="this.style.backgroundColor='#246583'">
             </li>
             <li>
-                    <input type="button" value="Add new" onclick="location.href='probation_add_and_edit.php'"/>
+            <input type="button" value="Add new" style="width: 120px; height: 40px; border-radius: 5px; background-color: #246583; color: #ffffff; cursor: pointer; transition: background-color 0.3s ease; border: none; margin-left: 10px;" onclick="location.href='probation_add_and_edit.php'" onmouseover="this.style.backgroundColor='#205070'" onmouseout="this.style.backgroundColor='#246583'">
             </li>
             </ul>
 
@@ -190,3 +189,39 @@ include 'connect.php';
       </body>
 
 </html>
+
+
+<style>
+.more {
+    display: inline-block; 
+    text-decoration: none; 
+}
+
+.more button {
+    width: 50px;
+    height: 40px; 
+    border-radius: 5px; 
+    background-color: #246583; 
+    color: #ffffff; 
+    cursor: pointer;
+    transition: background-color 0.3s ease; 
+    border: none; 
+}
+
+.more button:hover {
+    background-color: #205070; 
+}
+
+
+.fira-sans {
+    font-family: 'Fira Sans', sans-serif; /* Replace 'Fira Sans' with the actual font name or import it if necessary */
+    /* Add any other font styles you want here */
+  }
+
+  .fira-sans {
+    font-family: 'Fira Sans', sans-serif; 
+  
+  }
+
+
+</style>

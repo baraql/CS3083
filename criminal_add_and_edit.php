@@ -89,7 +89,7 @@ else {
     <header class="header-main">
         <nav class="header-main-nav">
             <ul>
-                <li class="active"><a href="#">Add criminal information</a></li>
+                <li class="active"><a href="#">ADD CRIMINAL INFORMATION</a></li>
             </ul>
         </nav>
     </header>

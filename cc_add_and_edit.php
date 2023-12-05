@@ -63,7 +63,7 @@ if($method == 'a'){
     <header class="header-main">
         <nav class="header-main-nav">
             <ul>
-                <li class="active"><a href="#">Add crime_code information</a></li>
+                <li class="active"><a href="#">ADD CRIME CODE</a></li>
             </ul>
         </nav>
     </header>

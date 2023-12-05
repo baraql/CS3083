@@ -54,11 +54,11 @@ include 'connect.php';
                         <option value="crime_code">Crime Code</option>
                         <option value="code_description">Code Description</option>
                     </select>
-                    <input type="submit" value="Search"> 
+                    <input type="submit" value="Search" class="fira-sans" style="width: 50px; height: 40px; border-radius: 5px; background-color: #246583; color: #ffffff; cursor: pointer; transition: background-color 0.3s ease; border: none; text-align: center;" onmouseover="this.style.backgroundColor='#205070'" onmouseout="this.style.backgroundColor='#246583'">
                 </form>
             </li>
             <li>
-                    <input type="button" value="Add new" onclick="location.href='cc_add_and_edit.php'"/>
+            <input type="button" value="Add new" class="fira-sans" style="width: 120px; height: 40px; border-radius: 5px; background-color: #246583; color: #ffffff; cursor: pointer; transition: background-color 0.3s ease; border: none; margin-left: 10px;" onclick="location.href='cc_add_and_edit.php'" onmouseover="this.style.backgroundColor='#205070'" onmouseout="this.style.backgroundColor='#246583'">
             </li>
             </ul>
 
@@ -129,7 +129,7 @@ include 'connect.php';
                 <button type="button">Delete</button>
             </a>
 
-            <a href="cc_add_and_edit.php?m=e&crime_code='. $cc .'" class="more")">
+            <a href="cc_add_and_edit.php?m=e&cc='. $cc .'" class="more")">
                 <button type="button">Edit</button>
             </a>
             </td>
@@ -146,3 +146,34 @@ include 'connect.php';
 
 </body>
 </html>
+
+<style>
+.more {
+    display: inline-block; 
+    text-decoration: none; 
+}
+
+.more button {
+    width: 50px;
+    height: 40px; 
+    border-radius: 5px; 
+    background-color: #246583; 
+    color: #ffffff; 
+    cursor: pointer;
+    transition: background-color 0.3s ease; 
+    border: none; 
+}
+
+.more button:hover {
+    background-color: #205070; 
+}
+
+.fira-sans {
+    font-family: 'Fira Sans', sans-serif; 
+  
+  }
+
+
+
+</style>
+

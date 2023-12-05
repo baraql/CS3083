@@ -207,6 +207,7 @@ if (isset($_REQUEST['criminal_ID'])) {
                 echo '<p>Appeal Deadline: ' . $crime['appeal_cut_date'] . '</p>';
                
                 echo '<a href="addCrimes.php?m=e&criminal_ID=' . $criminal_id . '&crime_ID=' . $crime['crime_ID'] . '">';
+               //TO CHANGE 
                 echo '<button class="popup-button">Edit</button>';
                 echo '</a>';
         

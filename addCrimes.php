@@ -10,8 +10,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     exit();
 }
 
-$criminal_id = array_key_exists("criminal_ID", $_GET) ? $_GET['criminal_ID'] : null;
-if ($criminal_id == null) {
+$criminal_ID = array_key_exists("criminal_ID", $_GET) ? $_GET['criminal_ID'] : null;
+if ($criminal_ID == null) {
     header("Location: criminal.php");
 }
 
@@ -43,6 +43,7 @@ if ($method == 'a') {
     <link rel="stylesheet" href="styleTable.css">
     <script>
         function check(form) {
+            var criminal_ID = form['criminal_ID'];
             var crime_ID = form['crime_ID'];
             var crime_classification = form['crime_classification'];
             var date_charged = form['date_charged'];
@@ -89,7 +90,7 @@ if ($method == 'a') {
     </header>
 
     <form action="addCrimes.php?m=<?php echo is_null($method) ? 'a' : 'u'?>" onsubmit="return check(this);" method="post">
-    <input type="hidden" name="criminal_ID" value="<?php echo $criminal_id; ?>">
+    <input type="hidden" name="criminal_ID" value="<?php echo $criminal_ID; ?>">
     <table class="content-table">
         <tbody>
             <tr>
@@ -126,7 +127,7 @@ if ($method == 'a') {
                 <th>Operation:</th>
                 <td>
                     <input type="submit" value="Submit" class="submit">
-                    <input type="button" class="submit" value="Back" onclick="location.href='popup.php'">
+                    <input type="button" class="submit" value="Back" onclick="location.href='popup.php?criminal_ID=<?php echo $criminal_ID; ?>'">
                 </td>
             </tr>
         </tbody>

@@ -3,7 +3,6 @@
  * probation related functions;
  */
 include 'connect.php';
-include 'user.php';
 
 class Probation{
     public $id;

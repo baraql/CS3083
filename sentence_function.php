@@ -1,6 +1,5 @@
 <?PHP
 include 'connect.php';
-include 'user.php';
 
 class Sentence{
     public $sentence_ID;

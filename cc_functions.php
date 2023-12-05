@@ -3,7 +3,6 @@
  * crime codes related functions;
  */
 include 'connect.php';
-include 'user.php';
 
 class Crime_code{
     public $cc;
@@ -61,7 +60,6 @@ function search_crime_code(){
 // 
 function delete_crime_code() {
     global $con;
-
     $cc = $_POST['cc'];
     $sql = "DELETE from crime_codes where crime_code=$cc";
     

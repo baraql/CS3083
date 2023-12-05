@@ -18,7 +18,7 @@ class Charge
         $charge = new Charge;
         $charge->charge_ID = $arrOrRes['charge_ID'];
         $charge->crime_ID = $arrOrRes['crime_ID'];
-        $charge->crime_code = $arrOrRes['crime_ID'];
+        $charge->crime_code = $arrOrRes['crime_code'];
         $charge->charge_status = $arrOrRes['charge_status'];
         $charge->fine_amount = $arrOrRes['fine_amount'];
         $charge->court_fee = $arrOrRes['court_fee'];
@@ -50,7 +50,6 @@ function get_charge_info_from_db()
 function add_charge()
 {
     var_dump($_POST);
-
 
     global $con;
     $criminal_ID = array_key_exists('criminal_ID', $_REQUEST) ? $_REQUEST['criminal_ID'] : die("Criminal ID required!");
@@ -93,33 +92,25 @@ function add_charge()
 function update_charge()
 {
 
-
     global $con;
     $criminal_ID = array_key_exists('criminal_ID', $_REQUEST) ? $_REQUEST['criminal_ID'] : die("Criminal ID required!");
 
-    $sql = "UPDATE `crime_charges` SET `charge_ID`= ?, `crime_ID`= ?, `crime_code`= ?, `charge_status`= ?, `fine_amount`= ?, `court_fee`= ?, `amount_paid`= ? WHERE pay_due_date = ?";
-    $charge_ID = $_POST['charge_ID'];
-    $crime_ID = $_POST['crime_ID'];
-    $crime_code = $_POST['crime_code'];
-    $charge_status = $_POST['charge_status'];
-    $fine_amount = $_POST['fine_amount'];
-    $court_fee = $_POST['court_fee'];
-    $amount_paid = $_POST['amount_paid'];
-    $pay_due_date = $_POST['pay_due_date'];
+    $sql = "UPDATE `crime_charges` SET `charge_ID`= ?, `crime_ID`= ?, `crime_code`= ?, `charge_status`= ?, `fine_amount`= ?, `court_fee`= ?, `amount_paid`= ? WHERE charge_ID = ?";
+    $charge = Charge::fromArrayOrResult($_POST);
 
     try {
         $con->begin_transaction();
         $stmt = $con->prepare($sql);
         $stmt->bind_param(
-            "iiisiiis",
-            $charge_ID,
-            $crime_ID,
-            $crime_code,
-            $charge_status,
-            $fine_amount,
-            $court_fee,
-            $amount_paid,
-            $pay_due_date
+            "iiisiiii", 
+            $charge->charge_ID,
+            $charge->crime_ID,
+            $charge->crime_code,
+            $charge->charge_status,
+            $charge->fine_amount,
+            $charge->court_fee,
+            $charge->amount_paid,
+            $charge->charge_ID
         );
 
 
@@ -130,6 +121,8 @@ function update_charge()
         $con->rollback();
         die($exception);
     }
+
+
 }
 
 function delete_charge()

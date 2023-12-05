@@ -428,45 +428,6 @@ echo '</div>';  //closing box 3 charges
 
 
     '
-    <script>
-    function addCrimeStuff(crimeID, identifier) {
-        var form = document.createElement("form");
-        form.method = "POST";
-        if (identifier == "appeals") {
-            form.action = "addAppeals.php";
-
-
-
-        } else if (identifier == "crimeOfficers") {
-            form.action = "addCrimeOfficers.php";
-
-
-
-        } else {
-            form.action = "addCharges.php";
-
-        }
-
-
-
-        var inputCrimeID = document.createElement("input");
-        inputCrimeID.type = "hidden";
-        inputCrimeID.name = "crimeID";
-        inputCrimeID.value = crimeID;
-
-        form.appendChild(inputCrimeID);
-        document.body.appendChild(form);
-
-        form.submit();
-    }
-    </script>
-
-
-
-
-
-
-
 
     <style>
     * {
@@ -478,19 +439,16 @@ echo '</div>';  //closing box 3 charges
     body,
     html {
         height: 100%;
-        /* Set the body and html height to 100% */
     }
 
     .container {
         width: 70%;
         padding: 20px;
         margin: 30px auto;
-        /* Add top and bottom margin, keep auto for horizontal centering */
         display: flex;
         background: #ddd;
         justify-content: space-between;
         height: 90vh;
-        /* Set the container height to 100% of the viewport height */
         max-width: 950px;
 
     }
@@ -506,8 +464,6 @@ echo '</div>';  //closing box 3 charges
         overflow: auto;
         flex-direction: column;
         /* Set flex direction to column for vertical stacking */
-
-
     }
 
     .box {

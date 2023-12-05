@@ -74,7 +74,8 @@ else {
         </nav>
         <nav class="header-main-logout">
             <ul>
-                <li><a href="logout.php">LOGOUT</a></li>
+                <li style="font-family: Futura, sans-serif; line-height: 1.5;"><a
+                        style="font-family: Futura, sans-serif; line-height: 1.5;" href="logout.php">LOGOUT</a></li>
             </ul>
         </nav>
     </header>

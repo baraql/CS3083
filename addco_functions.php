@@ -19,7 +19,7 @@ function add_co() {
     $sql = "INSERT INTO `crime_officers`(`crime_ID`, `officer_ID`) VALUES (?,?)";
     $criminal_ID = $_POST['criminal_ID'];
 
-
+    var_dump($_POST);
 
     try {
         $con->begin_transaction();
@@ -27,7 +27,7 @@ function add_co() {
         $stmt->bind_param(
             "ii",
             $crime_ID,
-            $officer_ID,
+            $officer_ID
         );
 
         $stmt->execute();

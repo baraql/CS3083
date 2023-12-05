@@ -68,7 +68,7 @@ if (isset($_REQUEST['criminal_ID'])) {
 
     <div class="container">
 
-        <div class="column">
+        <div class="column" style="font-family: Futura, sans-serif; line-height: 1.5;">
 
             <div class="box" onclick="toggleJudges()" style="font-family: Futura, sans-serif; line-height: 1.5;">
                 <h2>Criminal ID: <?php  echo $criminal_id;?>
@@ -123,11 +123,11 @@ if (isset($_REQUEST['criminal_ID'])) {
 
             </div>
 
-            <div class="column ">
+            <div class="column " style="font-family: Futura, sans-serif; line-height: 1.5;">
 
 
                 <h2>Sentencing
-                    <a href="addSentences.php?criminal_ID=<?php echo $criminal_id; ?>"><button>Add</button></a>
+                    <a href=" addSentences.php?criminal_ID=<?php echo $criminal_id; ?>"><button>Add</button></a>
                 </h2>
 
                 <?php
@@ -168,7 +168,7 @@ if (isset($_REQUEST['criminal_ID'])) {
             </div>
         </div>
 
-        <div class="column">
+        <div class="column" style="font-family: Futura, sans-serif; line-height: 1.5;">
 
 
             <h2> CRIMES

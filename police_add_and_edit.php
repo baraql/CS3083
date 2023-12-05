@@ -1,6 +1,9 @@
 <?PHP
 session_start();
+include_once("setting.php");
+
 include_once 'police_functions.php';
+
 
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     // echo "not logged in";
@@ -27,10 +30,12 @@ if($method == 'a'){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="styleNav.css">
     <link rel="stylesheet" href="styleTable.css">
     <script>
+
         <?php
         if ($method == 'e' && array_key_exists("success", $_GET)) {
             echo "window.onload = function() {";
@@ -41,7 +46,7 @@ if($method == 'a'){
 
         function check(form) {
             var id = form['officer_ID'];
-            var fname = form['officer_name_first'];
+=            var fname = form['officer_name_first'];
             var lname = form['officer_name_last'];
             var precinct = form['officer_precinct'];
             var badge = form['officer_badge'];
@@ -85,6 +90,7 @@ if($method == 'a'){
     </header>
 
     <form action="police_add_and_edit.php?m=<?php echo is_null($method) ? 'a' : 'u'?>" onsubmit="return check(this);" method="post">
+    <input type="hidden" name="officer_ID" value="<?php echo $police_info->id;?>">
     <table class="content-table">
         <tbody>
             <tr>
@@ -125,7 +131,7 @@ if($method == 'a'){
             <tr>
                 <th>Operation:</th>
                 <td>
-                    <input type="submit" value="Submit" class="submit">
+                    <input type="submit" value="Submit" class="submit" >
                     <input type="button" class="submit" value="Back" onclick="location.href='police.php'">
                 </td>
             </tr>

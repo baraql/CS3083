@@ -9,7 +9,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     exit();
 }
 
-
 $method = array_key_exists('m', $_GET) ? $_GET['m'] : null;
 
 if ($method == 'a') {

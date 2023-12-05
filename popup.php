@@ -70,7 +70,7 @@ if (isset($_REQUEST['criminal_ID'])) {
 
         <div class="column">
 
-            <div class="box" onclick="toggleJudges()">
+            <div class="box" onclick="toggleJudges()" style="font-family: Futura, sans-serif; line-height: 1.5;">
                 <h2>Criminal ID: <?php  echo $criminal_id;?>
                     <a href="addalias.php?criminal_ID=<?php echo $criminal_id; ?>"><button>Add Alias</button></a>
                 </h2>
@@ -94,7 +94,7 @@ if (isset($_REQUEST['criminal_ID'])) {
             
             if ($result && mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
-                    echo '<div class="box4" style="font-family: Fira Sans; line-height: 1.5;">';
+                    echo '<div class="box4" style="font-family: Futura, sans-serif; line-height: 1.5;">';
                     echo '<h3>' . $row['alias'] . '</h3>';
                     echo '<form method="post" action="addalias_functions.php">'; 
                     echo '<input type="hidden" name="alias_ID" value="' . $row['alias_ID'] . '">';
@@ -137,7 +137,7 @@ if (isset($_REQUEST['criminal_ID'])) {
                 if ($result && mysqli_num_rows($result) > 0) {
                     while ($sentence = mysqli_fetch_assoc($result)) {
                 ?>
-                <div class="boxSentencing" style="font-family: Fira Sans;line-height: 1.5;">
+                <div class="boxSentencing" style="font-family: Futura, sans-serif; line-height: 1.5;">
                     <h3>Sentence ID: <?php echo $sentence['sentence_ID']; ?></h3>
                     <p>Sentence Type: <?php echo $sentence['sentence_type']; ?></p>
                     <p>Probation Officer ID: <?php echo $sentence['prob_ID']; ?></p>
@@ -183,7 +183,7 @@ if (isset($_REQUEST['criminal_ID'])) {
 
         if ($result && mysqli_num_rows($result) > 0) {
             while ($crime = mysqli_fetch_assoc($result)) {
-                echo '<div class="box2" style="font-family: Fira Sans; line-height: 1.5;">';
+                echo '<div class="box2" style="font-family: Futura, sans-serif; line-height: 1.5;">';
                 echo '<h3>Crime ID: ' . $crime['crime_ID'] . '</h3>';
                 echo '<p>Crime Classification: ' . $crime['crime_classification'] . '</p>';
                 echo '<p>Date Charged: ' . $crime['date_charged'] . '</p>';

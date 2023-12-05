@@ -47,21 +47,21 @@ a {
 
 .header-main-nav ul li.active a {
     font-weight: bold;
-    color: #000080; /* Your highlight color */
+    color: #000080;
 }
 
 
 .header-main-nav ul li a {
-    padding: 0 10px; 
-    font-family: Fira Sans;
-    /* align-self: center;*/ 
+    padding: 0 10px;
+    font-family: 'Futura', sans-serif;
     line-height: 40px;
 }
 
 .header-main-nav ul li a:hover {
-    color: #000080; 
+    color: #000080;
     font-weight: bold;
 }
+
 
 
 

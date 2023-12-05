@@ -153,6 +153,7 @@ else {
                     <a href="#" class="more" onclick="submitFormWithId(' . $id . ')">
                         <button type="button">More</button>
                     </a>
+                    
                     <a href="#" class="more" onclick="deleteWithId(' . $id . ', \'' . $fname . ' ' . $lname . '\')">
                         <button type="button">Delete</button>
                     </a>

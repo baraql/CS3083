@@ -107,14 +107,14 @@ include 'connect.php';
             <td>' . $cd . '</td>
 
             <script>
-                function deleteWithId(id, name){
-                    if (window.confirm("Sure to delete crime_code infromation from \'" + name + "\'?")) {
+                function deleteWithId(id){
+                    if (window.confirm("Sure to delete crime_code infromation?")) {
                         var form1 = document.createElement("form");
                         form1.method = "POST";
                         form1.action = "cc.php?m=d";
                         var input = document.createElement("input");
                         input.type = "hidden";
-                        input.name = "id";
+                        input.name = "cc";
                         input.value = id;
 
                         form1.appendChild(input);

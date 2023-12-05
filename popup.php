@@ -58,15 +58,21 @@ if (isset($_REQUEST['criminal_ID'])) {
     </script>
 </head>
 
-<body>
+        <body>
+        <a href="criminal.php" style="text-decoration: none; color: inherit;">
+        <button type="button" style="padding: 10px 20px; font-size: 16px; background-color: #96B6C5; border: none; color: white; border-radius: 8px;">Go Back</button>
+        </a>
+
+
     <div class="container">
 
 
-        <!-- ----------------------------------------------------------------------------------->
-        <!-- ----------------------------------------------------------------------------------->
-        <!--                               CRIMINAL                                           -->
-        <!-- ----------------------------------------------------------------------------------->
-        <!-- ----------------------------------------------------------------------------------->
+            <!-- ----------------------------------------------------------------------------------->
+            <!-- ----------------------------------------------------------------------------------->
+            <!--                               CRIMINAL                                           -->
+            <!-- ----------------------------------------------------------------------------------->
+            <!-- ----------------------------------------------------------------------------------->
+          
 
         <div class="column">
 
@@ -213,6 +219,7 @@ if (isset($_REQUEST['criminal_ID'])) {
                 // echo '<p>Crime Code: ' . $crime['crime_code'] . '</p>';
                
                 echo '<a href="addCrimes.php?m=e&criminal_ID=' . $criminal_id . '&crime_ID=' . $crime['crime_ID'] . '">';
+               //TO CHANGE 
                 echo '<button class="popup-button">Edit</button>';
                 echo '</a>';
         
@@ -406,9 +413,6 @@ echo '</div>';  //closing box 3 charges
         } 
 ?>
 
-
-
-
         </div>
 
     </div>
@@ -452,10 +456,6 @@ echo '</div>';  //closing box 3 charges
         form.submit();
     }
     </script>
-
-
-
-
 
 
 

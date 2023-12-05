@@ -57,7 +57,7 @@ function search_crime_code(){
 
 }
 
-//delete 
+// 
 function delete_crime_code() {
     global $con;
     $cc = $_POST['cc'];
@@ -80,7 +80,7 @@ function delete_crime_code() {
 function get_crime_code_info_from_db() {
     global $con;
 
-    $id = array_key_exists('crime_code', $_REQUEST) ? $_REQUEST['crime_code'] : null;
+    $id = array_key_exists('cc', $_REQUEST) ? $_REQUEST['cc'] : null;
     if ($id == null) {
         return new Crime_code;
     }
@@ -142,7 +142,7 @@ function update_crime_code_info() {
                             $crime_code->cc);
         $stmt->execute();
         $con->commit();
-        header("location:cc_add_and_edit.php?m=e&success=t&crime_code=$crime_code->cc");
+        header("location:cc.php");
     } catch (mysqli_sql_exception $exception) {
         $con->rollback();
         die($exception);

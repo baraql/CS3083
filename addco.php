@@ -90,7 +90,7 @@ if (isset($_GET['officer_ID'])) {
 
 <style>
 body {
-    font-family: Arial, sans-serif;
+    font-family: Futura, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;

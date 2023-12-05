@@ -3,6 +3,7 @@
  * probation related functions;
  */
 include 'connect.php';
+include 'user.php';
 
 class Probation{
     public $id;
@@ -74,6 +75,7 @@ function search_probation() {
 
 //delete 
 function delete_probation() {
+    User::checkPerm();
     global $con;
     $id = $_POST['id'];
     $sql = "DELETE from prob_officer where prob_ID=$id";
@@ -117,6 +119,7 @@ function get_probation_info_from_db() {
 
 // insert new 
 function add_probation_info() {
+    User::checkPerm();
     global $con;
     $sql = "insert into prob_officer values (?,?,?,?,?,?,?,?,?,?)";
     $probation = Probation::fromResultRow($_POST);
@@ -146,6 +149,7 @@ function add_probation_info() {
 
 //update probation
 function update_probation_info() {
+    User::checkPerm();
     global $con;
 
     $sql = "UPDATE `prob_officer` SET `prob_ID`=?,
@@ -180,7 +184,7 @@ function update_probation_info() {
                             $probation->id);
         $stmt->execute();
         $con->commit();
-        header("location:probation.php");
+        header("location:probation_add_and_edit.php?m=e&success=t&prob_ID=$probation->id");
     } catch (mysqli_sql_exception $exception) {
         $con->rollback();
         die($exception);

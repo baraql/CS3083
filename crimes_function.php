@@ -1,6 +1,6 @@
 <?PHP
 include 'connect.php';
-
+include 'user.php';
 
 class Crime {
     public $crime_ID;
@@ -39,7 +39,9 @@ function get_crime_info_form_db() {
 }
 
 function add_crime() {
+    User::checkPerm();
     global $con;
+
     $criminal_id = array_key_exists('criminal_ID', $_REQUEST) ? $_REQUEST['criminal_ID'] : die("Criminal id required!");
 
     $sql = "INSERT INTO `crimes`(`crime_ID`, 
@@ -76,6 +78,7 @@ function add_crime() {
 
 
 function update_crime() {
+    User::checkPerm();
     global $con;
     $criminal_id = array_key_exists('criminal_ID', $_REQUEST) ? $_REQUEST['criminal_ID'] : die("Criminal id required!");
 
@@ -100,8 +103,7 @@ function update_crime() {
                         $crime->crime_status,
                         $crime->hearing_date,
                         $crime->appeal_cut_date,
-                        $crime->crime_ID
-                        );
+                        $crime->crime_ID);
 
         $stmt->execute();
         $con->commit();
@@ -114,6 +116,7 @@ function update_crime() {
 }
 
 function delete_crime() {
+    User::checkPerm();
     global $con;
     $crime_id = array_key_exists('crime_ID', $_POST) ? $_POST['crime_ID'] : die("Crime id required!");
     $criminal_id = array_key_exists('criminal_ID', $_GET) ? $_GET['criminal_ID'] : die("Criminal id required!");

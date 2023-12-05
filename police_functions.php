@@ -3,6 +3,7 @@
  * police related functions;
  */
 include 'connect.php';
+include 'user.php';
 
 class Police{
     public $id;
@@ -71,6 +72,7 @@ function search_police() {
 
 //delete 
 function delete_police() {
+    User::checkPerm();
     global $con;
     $id = $_POST['id'];
     $sql = "DELETE from officers where officer_ID=$id";
@@ -94,27 +96,27 @@ function get_police_info_from_db() {
 
     $id = array_key_exists('officer_ID', $_REQUEST) ? $_REQUEST['officer_ID'] : null;
     if ($id == null) {
-        echo 'fuckkk'; 
         return new Police;
     }
 
-    $sql = 'SELECT * FROM officers WHERE officer_ID = ' . $id;
+    $sql = 'select * from officers where officer_ID = ' . $id;
     try {
         $result = $con->query($sql);
-        if ($result && mysqli_num_rows($result) == 1) {
+        if (mysqli_num_rows($result) == 1) {
             $row = mysqli_fetch_assoc($result);
             return Police::fromResultRow($row);
         } else {
-            die("Police with ID $id does not exist.");
+            die("Police with id $id does not exist.");
         }
     } catch (mysqli_sql_exception $exception) {
         die($exception);
+        // throw $exception;
     }
 }
 
-
 // insert new 
 function add_police_info() {
+    User::checkPerm();
     global $con;
 
     $sql = "insert into officers values (?,?,?,?,?,?,?)";
@@ -142,6 +144,7 @@ function add_police_info() {
 
 //update police
 function update_police_info() {
+    User::checkPerm();
     global $con;
 
     $sql = "UPDATE `officers` SET `officer_ID`=?,
@@ -170,7 +173,7 @@ function update_police_info() {
                             $police->id);
         $stmt->execute();
         $con->commit();
-        header("location:police.php");
+        header("location:police_add_and_edit.php?m=e&success=t&officer_ID=$police->id");
     } catch (mysqli_sql_exception $exception) {
         $con->rollback();
         die($exception);

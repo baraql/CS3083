@@ -10,8 +10,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     exit();
 }
 
-$criminal_id = array_key_exists("criminal_ID", $_GET) ? $_GET['criminal_ID'] : null;
-if ($criminal_id == null) {
+$criminal_ID = array_key_exists("criminal_ID", $_GET) ? $_GET['criminal_ID'] : null;
+if ($criminal_ID == null) {
     header("Location: criminal.php");
 }
 
@@ -43,6 +43,7 @@ if ($method == 'a') {
     <link rel="stylesheet" href="styleTable.css">
     <script>
         function check(form) {
+            var criminal_ID = form['criminal_ID'];
             var crime_ID = form['crime_ID'];
             var crime_classification = form['crime_classification'];
             var date_charged = form['date_charged'];
@@ -88,14 +89,24 @@ if ($method == 'a') {
         </nav>
     </header>
 
+    <?php
+    $disabled = '';
+    if ($method === 'e') {
+        $disabled = 'readonly';
+    }
+    ?>
+
     <form action="addCrimes.php?m=<?php echo is_null($method) ? 'a' : 'u'?>" onsubmit="return check(this);" method="post">
-    <input type="hidden" name="criminal_ID" value="<?php echo $criminal_id; ?>">
+    <input type="hidden" name="criminal_ID" value="<?php echo $criminal_ID; ?>">
     <table class="content-table">
         <tbody>
-            <tr>
-                <th>Crime ID</th> 
-                <td><input type="text" class="input" name="crime_ID" maxlength="9" value="<?PHP echo $crime->crime_ID;?>"></td>
-            </tr>
+        <tr>
+    <th>Crime ID</th>
+    <td><input type="text" class="input" name="crime_ID" maxlength="9"
+            value="<?php echo isset($_GET['crime_ID']) ? htmlspecialchars($_GET['crime_ID']) : $crime->crime_ID; ?>"
+            <?php echo $disabled; ?>></td>
+</tr>
+
             <tr>
                 <th>Crime Classification</th>
                 <td><input type="text" class="input" name="crime_classification" maxlength="1" value="<?PHP echo $crime->crime_classification;?>"></td>
@@ -126,7 +137,7 @@ if ($method == 'a') {
                 <th>Operation:</th>
                 <td>
                     <input type="submit" value="Submit" class="submit">
-                    <input type="button" class="submit" value="Back" onclick="location.href='popup.php'">
+                    <input type="button" class="submit" value="Back" onclick="location.href='popup.php?criminal_ID=<?php echo $criminal_ID; ?>'">
                 </td>
             </tr>
         </tbody>

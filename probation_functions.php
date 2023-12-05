@@ -180,7 +180,7 @@ function update_probation_info() {
                             $probation->id);
         $stmt->execute();
         $con->commit();
-        header("location:probation_add_and_edit.php?m=e&success=t&prob_ID=$probation->id");
+        header("location:probation.php");
     } catch (mysqli_sql_exception $exception) {
         $con->rollback();
         die($exception);

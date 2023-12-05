@@ -9,7 +9,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     exit();
 }
 
-
 $method = array_key_exists('m', $_GET) ? $_GET['m'] : null;
 
 if ($method == 'a') {
@@ -94,6 +93,7 @@ else {
             </ul>
         </nav>
     </header>
+    
 
     <form action="criminal_add_and_edit.php?m=<?php echo is_null($method) ? 'a' : 'u'?>" onsubmit="return check(this);" method="post">
     <table class="content-table">

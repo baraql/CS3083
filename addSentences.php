@@ -3,7 +3,6 @@
 session_start();
 
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    // echo "not logged in";
     header("Location: index.html");
     exit();
 }

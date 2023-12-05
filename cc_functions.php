@@ -73,10 +73,8 @@ function delete_crime_code() {
     } catch (mysqli_sql_exception $exception) {
         $con->rollback();
         die($exception);
-        // throw $exception;
     }
 
-    // mysqli_query($con, $sql);
 }
 
 //get crime_code by cc
@@ -99,7 +97,6 @@ function get_crime_code_info_from_db() {
         }
     } catch (mysqli_sql_exception $exception) {
         die($exception);
-        // throw $exception;
     }
 }
 
@@ -122,7 +119,6 @@ function add_crime_code_info() {
     } catch (mysqli_sql_exception $exception) {
         $con->rollback();
         die($exception);
-        // throw $exception;
     }
 }
 
@@ -133,8 +129,7 @@ function update_crime_code_info() {
 
     $sql = "UPDATE `crime_codes` SET `crime_code`=?,
                                     `code_description`= ?
-                                     WHERE crime_code = ?";
-    // die($sql);                                    
+                                     WHERE crime_code = ?";                                
     $crime_code = Crime_code::fromResultRow($_POST);
 
     try {
@@ -151,7 +146,6 @@ function update_crime_code_info() {
     } catch (mysqli_sql_exception $exception) {
         $con->rollback();
         die($exception);
-        // throw $exception;
     }
 }
 ?>

@@ -87,10 +87,8 @@ function delete_probation() {
     } catch (mysqli_sql_exception $exception) {
         $con->rollback();
         die($exception);
-        // throw $exception;
     }
 
-    // mysqli_query($con, $sql);
 }
 
 //get probation by id 
@@ -163,7 +161,7 @@ function update_probation_info() {
                                     `prob_email`= ?,
                                     `prob_status`= ?
                                      WHERE prob_ID = ?";
-    // die($sql);                                    
+
     $probation = Probation::fromResultRow($_POST);
 
     try {
@@ -188,7 +186,6 @@ function update_probation_info() {
     } catch (mysqli_sql_exception $exception) {
         $con->rollback();
         die($exception);
-        // throw $exception;
     }
 }
 ?>

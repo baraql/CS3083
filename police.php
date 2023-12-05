@@ -29,7 +29,6 @@ include 'connect.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="styleNav.css">
     <link rel="stylesheet" href="styleTable.css">
 </head>
@@ -89,30 +88,6 @@ include 'connect.php';
         <tbody>
 
             <?php
-            // $sql = "SELECT * FROM `officers`";
-            // $result = mysqli_query($con, $sql);
-
-            // if ($result) {
-            //     while ($row = mysqli_fetch_assoc($result)) {
-            //         $id = $row['officer_ID'];
-            //         $fname = $row['officer_name_first'];
-            //         $lname = $row['officer_name_last'];
-            //         $precinct = $row['officer_precinct'];
-            //         $badge = $row['officer_badge'];
-            //         $phone = $row['officer_phone'];
-            //         $status = $row['officer_status'];
-
-            //         echo '<tr>
-            //                 <th scope="row">' . $id . '</th>
-            //                 <td>' . $fname . '</td>
-            //                 <td>' . $lname . '</td>
-            //                 <td>' . $precinct . '</td>
-            //                 <td>' . $badge . '</td>
-            //                 <td>' . $phone . '</td>
-            //                 <td>' . $status . '</td>
-            //             </tr>';
-            //     }
-            // }
 
                 foreach($result as $row){
                     $id = $row->id;

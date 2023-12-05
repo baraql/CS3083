@@ -3,12 +3,12 @@
 include 'connect.php';
 include_once "addco_functions.php";
 
-session_start();
+// session_start();
 
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    header("Location: index.html");
-    exit();
-}
+// if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+//     header("Location: index.html");
+//     exit();
+// }
 /* 
 criminal_ID 
 crime_ID
@@ -31,7 +31,6 @@ if ($criminal_ID == null) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Alias</title>
-    <!-- the whole "check" function, I don't think we need-->
     <script>
     function check(form) {
         return true;

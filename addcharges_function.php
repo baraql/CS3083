@@ -1,5 +1,14 @@
 <?php
 include 'connect.php';
+include 'user.php';
+
+session_start();
+
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("Location: index.html");
+    exit();
+}
+
 class Charge
 {
     public $charge_ID;
@@ -49,7 +58,7 @@ function get_charge_info_from_db()
 
 function add_charge()
 {
-    var_dump($_POST);
+    User::checkPerm();
 
 
     global $con;
@@ -92,7 +101,7 @@ function add_charge()
 
 function update_charge()
 {
-
+    User::checkPerm();
 
     global $con;
     $criminal_ID = array_key_exists('criminal_ID', $_REQUEST) ? $_REQUEST['criminal_ID'] : die("Criminal ID required!");
@@ -134,6 +143,7 @@ function update_charge()
 
 function delete_charge()
 {
+    User::checkPerm();
     global $con;
     $charge_ID = array_key_exists('charge_ID', $_POST) ? $_POST['charge_ID'] : die("Charge ID required!");
     $criminal_ID = $_POST['criminal_ID'];

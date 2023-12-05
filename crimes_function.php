@@ -30,8 +30,7 @@ function get_crime_info_form_db() {
     global $con;
 
     $crime_id = array_key_exists('crime_ID', $_GET) ? $_GET['crime_ID'] : die("Crime id required!");
-    // $criminal_id = array_key_exists('criminal_id', $_REQUEST) ? $_REQUEST['criminal_id'] : die("Criminal id required!");
-
+   
     $sql = "select * from crimes where crime_id = $crime_id";
     $result = mysqli_query($con, $sql);
     $row = mysqli_fetch_assoc($result);
@@ -130,7 +129,6 @@ function delete_crime() {
     } catch (mysqli_sql_exception $exception) {
         $con->rollback();
         die($exception);
-        // throw $exception;
     }
 }
 ?>

@@ -1,8 +1,16 @@
 <?php
 include 'connect.php';
+include 'user.php';
 
+session_start();
+
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("Location: index.html");
+    exit();
+}
 
 function add_co() {
+    User::checkPerm();
     global $con;
     $officer_ID = array_key_exists('officer_ID', $_REQUEST) ? $_REQUEST['officer_ID'] : die("officer ID required!");
 
@@ -33,6 +41,7 @@ function add_co() {
 }
 
 function update_co() {
+    User::checkPerm();
     global $con;
     $criminal_ID = array_key_exists('criminal_ID', $_REQUEST) ? $_REQUEST['criminal_ID'] : die("Criminal ID required!");
 
@@ -61,6 +70,7 @@ function update_co() {
 }
 
 function delete_co() {
+    User::checkPerm();
 
     global $con;
     $officer_ID = array_key_exists('officer_ID', $_POST) ? $_POST['officer_ID'] : die("Officer ID required!");
@@ -87,7 +97,6 @@ if (isset($_POST['m'])) {
 } else {
     return;
 }
-var_dump($_POST);
 
 if ($method == 'a') {
     add_co();

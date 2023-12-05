@@ -1,11 +1,8 @@
 <?php
-// Assuming you have a valid database connection stored in $con
-// Ensure that the connection is established before this code
 
 session_start();
 
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    // echo "not logged in";
     header("Location: index.html");
     exit();
 }

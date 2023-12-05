@@ -25,8 +25,6 @@ function get_appeal_info_from_db()
 {
     global $con;
 
-    //is this also a typo?
-
     $sql = "SELECT * FROM appeals WHERE crime_ID = ?";
     $stmt = $con->prepare($sql);
     $stmt->bind_param("i", $crime_ID);
@@ -80,7 +78,6 @@ function update_appeal()
     $appeal = Appeal::fromArrayOrResult($_POST);
 
     try {
-        // echo "UPDATE";
         $con->begin_transaction();
         $stmt = $con->prepare($sql);
         $stmt->bind_param(

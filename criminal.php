@@ -3,7 +3,6 @@ session_start();
 include_once 'criminal_functions.php';
 
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    // echo "not logged in";
     header("Location: index.html");
     exit();
 }
@@ -30,7 +29,6 @@ else {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="styleNav.css">
     <link rel="stylesheet" href="styleTable.css">
 
@@ -173,11 +171,8 @@ else {
 
     <script>
     function redirectToNewPage() {
-        // Assuming you want to redirect to a page named 'file_input.php'
-        // You can change this URL based on your actual file input page
         var newPageUrl = 'addcriminal.php';
         
-        // Redirect to the new page
         window.location.href = newPageUrl;
     }
 </script>

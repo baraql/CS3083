@@ -90,7 +90,7 @@ function add_charge()
     }
 }
 
-function update_appeal()
+function update_charge()
 {
 
 
@@ -98,21 +98,28 @@ function update_appeal()
     $criminal_ID = array_key_exists('criminal_ID', $_REQUEST) ? $_REQUEST['criminal_ID'] : die("Criminal ID required!");
 
     $sql = "UPDATE `crime_charges` SET `charge_ID`= ?, `crime_ID`= ?, `crime_code`= ?, `charge_status`= ?, `fine_amount`= ?, `court_fee`= ?, `amount_paid`= ? WHERE pay_due_date = ?";
-    $charge = Charge::fromArrayOrResult($_POST);
+    $charge_ID = $_POST['charge_ID'];
+    $crime_ID = $_POST['crime_ID'];
+    $crime_code = $_POST['crime_code'];
+    $charge_status = $_POST['charge_status'];
+    $fine_amount = $_POST['fine_amount'];
+    $court_fee = $_POST['court_fee'];
+    $amount_paid = $_POST['amount_paid'];
+    $pay_due_date = $_POST['pay_due_date'];
 
     try {
         $con->begin_transaction();
         $stmt = $con->prepare($sql);
         $stmt->bind_param(
-            "iisssi",
-            $charge->charge_ID,
-            $charge->crime_ID,
-            $charge->crime_code,
-            $charge->charge_status,
-            $charge->fine_amount,
-            $charge->court_fee,
-            $charge->amount_paid,
-            $charge->pay_due_date
+            "iiisiiis",
+            $charge_ID,
+            $crime_ID,
+            $crime_code,
+            $charge_status,
+            $fine_amount,
+            $court_fee,
+            $amount_paid,
+            $pay_due_date
         );
 
 

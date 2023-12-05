@@ -87,7 +87,11 @@ if($method == 'a'){
                 <li class="active"><a href="#">Add police information</a></li>
             </ul>
         </nav>
-    </header>
+    </header>  
+      
+
+
+
 
     <form action="police_add_and_edit.php?m=<?php echo is_null($method) ? 'a' : 'u'?>" onsubmit="return check(this);" method="post">
     <input type="hidden" name="officer_ID" value="<?php echo $police_info->id;?>">
@@ -96,6 +100,7 @@ if($method == 'a'){
             <tr>
                 <th>ID</th> 
                 <td><input type="text" class="input" name="officer_ID" maxlength="9" value="<?PHP echo $police_info->id;?>"></td>
+
             </tr>
             <tr>
                 <th>First Name</th>

@@ -89,14 +89,24 @@ if ($method == 'a') {
         </nav>
     </header>
 
+    <?php
+    $disabled = '';
+    if ($method === 'e') {
+        $disabled = 'readonly';
+    }
+    ?>
+
     <form action="addCrimes.php?m=<?php echo is_null($method) ? 'a' : 'u'?>" onsubmit="return check(this);" method="post">
     <input type="hidden" name="criminal_ID" value="<?php echo $criminal_ID; ?>">
     <table class="content-table">
         <tbody>
-            <tr>
-                <th>Crime ID</th> 
-                <td><input type="text" class="input" name="crime_ID" maxlength="9" value="<?PHP echo $crime->crime_ID;?>"></td>
-            </tr>
+        <tr>
+    <th>Crime ID</th>
+    <td><input type="text" class="input" name="crime_ID" maxlength="9"
+            value="<?php echo isset($_GET['crime_ID']) ? htmlspecialchars($_GET['crime_ID']) : $crime->crime_ID; ?>"
+            <?php echo $disabled; ?>></td>
+</tr>
+
             <tr>
                 <th>Crime Classification</th>
                 <td><input type="text" class="input" name="crime_classification" maxlength="1" value="<?PHP echo $crime->crime_classification;?>"></td>

@@ -55,7 +55,12 @@ if (isset($_REQUEST['criminal_ID'])) {
         }
     </script>
 </head>
-<body>
+        <body>
+        <a href="criminal.php" style="text-decoration: none; color: inherit;">
+        <button type="button" style="padding: 10px 20px; font-size: 16px; background-color: #96B6C5; border: none; color: white; border-radius: 8px;">Go Back</button>
+        </a>
+
+
     <div class="container">
 
 
@@ -64,6 +69,7 @@ if (isset($_REQUEST['criminal_ID'])) {
             <!--                               CRIMINAL                                           -->
             <!-- ----------------------------------------------------------------------------------->
             <!-- ----------------------------------------------------------------------------------->
+          
 
         <div class="column"> 
 
@@ -394,7 +400,6 @@ if (isset($_REQUEST['criminal_ID'])) {
         } 
 ?>
 
-            
    
 
         </div>

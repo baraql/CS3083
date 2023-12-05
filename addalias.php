@@ -9,6 +9,7 @@ include_once "addco_functions.php";
 //     header("Location: index.html");
 //     exit();
 // }
+
 /* 
 criminal_ID 
 crime_ID

@@ -58,27 +58,29 @@ if (isset($_REQUEST['criminal_ID'])) {
     </script>
 </head>
 
-        <body>
-        <a href="criminal.php" style="text-decoration: none; color: inherit;">
-        <button type="button" style="padding: 10px 20px; font-size: 16px; background-color: #96B6C5; border: none; color: white; border-radius: 8px;">Go Back</button>
-        </a>
+<body>
+    <a href="criminal.php" style="text-decoration: none; color: inherit;">
+        <button type="button"
+            style="padding: 10px 20px; font-size: 16px; background-color: #96B6C5; border: none; color: white; border-radius: 8px;">Go
+            Back</button>
+    </a>
 
 
     <div class="container">
 
 
-            <!-- ----------------------------------------------------------------------------------->
-            <!-- ----------------------------------------------------------------------------------->
-            <!--                               CRIMINAL                                           -->
-            <!-- ----------------------------------------------------------------------------------->
-            <!-- ----------------------------------------------------------------------------------->
-          
+        <!-- ----------------------------------------------------------------------------------->
+        <!-- ----------------------------------------------------------------------------------->
+        <!--                               CRIMINAL                                           -->
+        <!-- ----------------------------------------------------------------------------------->
+        <!-- ----------------------------------------------------------------------------------->
+
 
         <div class="column">
 
             <div class="box" onclick="toggleJudges()">
                 <h2>Criminal ID: <?php  echo $criminal_id;?>
-                    <a href="addCrimes.php?criminal_ID=<?php echo $criminal_id; ?>"><button>Add Alias</button></a>
+                    <a href="addalias.php?criminal_ID=<?php echo $criminal_id; ?>"><button>Add Alias</button></a>
                 </h2>
 
                 <?php
@@ -104,14 +106,13 @@ if (isset($_REQUEST['criminal_ID'])) {
             
             if ($result && mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
-                    // Access the data from the current row using $row
                     echo '<div class="box4" style="font-family: Fira Sans; line-height: 1.5;">';
                     echo '<h3>' . $row['alias'] . '</h3>';
                     echo '<button class="popup-button" onclick="deleteWithId(' . $row['alias_ID'] . ');">Delete</button>';
                     echo '</div>'; 
                 }
             } else {
-                // Handle the case when no rows are found
+                // handle case when no rows found
             }
 
             

@@ -108,7 +108,12 @@ if (isset($_REQUEST['criminal_ID'])) {
                 while ($row = mysqli_fetch_assoc($result)) {
                     echo '<div class="box4" style="font-family: Fira Sans; line-height: 1.5;">';
                     echo '<h3>' . $row['alias'] . '</h3>';
-                    echo '<button class="popup-button" onclick="deleteWithId(' . $row['alias_ID'] . ');">Delete</button>';
+                    echo '<form method="post" action="addalias_functions.php">'; //form 1 
+                    echo '<input type="hidden" name="alias_ID" value="' . $row['alias_ID'] . '">';
+                    echo '<input type="hidden" name="criminal_ID" value="' . $criminal_id . '">';
+                    echo '<input type="hidden" name="m" value="d">';
+                    echo '<button type="submit" id="coDelete" onclick="return confirm(\'Are you sure you want to delete this alias?\')">Delete</button>';
+                    echo '</form>';
                     echo '</div>'; 
                 }
             } else {
@@ -266,13 +271,10 @@ if (isset($_REQUEST['criminal_ID'])) {
                             echo '<p>Officer Name: ' . $officerData['officer_name_first'] . ' ' . $officerData['officer_name_last'] . '</p>';
                         }
 
-                        //add 
+                        //delete 
                         echo '<form method="post" action="addco_functions.php">'; //form 1 
                         echo '<input type="hidden" name="crime_ID" value="' . $crime['crime_ID'] . '">';
                         echo '<input type="hidden" name="officer_ID" value="' . $officerID . '">';
-
-
-                        //delete 
                         echo '<input type="hidden" name="m" value="d">'; //u &m idk when and where this will be important 
                         echo '<button type="submit" id="coDelete" onclick="return confirm(\'Are you sure you want to delete this crime officer?\')">Delete</button>';
                         echo '</form>';

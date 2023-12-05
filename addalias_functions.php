@@ -41,11 +41,12 @@ function delete_alias() {
     $criminal_ID = $_POST['criminal_ID'];
 
     $sql = "DELETE FROM alias WHERE alias_id = ?";
-
-    $con->begin_transaction();
+    $alias_ID = $_POST['alias_ID'];
+    
     try {
+        $con->begin_transaction();
         $stmt = $con->prepare($sql);
-        $stmt->bind_param("i", $crime_ID);
+        $stmt->bind_param("i", $alias_ID);
         $stmt->execute();
         $con->commit();
         header("location:popup.php?criminal_ID=$criminal_ID");

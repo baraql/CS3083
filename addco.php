@@ -45,25 +45,26 @@ if (isset($_GET['officer_ID'])) {
     <title>Add Crime Officers</title>
     <!-- the whole "check" function, I don't think we need-->
     <script>
-        function check(form) {
-            return true; 
-        }
+    function check(form) {
+        return true;
+    }
     </script>
 
 
 
 </head>
+
 <body>
-    <form method = "post" action="addco_functions.php" onsubmit="return check(this);" >
+    <form method="post" action="addco_functions.php" onsubmit="return check(this);">
         <input type="hidden" name="m" value="<?php echo $method; ?>" />
         <input type="hidden" name="criminal_ID" value="<?php echo $criminal_ID; ?>" />
         <input type="hidden" name="crime_ID" value="<?php echo $crime_ID; ?>" />
 
-        
+
         <label for="crime_officers">Crime Officer:</label>
-            <select id="officer_ID" name="officer_ID" required
-                style="width: 100%; padding: 8px; margin-bottom: 16px; box-sizing: border-box;">
-                <?php
+        <select id="officer_ID" name="officer_ID" required
+            style="width: 100%; padding: 8px; margin-bottom: 16px; box-sizing: border-box;">
+            <?php
                     $OfficersQuery = "SELECT * FROM officers";
                     $OfficersQuery = mysqli_query($con, $OfficersQuery);
                     while ($Officer = mysqli_fetch_assoc($OfficersQuery)) {
@@ -72,74 +73,75 @@ if (isset($_GET['officer_ID'])) {
                         echo '</option>';
                     } 
                 ?>
-            </select><br>
-        
+        </select><br>
+
         <button type="submit">Submit</button>
-        <button type="button">
-                <a href="popup.php?criminal_ID=<?php echo $criminal_ID; ?>"
-                    style="text-decoration: none; color: inherit;">Go Back</a>
-        </button>
+        <a href="popup.php?criminal_ID=<?php echo $criminal_ID; ?>" style="text-decoration: none; color: inherit;">
+            <button type="button">Go Back</button>
+        </a>
+
 
     </form>
 
 
-    
+
 </body>
+
 </html>
 
 
 
 
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
 
-    form {
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-        width: 300px;
-    }
+form {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+}
 
-    label {
-        display: block;
-        margin-bottom: 8px;
-    }
+label {
+    display: block;
+    margin-bottom: 8px;
+}
 
-    input {
-        width: 100%;
-        padding: 8px;
-        margin-bottom: 16px;
-        box-sizing: border-box;
-    }
+input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
 
-    button {
-        background-color: #4caf50;
-        color: #fff;
-        padding: 10px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
+button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
 
-    button:hover {
-        background-color: #45a049;
-    }
+button:hover {
+    background-color: #45a049;
+}
 
-    .success-message {
-        color: #4caf50;
-    }
+.success-message {
+    color: #4caf50;
+}
 
-    .error-message {
-        color: #f44336;
-    }
-    </style>
+.error-message {
+    color: #f44336;
+}
+</style>

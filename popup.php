@@ -16,45 +16,48 @@ if (isset($_REQUEST['criminal_ID'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script>
-        function deleteWithId(id) {
-            if (window.confirm("Sure to delete crimes information with id \'" + id + "\'?")) {
-                var form1 = document.createElement("form");
-                form1.method = "POST";
-                form1.action = "addCrimes.php?m=d&criminal_ID=<?PHP echo $criminal_id?>";
+    function deleteWithId(id) {
+        if (window.confirm("Sure to delete crimes information with id \'" + id + "\'?")) {
+            var form1 = document.createElement("form");
+            form1.method = "POST";
+            form1.action = "addCrimes.php?m=d&criminal_ID=<?PHP echo $criminal_id?>";
 
-                var input = document.createElement("input");
-                input.type = "hidden";
-                input.name = "crime_ID";
-                input.value = id;
+            var input = document.createElement("input");
+            input.type = "hidden";
+            input.name = "crime_ID";
+            input.value = id;
 
-                form1.appendChild(input);
-                document.body.appendChild(form1);
-                form1.submit();
-            }
+            form1.appendChild(input);
+            document.body.appendChild(form1);
+            form1.submit();
         }
-        function deleteSentence(id){
-            if (window.confirm("Sure to delete sentence information with id \'" + id + "\'?")) {
-                var form1 = document.createElement("form");
-                form1.method = "POST";
-                form1.action = "addSentences.php?m=d&criminal_ID=<?PHP echo $criminal_id?>";
+    }
 
-                var input = document.createElement("input");
-                input.type = "hidden";
-                input.name = "sentence_ID";
-                input.value = id;
+    function deleteSentence(id) {
+        if (window.confirm("Sure to delete sentence information with id \'" + id + "\'?")) {
+            var form1 = document.createElement("form");
+            form1.method = "POST";
+            form1.action = "addSentences.php?m=d&criminal_ID=<?PHP echo $criminal_id?>";
 
-                form1.appendChild(input);
-                document.body.appendChild(form1);
-                form1.submit();
-            }
+            var input = document.createElement("input");
+            input.type = "hidden";
+            input.name = "sentence_ID";
+            input.value = id;
+
+            form1.appendChild(input);
+            document.body.appendChild(form1);
+            form1.submit();
         }
+    }
     </script>
 </head>
+
         <body>
         <a href="criminal.php" style="text-decoration: none; color: inherit;">
         <button type="button" style="padding: 10px 20px; font-size: 16px; background-color: #96B6C5; border: none; color: white; border-radius: 8px;">Go Back</button>
@@ -71,14 +74,14 @@ if (isset($_REQUEST['criminal_ID'])) {
             <!-- ----------------------------------------------------------------------------------->
           
 
-        <div class="column"> 
+        <div class="column">
 
-        <div class = "box" onclick="toggleJudges()"> 
-        <h2>Criminal ID: <?php  echo $criminal_id;?>
-        <a href="addCrimes.php?criminal_ID=<?php echo $criminal_id; ?>"><button>Add Alias</button></a>
-        </h2>
+            <div class="box" onclick="toggleJudges()">
+                <h2>Criminal ID: <?php  echo $criminal_id;?>
+                    <a href="addCrimes.php?criminal_ID=<?php echo $criminal_id; ?>"><button>Add Alias</button></a>
+                </h2>
 
-        <?php
+                <?php
 
         $sql = "SELECT * FROM criminals WHERE criminal_ID = '" . mysqli_real_escape_string($con, $criminal_id) . "'";
         $result = mysqli_query($con, $sql);
@@ -123,80 +126,82 @@ if (isset($_REQUEST['criminal_ID'])) {
 
 
         ?>
-        
-        </div><!-- ENDS CRIMINAL ID-->
 
-        <div class = "column "> 
+            </div><!-- ENDS CRIMINAL ID-->
 
-            <!-- ----------------------------------------------------------------------------------->
-            <!-- ----------------------------------------------------------------------------------->
-            <!--                                      SENTENCING                                  -->
-            <!-- ----------------------------------------------------------------------------------->
-            <!-- ----------------------------------------------------------------------------------->
+            <div class="column ">
 
-            <h2>Sentencing 
-            <a href="addSentences.php?criminal_ID=<?php echo $criminal_id; ?>"><button>Add</button></a>
-            </h2>
+                <!-- ----------------------------------------------------------------------------------->
+                <!-- ----------------------------------------------------------------------------------->
+                <!--                                      SENTENCING                                  -->
+                <!-- ----------------------------------------------------------------------------------->
+                <!-- ----------------------------------------------------------------------------------->
 
-            <?php
+                <h2>Sentencing
+                    <a href="addSentences.php?criminal_ID=<?php echo $criminal_id; ?>"><button>Add</button></a>
+                </h2>
+
+                <?php
                 $sql = "SELECT * FROM sentences WHERE criminal_ID = '" . mysqli_real_escape_string($con, $criminal_id) . "'";
                 $result = mysqli_query($con, $sql);
 
                 if ($result && mysqli_num_rows($result) > 0) {
                     while ($sentence = mysqli_fetch_assoc($result)) {
                 ?>
-                    <div class="boxSentencing" style="font-family: Fira Sans;line-height: 1.5;">
-                        <h3>Sentence ID: <?php echo $sentence['sentence_ID']; ?></h3>
-                        <p>Sentence Type: <?php echo $sentence['sentence_type']; ?></p>
-                        <p>Probation Officer ID: <?php echo $sentence['prob_ID']; ?></p>
-                        <p>Start Date: <?php echo $sentence['start_date']; ?></p>
-                        <p>End Date: <?php echo $sentence['end_date']; ?></p>
-                        <p>Violations: <?php echo $sentence['violations']; ?></p>
-                        <a href="addSentences.php?m=e&criminal_ID=<?php echo $criminal_id; ?>&sentence_ID=<?php echo $sentence['sentence_ID']; ?>">
-                            <button class="popup-button">Edit</button>
-                        </a>
-                    
-                        <button class="popup-button" onclick="deleteSentence(<?php echo $sentence['sentence_ID']; ?>);">Delete</button>
+                <div class="boxSentencing" style="font-family: Fira Sans;line-height: 1.5;">
+                    <h3>Sentence ID: <?php echo $sentence['sentence_ID']; ?></h3>
+                    <p>Sentence Type: <?php echo $sentence['sentence_type']; ?></p>
+                    <p>Probation Officer ID: <?php echo $sentence['prob_ID']; ?></p>
+                    <p>Start Date: <?php echo $sentence['start_date']; ?></p>
+                    <p>End Date: <?php echo $sentence['end_date']; ?></p>
+                    <p>Violations: <?php echo $sentence['violations']; ?></p>
+                    <a
+                        href="addSentences.php?m=e&criminal_ID=<?php echo $criminal_id; ?>&sentence_ID=<?php echo $sentence['sentence_ID']; ?>">
+                        <button class="popup-button">Edit</button>
+                    </a>
 
-                    </div>
+                    <button class="popup-button"
+                        onclick="deleteSentence(<?php echo $sentence['sentence_ID']; ?>);">Delete</button>
 
-                    <!-- ------------------------------------------------------------ -->
-                    <!-- ------------------------------------------------------------ -->
-                    <!--        DELETE SENTENCES POPUP                                -->
-                    <!-- ------------------------------------------------------------ -->
-                    <!-- ------------------------------------------------------------ -->
+                </div>
 
-                    <div class="popup" id="popup-sentence">
-                        <h2>Confirm Deletion</h2>
-                        <p>Are you sure you want to delete this Sentence?</p>
-                        <button onclick="confirmDelete('popup-sentence')">Yes</button>
-                        <button onclick="closePopup('popup-sentence')">No</button>
-                    </div>
+                <!-- ------------------------------------------------------------ -->
+                <!-- ------------------------------------------------------------ -->
+                <!--        DELETE SENTENCES POPUP                                -->
+                <!-- ------------------------------------------------------------ -->
+                <!-- ------------------------------------------------------------ -->
+
+                <div class="popup" id="popup-sentence">
+                    <h2>Confirm Deletion</h2>
+                    <p>Are you sure you want to delete this Sentence?</p>
+                    <button onclick="confirmDelete('popup-sentence')">Yes</button>
+                    <button onclick="closePopup('popup-sentence')">No</button>
+                </div>
                 <?php
                     }
                 } 
             ?>
 
-        </div>
+            </div>
         </div>
 
         <div class="column">
 
 
 
-        <!-- ----------------------------------------------------------------------------------->
-        <!-- ----------------------------------------------------------------------------------->
-        <!--                                      CRIMES                                      -->
-        <!-- ----------------------------------------------------------------------------------->
-        <!-- ----------------------------------------------------------------------------------->
+            <!-- ----------------------------------------------------------------------------------->
+            <!-- ----------------------------------------------------------------------------------->
+            <!--                                      CRIMES                                      -->
+            <!-- ----------------------------------------------------------------------------------->
+            <!-- ----------------------------------------------------------------------------------->
 
 
-        <h2> CRIMES       
-        <a href="addCrimes.php?criminal_ID=<?php echo $criminal_id; ?>"><button>Add</button></a>
-        </h2>
+            <h2> CRIMES
+                <a href="addCrimes.php?criminal_ID=<?php echo $criminal_id; ?>"><button>Add</button></a>
+            </h2>
 
 
-        <?php
+            <?php
 
         //SHOW EACH POSSIBLE CRIME THE CRIMINAL COULD HAVE COMMITTED 
         $sql = "SELECT * FROM crimes WHERE criminal_ID = '" . mysqli_real_escape_string($con, $criminal_id) . "'";
@@ -211,6 +216,7 @@ if (isset($_REQUEST['criminal_ID'])) {
                 echo '<p>Crime Status: ' . $crime['crime_status'] . '</p>';
                 echo '<p>Hearing Date: ' . $crime['hearing_date'] . '</p>';
                 echo '<p>Appeal Deadline: ' . $crime['appeal_cut_date'] . '</p>';
+                // echo '<p>Crime Code: ' . $crime['crime_code'] . '</p>';
                
                 echo '<a href="addCrimes.php?m=e&criminal_ID=' . $criminal_id . '&crime_ID=' . $crime['crime_ID'] . '">';
                //TO CHANGE 
@@ -364,7 +370,7 @@ if (isset($_REQUEST['criminal_ID'])) {
 
 
                         //what does this do? 
-                        echo '<form method="post" action="addcharges.php">'; //form 1 
+                        echo '<form method="post" action="addcharges_function.php">'; //form 1 
                         echo '<input type="hidden" name="charge_ID" value="' . $charges['charge_ID'] . '">';
                         echo '<input type="hidden" name="criminal_ID" value="' . $criminal_id . '">';
                         echo '<input type="hidden" name="crime_ID" value="' . $crime['crime_ID'] . '">';
@@ -376,13 +382,20 @@ if (isset($_REQUEST['criminal_ID'])) {
 
 
                         //edit charges
-                        echo '<a href="addcharges.php?m=u&criminal_ID=' . $criminal_id . '&crime_ID=' . $crime['crime_ID'] . '&charge_ID=' . $charges['charge_ID'] . '">';
-                        echo '<input type="hidden" name="charge_ID" value="' . $charges['charge_ID'] . '">';
-                        echo '<input type="hidden" name="crime_ID" value="' . $crime['crime_ID'] . '">';
-                        echo '<input type="hidden" name="m" value="u">';
-                        echo '<button class="popup-button">Edit Charges</button>';
-                        echo '</a>';
-                        echo '</div>'; 
+                        echo '<a href="addCharges.php?m=u&criminal_ID=' . $criminal_id . '&charge_ID=' . urlencode($charges['charge_ID']) . '&crime_ID=' . urlencode($crime['crime_ID']) . '&charge_status=' . urlencode($charges['charge_status']) . '&fine_amount=' . urlencode($charges['fine_amount']) . '&court_fee=' . urlencode($charges['court_fee']) . '&amount_paid=' . urlencode($charges['amount_paid']) . '&pay_due_date=' . urlencode($charges['pay_due_date']) . '">';
+echo '<input type="hidden" name="criminal_ID" value="' . $criminal_id . '">';
+echo '<input type="hidden" name="charge_ID" value="' . $charges['charge_ID'] . '">';
+echo '<input type="hidden" name="crime_ID" value="' . $crime['crime_ID'] . '">';
+// echo '<input type="hidden" name="crime_code" value="' . $crime['crime_code'] . '">';
+echo '<input type="hidden" name="charge_status" value="' . $charges['charge_status'] . '">';
+echo '<input type="hidden" name="fine_amount" value="' . $charges['fine_amount'] . '">';
+echo '<input type="hidden" name="court_fee" value="' . $charges['court_fee'] . '">';
+echo '<input type="hidden" name="amount_paid" value="' . $charges['amount_paid'] . '">';
+echo '<input type="hidden" name="pay_due_date" value="' . $charges['pay_due_date'] . '">';
+echo '<input type="hidden" name="m" value="u">';
+echo '<button class="popup-button">Edit Charges</button>';
+echo '</a>';
+echo '</div>';  //closing box 3 charges 
     
                     }
                 } 
@@ -400,20 +413,18 @@ if (isset($_REQUEST['criminal_ID'])) {
         } 
 ?>
 
-   
-
         </div>
 
     </div>
 
 
-'
+    '
 
 
 
 
-'
-<script>
+    '
+    <script>
     function addCrimeStuff(crimeID, identifier) {
         var form = document.createElement("form");
         form.method = "POST";
@@ -422,14 +433,12 @@ if (isset($_REQUEST['criminal_ID'])) {
 
 
 
-        }
-        else if (identifier == "crimeOfficers") {
+        } else if (identifier == "crimeOfficers") {
             form.action = "addCrimeOfficers.php";
 
 
 
-        }
-        else {
+        } else {
             form.action = "addCharges.php";
 
         }
@@ -446,7 +455,7 @@ if (isset($_REQUEST['criminal_ID'])) {
 
         form.submit();
     }
-</script>
+    </script>
 
 
 
@@ -456,187 +465,203 @@ if (isset($_REQUEST['criminal_ID'])) {
 
 
     <style>
-        * {
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
-        }
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
 
-        body, html {
-            height: 100%; /* Set the body and html height to 100% */
-        }
+    body,
+    html {
+        height: 100%;
+        /* Set the body and html height to 100% */
+    }
 
-        .container {
-            width: 70%;
-            padding: 20px;
-            margin: 30px auto ; /* Add top and bottom margin, keep auto for horizontal centering */
-            display: flex;
-            background: #ddd;
-            justify-content: space-between;
-            height: 90vh; /* Set the container height to 100% of the viewport height */
-            max-width: 950px; 
-
-        }
-
-
-        .column {
-            flex: 1;
-            max-height: 100%;
-            padding: 20px;
-            background: #96B6C5;
-            max-width: 100%;
-            transition: 1s;
-            overflow: auto;  
-            flex-direction: column; /* Set flex direction to column for vertical stacking */
-
-
-        }
-
-        .box {
-            height: 300px;
-            padding: 20px;
-            background: #EEE0C9;
-            max-width: 100%;
-            transition: 1s;
-            overflow: hidden;
-            transition: 1s;
-            overflow: hidden;
-            margin-bottom: 10px; 
-            border-radius: 2vw ;
-
-
-
-        }
-
-        .box2 {
-            height: auto; /* Set a specific height */
-            width: 100%; /* Set a specific width */
-            padding: 20px;
-            background: #EEE0C9;
-            margin-bottom: 10px;
-            overflow: hidden;
-            border-radius: 2vw ;
-            border: 3px; 
-            min-height: 600px; 
-            transition: 1s;
-
-
-
-        }
-
-        .box:hover {
-            overflow: auto;
-            background: #F1F0E8 
-
-        }
-
-        .box2:hover {
-            overflow: auto;
-            background: #F1F0E8; 
-        }
-
-        .box-content {
-            max-height: 300px;
-            overflow-y: auto;
-        }
-
-        .column:hover {           
-
-            overflow: auto;
-        }
-
-        .column-content {
-            max-height: 300px;
-            overflow-y: auto;
-        }
-
-        .table-container {
-            text-align: center; /* Center-align the content */
-            margin: auto; /* Center the container horizontally */
-            max-width: 100%; /* Ensure the container doesn't exceed the viewport width */
-        }
-
-        table {
-            width: 100%; /* Make the table take the full width of its container */
-        }
-
-
-
-        .popup {
-            width: 30%;
-            max-height: 80%; /* Set a maximum height for scrollability */
-            background: #fff;
-            border-radius: 6px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.1);
-            text-align: center;
-            padding: 30px;
-            color: #333;
-            visibility: hidden;
-            overflow-y: auto; /* Enable vertical scrolling */
-            transition: transform 0.4s, top 0.4s;
-            border-radius: 2vw ;
+    .container {
+        width: 70%;
+        padding: 20px;
+        margin: 30px auto;
+        /* Add top and bottom margin, keep auto for horizontal centering */
+        display: flex;
+        background: #ddd;
+        justify-content: space-between;
+        height: 90vh;
+        /* Set the container height to 100% of the viewport height */
+        max-width: 950px;
 
     }
 
-        .open-popup {
-            visibility: visible;
-            top: 50%;
-            transform: translate(-50%, -50%) scale(1);
-        }
 
-        .box3 {
-            height: 200px; /* Set a specific height */
-            width: 100%; /* Set a specific width */
-            padding: 20px;
-            background: #FFF4E3;
-            margin-bottom: 10px;
-            overflow: hidden;
-            overflow-y: auto; /* Enable vertical scrolling */
-            border-radius: 1vw ;
-            height: auto; 
-            min-height: 100px; 
+    .column {
+        flex: 1;
+        max-height: 100%;
+        padding: 20px;
+        background: #96B6C5;
+        max-width: 100%;
+        transition: 1s;
+        overflow: auto;
+        flex-direction: column;
+        /* Set flex direction to column for vertical stacking */
 
 
+    }
 
-        }
-
-
-        .box3:hover {
-            overflow: auto;
-            background: #96B6C5 
-            border-radius: 2vw ;
-
-        }
-
-        .box4 {
-            height: 50px; /* Set a specific height */
-            width: 100%; /* Set a specific width */
-            padding: 20px;
-            background: #FFF4E3;
-            margin-bottom: 10px;
-            overflow: hidden;
-            overflow-y: auto; /* Enable vertical scrolling */
-            border-radius: 1vw ;
-            height: auto; 
-            min-height: 50px; 
+    .box {
+        height: 300px;
+        padding: 20px;
+        background: #EEE0C9;
+        max-width: 100%;
+        transition: 1s;
+        overflow: hidden;
+        transition: 1s;
+        overflow: hidden;
+        margin-bottom: 10px;
+        border-radius: 2vw;
 
 
 
-        }
+    }
+
+    .box2 {
+        height: auto;
+        /* Set a specific height */
+        width: 100%;
+        /* Set a specific width */
+        padding: 20px;
+        background: #EEE0C9;
+        margin-bottom: 10px;
+        overflow: hidden;
+        border-radius: 2vw;
+        border: 3px;
+        min-height: 600px;
+        transition: 1s;
 
 
-        .box4:hover {
-            overflow: auto;
-            background: #96B6C5 
-            border-radius: 2vw ;
 
-        }
+    }
+
+    .box:hover {
+        overflow: auto;
+        background: #F1F0E8
+    }
+
+    .box2:hover {
+        overflow: auto;
+        background: #F1F0E8;
+    }
+
+    .box-content {
+        max-height: 300px;
+        overflow-y: auto;
+    }
+
+    .column:hover {
+
+        overflow: auto;
+    }
+
+    .column-content {
+        max-height: 300px;
+        overflow-y: auto;
+    }
+
+    .table-container {
+        text-align: center;
+        /* Center-align the content */
+        margin: auto;
+        /* Center the container horizontally */
+        max-width: 100%;
+        /* Ensure the container doesn't exceed the viewport width */
+    }
+
+    table {
+        width: 100%;
+        /* Make the table take the full width of its container */
+    }
 
 
-        .popup-delete {
+
+    .popup {
+        width: 30%;
+        max-height: 80%;
+        /* Set a maximum height for scrollability */
+        background: #fff;
+        border-radius: 6px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.1);
+        text-align: center;
+        padding: 30px;
+        color: #333;
+        visibility: hidden;
+        overflow-y: auto;
+        /* Enable vertical scrolling */
+        transition: transform 0.4s, top 0.4s;
+        border-radius: 2vw;
+
+    }
+
+    .open-popup {
+        visibility: visible;
+        top: 50%;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    .box3 {
+        height: 200px;
+        /* Set a specific height */
+        width: 100%;
+        /* Set a specific width */
+        padding: 20px;
+        background: #FFF4E3;
+        margin-bottom: 10px;
+        overflow: hidden;
+        overflow-y: auto;
+        /* Enable vertical scrolling */
+        border-radius: 1vw;
+        height: auto;
+        min-height: 100px;
+
+
+
+    }
+
+
+    .box3:hover {
+        overflow: auto;
+        background: #96B6C5 border-radius: 2vw;
+
+    }
+
+    .box4 {
+        height: 50px;
+        /* Set a specific height */
+        width: 100%;
+        /* Set a specific width */
+        padding: 20px;
+        background: #FFF4E3;
+        margin-bottom: 10px;
+        overflow: hidden;
+        overflow-y: auto;
+        /* Enable vertical scrolling */
+        border-radius: 1vw;
+        height: auto;
+        min-height: 50px;
+
+
+
+    }
+
+
+    .box4:hover {
+        overflow: auto;
+        background: #96B6C5 border-radius: 2vw;
+
+    }
+
+
+    .popup-delete {
         width: 50%;
         max-height: 50%;
         background: #fff;
@@ -650,7 +675,8 @@ if (isset($_REQUEST['criminal_ID'])) {
         color: #333;
         visibility: hidden;
         overflow-y: auto;
-        transition: transform 0.4s, top 0.4s, visibility 0s linear 0.4s; /* Added visibility transition delay */
+        transition: transform 0.4s, top 0.4s, visibility 0s linear 0.4s;
+        /* Added visibility transition delay */
         border-radius: 2vw;
     }
 
@@ -661,50 +687,52 @@ if (isset($_REQUEST['criminal_ID'])) {
     }
 
 
-    .boxSentencing{
-            height: 200px; /* Set a specific height */
-            width: 100%; /* Set a specific width */
-            padding: 20px;
-            background: #EEE0C9;
-            margin-bottom: 10px;
-            overflow: hidden;
-            border-radius: 2vw ;
-            border: 3px; 
+    .boxSentencing {
+        height: 200px;
+        /* Set a specific height */
+        width: 100%;
+        /* Set a specific width */
+        padding: 20px;
+        background: #EEE0C9;
+        margin-bottom: 10px;
+        overflow: hidden;
+        border-radius: 2vw;
+        border: 3px;
 
 
 
-        }
+    }
 
 
-        .boxSentencing:hover {
-            overflow: auto;
-            background: #F1F0E8 
-        }
+    .boxSentencing:hover {
+        overflow: auto;
+        background: #F1F0E8
+    }
 
-        .boxfinal{
-            height: auto
-            height-min: 100px; /* Set a specific height */
-            width: 100%; /* Set a specific width */
-            padding: 20px;
-            background: #FFF4E3;
-            margin-bottom: 10px;
-            overflow: hidden;
-            border-radius: 1vw ;
-            border: 3px; 
-            transition: 1s;
-
-
-
-
-        }
+    .boxfinal {
+        height: auto height-min: 100px;
+        /* Set a specific height */
+        width: 100%;
+        /* Set a specific width */
+        padding: 20px;
+        background: #FFF4E3;
+        margin-bottom: 10px;
+        overflow: hidden;
+        border-radius: 1vw;
+        border: 3px;
+        transition: 1s;
 
 
-        .boxfinal:hover {
-            overflow: auto;
-            background: #fbfbf8; 
-        }
 
 
+    }
+
+
+    .boxfinal:hover {
+        overflow: auto;
+        background: #fbfbf8;
+    }
     </style>
 </body>
+
 </html>

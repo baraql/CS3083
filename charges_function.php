@@ -1,61 +1,49 @@
 <?php
 include 'connect.php';
-class Charge
+class Appeal
 {
-    public $charge_ID;
+    public $appeal_ID;
     public $crime_ID;
-    public $crime_code;
-    public $charge_status;
-    public $fine_amount;
-    public $court_fee;
-    public $amount_paid;
-    public $pay_due_date;
-
-
+    public $filing_date;
+    public $hearing_date;
+    public $appeal_status;
 
     public static function fromArrayOrResult($arrOrRes)
     {
-        $charge = new Charge;
-        $charge->charge_ID = $arrOrRes['charge_ID'];
-        $charge->crime_ID = $arrOrRes['crime_ID'];
-        $charge->crime_code = $arrOrRes['crime_ID'];
-        $charge->charge_status = $arrOrRes['charge_status'];
-        $charge->fine_amount = $arrOrRes['fine_amount'];
-        $charge->court_fee = $arrOrRes['court_fee'];
-        $charge->amount_paid = $arrOrRes['amount_paid'];
-        $charge->pay_due_date = $arrOrRes['pay_due_date'];
+        $appeal = new Appeal;
+        $appeal->appeal_ID = $arrOrRes['appeal_ID'];
+        $appeal->crime_ID = $arrOrRes['crime_ID'];
+        $appeal->filing_date = $arrOrRes['filing_date'];
+        $appeal->hearing_date = $arrOrRes['hearing_date'];
+        $appeal->appeal_status = $arrOrRes['appeal_status'];
 
-
-        return $charge;
+        return $appeal;
     }
 }
 
-
-
-function get_charge_info_from_db()
+function get_appeal_info_from_db()
 {
     global $con;
 
-    $sql = "SELECT * FROM crime_charges WHERE crime_ID = ?";
+    //is this also a typo?
 
+    $sql = "SELECT * FROM appeals WHERE crime_ID = ?";
     $stmt = $con->prepare($sql);
     $stmt->bind_param("i", $crime_ID);
     $stmt->execute();
     $result = $stmt->get_result();
     $row = $result->fetch_assoc();
 
-    return Charge::fromArrayOrResult($row);
+    return Appeal::fromArrayOrResult($row);
 }
 
-function add_charge()
+function add_appeal()
 {
-    var_dump($_POST);
-
-
     global $con;
     $criminal_ID = array_key_exists('criminal_ID', $_REQUEST) ? $_REQUEST['criminal_ID'] : die("Criminal ID required!");
-    echo "criminal_ID: $criminal_ID";
-    $charge_ID = $_POST['charge_ID'];
+
+
+    $appeal_ID = filter_input(INPUT_POST, 'charge_ID', FILTER_VALIDATE_INT);
     $crime_ID = $_POST['crime_ID'];
     $crime_code = $_POST['crime_code'];
     $charge_status = $_POST['charge_status'];
@@ -70,15 +58,8 @@ function add_charge()
         $con->begin_transaction();
         $stmt = $con->prepare($sql);
         $stmt->bind_param(
-            "iiisiiis",
-            $charge_ID,
-            $crime_ID,
-            $crime_code,
-            $charge_status,
-            $fine_amount,
-            $court_fee,
-            $amount_paid,
-            $pay_due_date
+            "iisss",
+            $ap
         );
 
         $stmt->execute();
@@ -92,27 +73,24 @@ function add_charge()
 
 function update_appeal()
 {
-
-
     global $con;
     $criminal_ID = array_key_exists('criminal_ID', $_REQUEST) ? $_REQUEST['criminal_ID'] : die("Criminal ID required!");
 
-    $sql = "UPDATE `crime_charges` SET `charge_ID`= ?, `crime_ID`= ?, `crime_code`= ?, `charge_status`= ?, `fine_amount`= ?, `court_fee`= ?, `amount_paid`= ? WHERE pay_due_date = ?";
-    $charge = Charge::fromArrayOrResult($_POST);
+    $sql = "UPDATE `appeals` SET `appeal_ID`= ?, `crime_ID`= ?, `filing_date`= ?, `hearing_date`= ?, `appeal_status`= ? WHERE appeal_ID = ?";
+    $appeal = Appeal::fromArrayOrResult($_POST);
 
     try {
+        // echo "UPDATE";
         $con->begin_transaction();
         $stmt = $con->prepare($sql);
         $stmt->bind_param(
             "iisssi",
-            $charge->charge_ID,
-            $charge->crime_ID,
-            $charge->crime_code,
-            $charge->charge_status,
-            $charge->fine_amount,
-            $charge->court_fee,
-            $charge->amount_paid,
-            $charge->pay_due_date
+            $appeal->appeal_ID,
+            $appeal->crime_ID,
+            $appeal->filing_date,
+            $appeal->hearing_date,
+            $appeal->appeal_status,
+            $appeal->appeal_ID
         );
 
 
@@ -125,18 +103,18 @@ function update_appeal()
     }
 }
 
-function delete_charge()
+function delete_appeal()
 {
     global $con;
-    $charge_ID = array_key_exists('charge_ID', $_POST) ? $_POST['charge_ID'] : die("Charge ID required!");
+    $appeal_ID = array_key_exists('appeal_ID', $_POST) ? $_POST['appeal_ID'] : die("Appeal ID required!");
     $criminal_ID = $_POST['criminal_ID'];
 
-    $sql = "DELETE FROM crime_charges WHERE charge_ID = ?";
+    $sql = "DELETE FROM appeals WHERE appeal_ID = ?";
 
     $con->begin_transaction();
     try {
         $stmt = $con->prepare($sql);
-        $stmt->bind_param("i", $charge_ID);
+        $stmt->bind_param("i", $appeal_ID);
         $stmt->execute();
         $con->commit();
         header("location:popup.php?criminal_ID=$criminal_ID");
@@ -154,12 +132,12 @@ if (isset($_POST['m'])) {
 }
 
 if ($method == 'a') {
-    add_charge();
+    add_appeal();
 } elseif ($method == 'e') {
-    $appeal = get_charge_info_from_db();
+    $appeal = get_appeal_info_from_db();
 } elseif ($method == 'u') {
-    update_charge();
+    update_appeal();
 } elseif ($method == 'd') {
-    delete_charge();
+    delete_appeal();
 }
 ?>

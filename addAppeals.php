@@ -74,7 +74,7 @@ $appeal = new Appeal;
         <input type="hidden" name="crime_ID" value="<?php echo $crime_ID; ?>" />
 
         <label for="appeal_ID">Appeal ID:</label>
-        
+
         <?php
 $disabled = '';
 if ($method === 'u') {

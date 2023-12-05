@@ -46,25 +46,30 @@ else {
         </nav>
         <nav class="header-main-nav">
             <ul>
-            <li>
-                <form id="search_form" method="post" action="criminal.php?m=s">
-                    <input type="search" name="search_text">
-                    <select id="field" name="field">
-                        <option value="criminal_ID">id</option>
-                        <option value="criminal_name_first">First Name</option>
-                        <option value="criminal_name_last">Last Name</option>
-                        <option value="criminal_street">Street</option>
-                        <option value="criminal_city">City</option>
-                        <option value="criminal_state">State</option>
-                        <option value="criminal_zip">Zip</option>
-                        <option value="criminal_phone">Phone</option>
-                    </select>
-                    <input type="submit" value="Search"> 
-                </form>
-            </li>
-            <li>
-                    <input type="button" value="Add new" onclick="location.href='criminal_add_and_edit.php'"/>
-            </li>
+                <li>
+                    <form id="search_form" method="post" action="criminal.php?m=s">
+                        <input type="search" name="search_text">
+                        <select id="field" name="field">
+                            <option value="criminal_ID">id</option>
+                            <option value="criminal_name_first">First Name</option>
+                            <option value="criminal_name_last">Last Name</option>
+                            <option value="criminal_street">Street</option>
+                            <option value="criminal_city">City</option>
+                            <option value="criminal_state">State</option>
+                            <option value="criminal_zip">Zip</option>
+                            <option value="criminal_phone">Phone</option>
+                        </select>
+                        <input type="submit" value="Search"
+                            style="width: 60px; height: 40px; margin-right: 10px; border-radius: 5px; background-color: #246583; color: #ffffff; cursor: pointer; transition: background-color 0.3s ease; border: none; text-align: center;"
+                            onmouseover="this.style.backgroundColor='#205070'"
+                            onmouseout="this.style.backgroundColor='#246583'">
+                    </form>
+                </li>
+                <li>
+                    <input type="button" value="Add new"
+                        style="width: 80px; height: 40px; border-radius: 5px; background-color: #246583; color: #ffffff; cursor: pointer; transition: background-color 0.3s ease; border: none; text-align: center;"
+                        onclick="location.href='criminal_add_and_edit.php'" />
+                </li>
             </ul>
         </nav>
         <nav class="header-main-logout">
@@ -90,7 +95,7 @@ else {
         </thead>
         <tbody>
 
-        <?php
+            <?php
             foreach ($result as $row) {
                     $id = $row->id;
                     $fname = $row->fname;
@@ -172,16 +177,40 @@ else {
     <script>
     function redirectToNewPage() {
         var newPageUrl = 'addcriminal.php';
-        
+
         window.location.href = newPageUrl;
     }
-</script>
+    </script>
 
 
-    
+
 
 
 
 </body>
 
 </html>
+<style>
+.more,
+.J {
+    display: inline-block;
+    text-decoration: none;
+}
+
+.more button,
+.J button {
+    width: 50px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #246583;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: none;
+}
+
+.more button:hover,
+.J button:hover {
+    background-color: #205070;
+}
+</style>

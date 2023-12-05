@@ -45,24 +45,29 @@ include 'connect.php';
         </nav>
         <nav class="header-main-nav">
             <ul>
-            <li>
-                <form id="search_form" method="post" action="police.php?m=s">
-                    <input type="search" name="search_text">
-                    <select id="field" name="field">
-                        <option value="officer_ID">id</option>
-                        <option value="officer_name_first">First Name</option>
-                        <option value="officer_name_last">Last Name</option>
-                        <option value="officer_precinct">Precinct</option>
-                        <option value="officer_badge">Badge</option>
-                        <option value="officer_phone">Phone</option>
-                        <option value="officer_status">Status</option>
-                    </select>
-                    <input type="submit" value="Search"> 
-                </form>
-            </li>
-            <li>
-                    <input type="button" value="Add new" onclick="location.href='police_add_and_edit.php'"/>
-            </li>
+                <li>
+                    <form id="search_form" method="post" action="police.php?m=s">
+                        <input type="search" name="search_text">
+                        <select id="field" name="field">
+                            <option value="officer_ID">id</option>
+                            <option value="officer_name_first">First Name</option>
+                            <option value="officer_name_last">Last Name</option>
+                            <option value="officer_precinct">Precinct</option>
+                            <option value="officer_badge">Badge</option>
+                            <option value="officer_phone">Phone</option>
+                            <option value="officer_status">Status</option>
+                        </select>
+                        <input type="submit" value="Search"
+                            style="width: 60px; height: 40px; margin-right: 10px; border-radius: 5px; background-color: #246583; color: #ffffff; cursor: pointer; transition: background-color 0.3s ease; border: none; text-align: center;"
+                            onmouseover="this.style.backgroundColor='#205070'"
+                            onmouseout="this.style.backgroundColor='#246583'">
+                    </form>
+                </li>
+                <li>
+                    <input type="button" value="Add new"
+                        style="width: 80px; height: 40px; border-radius: 5px; background-color: #246583; color: #ffffff; cursor: pointer; transition: background-color 0.3s ease; border: none; text-align: center;"
+                        onclick="location.href='police_add_and_edit.php'" />
+                </li>
             </ul>
         </nav>
         <nav class="header-main-logout">
@@ -148,3 +153,27 @@ include 'connect.php';
 </body>
 
 </html>
+<style>
+.more,
+.J {
+    display: inline-block;
+    text-decoration: none;
+}
+
+.more button,
+.J button {
+    width: 50px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #246583;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: none;
+}
+
+.more button:hover,
+.J button:hover {
+    background-color: #205070;
+}
+</style>

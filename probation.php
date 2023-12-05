@@ -23,7 +23,7 @@ include 'connect.php';
 ?>
 
 <!DOCTYPE html>
-<html lang = "en">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -34,8 +34,8 @@ include 'connect.php';
 </head>
 
 <body>
-    <header class = "header-main"> 
-        <nav class = "header-main-nav" >
+    <header class="header-main">
+        <nav class="header-main-nav">
             <ul>
                 <li><a href="criminal.php">CRIMINALS</a></li>
                 <li><a href="police.php">POLICE</a></li>
@@ -45,30 +45,35 @@ include 'connect.php';
         </nav>
         <nav class="header-main-nav">
             <ul>
-            <li>
-                <form id="search_form" method="post" action="probation.php?m=s">
-                    <input type="search" name="search_text">
-                    <select id="field" name="field">
-                        <option value="prob_ID">id</option>
-                        <option value="prob_name_first">First Name</option>
-                        <option value="prob_name_last">Last Name</option>
-                        <option value="prob_street">Street</option>
-                        <option value="prob_city">City</option>
-                        <option value="prob_state">State</option>
-                        <option value="prob_zip">Zip</option>
-                        <option value="prob_phone">Phone</option>
-                        <option value="prob_email">Email</option>
-                    </select>
-                    <input type="submit" value="Search"> 
-                </form>
-            </li>
-            <li>
-                    <input type="button" value="Add new" onclick="location.href='probation_add_and_edit.php'"/>
-            </li>
+                <li>
+                    <form id="search_form" method="post" action="probation.php?m=s">
+                        <input type="search" name="search_text">
+                        <select id="field" name="field">
+                            <option value="prob_ID">id</option>
+                            <option value="prob_name_first">First Name</option>
+                            <option value="prob_name_last">Last Name</option>
+                            <option value="prob_street">Street</option>
+                            <option value="prob_city">City</option>
+                            <option value="prob_state">State</option>
+                            <option value="prob_zip">Zip</option>
+                            <option value="prob_phone">Phone</option>
+                            <option value="prob_email">Email</option>
+                        </select>
+                        <input type="submit" value="Search"
+                            style="width: 60px; height: 40px; margin-right: 10px; border-radius: 5px; background-color: #246583; color: #ffffff; cursor: pointer; transition: background-color 0.3s ease; border: none; text-align: center;"
+                            onmouseover="this.style.backgroundColor='#205070'"
+                            onmouseout="this.style.backgroundColor='#246583'">
+                    </form>
+                </li>
+                <li>
+                    <input type="button"
+                        style="width: 80px; height: 40px; border-radius: 5px; background-color: #246583; color: #ffffff; cursor: pointer; transition: background-color 0.3s ease; border: none; text-align: center;"
+                        value="Add new" onclick="location.href='probation_add_and_edit.php'" />
+                </li>
             </ul>
 
         </nav>
-        <nav class = "header-main-logout">
+        <nav class="header-main-logout">
             <ul>
                 <li><a href="logout.php">LOGOUT</a></li>
             </ul>
@@ -78,22 +83,22 @@ include 'connect.php';
 
     <table class="content-table">
         <thead>
-          <tr>
-            <th>ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Street</th>
-            <th>City</th>
-            <th>State</th>
-            <th>Zip</th>
-            <th>Phone</th>
-            <th scope="col">Email</th>
-            <th scope="col">Status</th>
-            <th>Operations</th>
-          </tr>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Street</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip</th>
+                <th>Phone</th>
+                <th scope="col">Email</th>
+                <th scope="col">Status</th>
+                <th>Operations</th>
+            </tr>
         </thead>
         <tbody>
-        <?php
+            <?php
 
             foreach($result as $row){
                 $id = $row->id;
@@ -154,9 +159,33 @@ include 'connect.php';
             ?>
 
         </tbody>
-      </table>
+    </table>
 
 
-      </body>
+</body>
 
 </html>
+<style>
+.more,
+.J {
+    display: inline-block;
+    text-decoration: none;
+}
+
+.more button,
+.J button {
+    width: 50px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #246583;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: none;
+}
+
+.more button:hover,
+.J button:hover {
+    background-color: #205070;
+}
+</style>

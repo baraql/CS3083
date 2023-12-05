@@ -23,7 +23,7 @@ include 'connect.php';
 ?>
 
 <!DOCTYPE html>
-<html lang = "en">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -35,38 +35,43 @@ include 'connect.php';
 </head>
 
 <body>
-    <header class = "header-main"> 
-        <nav class = "header-main-nav" >
-        <ul>
-            <li><a href="criminal.php">CRIMINALS</a></li>
-            <li><a href="police.php">POLICE</a></li>
-            <li><a href="probation.php">PROBATION OFFICERS</a></li>
-            <li class="active"><a href="cc.php">CRIME CODES </a></li>
-        </ul>
+    <header class="header-main">
+        <nav class="header-main-nav">
+            <ul>
+                <li><a href="criminal.php">CRIMINALS</a></li>
+                <li><a href="police.php">POLICE</a></li>
+                <li><a href="probation.php">PROBATION OFFICERS</a></li>
+                <li class="active"><a href="cc.php">CRIME CODES </a></li>
+            </ul>
         </nav>
         <nav class="header-main-nav">
             <ul>
-            <li>
-                <form id="search_form" method="post" action="cc.php?m=s">
-                    <input type="search" name="search_text">
-                    <select id="field" name="field">
-                        <option value="crime_code">Crime Code</option>
-                        <option value="code_description">Code Description</option>
-                    </select>
-                    <input type="submit" value="Search"> 
-                </form>
-            </li>
-            <li>
-                    <input type="button" value="Add new" onclick="location.href='cc_add_and_edit.php'"/>
-            </li>
+                <li>
+                    <form id="search_form" method="post" action="cc.php?m=s">
+                        <input type="search" name="search_text">
+                        <select id="field" name="field">
+                            <option value="crime_code">Crime Code</option>
+                            <option value="code_description">Code Description</option>
+                        </select>
+                        <input type="submit" value="Search"
+                            style="width: 60px; height: 40px; margin-right: 10px; border-radius: 5px; background-color: #246583; color: #ffffff; cursor: pointer; transition: background-color 0.3s ease; border: none; text-align: center;"
+                            onmouseover="this.style.backgroundColor='#205070'"
+                            onmouseout="this.style.backgroundColor='#246583'">
+                    </form>
+                </li>
+                <li>
+                    <input type="button" value="Add new"
+                        style="width: 80px; height: 40px; border-radius: 5px; background-color: #246583; color: #ffffff; cursor: pointer; transition: background-color 0.3s ease; border: none; text-align: center;"
+                        onclick="location.href='cc_add_and_edit.php'" />
+                </li>
             </ul>
 
         </nav>
-        <nav class = "header-main-logout">
-        <ul>
-        <li><a href="logout.php">LOGOUT</a></li>
-        
-        </ul>
+        <nav class="header-main-logout">
+            <ul>
+                <li><a href="logout.php">LOGOUT</a></li>
+
+            </ul>
         </nav>
 
     </header>
@@ -74,15 +79,15 @@ include 'connect.php';
 
     <table class="content-table">
         <thead>
-          <tr>
-            <th>Crime Codes</th>
-            <th>Code Description</th>
-            <th>Operations</th>
-          </tr>
+            <tr>
+                <th>Crime Codes</th>
+                <th>Code Description</th>
+                <th>Operations</th>
+            </tr>
         </thead>
         <tbody>
 
-        <?php
+            <?php
         foreach($result as $row){
             $cc = $row->cc;
             $cd = $row->cd;
@@ -124,10 +129,35 @@ include 'connect.php';
      ?>
 
         </tbody>
-      </table>
+    </table>
 
 
-    
+
 
 </body>
+
 </html>
+<style>
+.more,
+.J {
+    display: inline-block;
+    text-decoration: none;
+}
+
+.more button,
+.J button {
+    width: 50px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #246583;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: none;
+}
+
+.more button:hover,
+.J button:hover {
+    background-color: #205070;
+}
+</style>

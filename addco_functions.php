@@ -74,7 +74,7 @@ function update_co() {
     global $con;
     $criminal_ID = array_key_exists('criminal_ID', $_REQUEST) ? $_REQUEST['criminal_ID'] : die("Criminal ID required!");
 
-    $sql = "UPDATE `crime officers` SET `crime_ID`= ?, `officer_ID`= ?";
+    $sql = "UPDATE `crime_officers` SET `crime_ID`= ?, `officer_ID`= ?";
     $crimeOfficer = crimeOfficer::fromArrayOrResult($_POST);
 
     try {

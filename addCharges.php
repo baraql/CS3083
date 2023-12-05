@@ -1,11 +1,7 @@
 <?php
 
 include 'connect.php';
-<<<<<<< Updated upstream
 include_once "addcharges_function.php";
-=======
-include_once "appeals_function.php";
->>>>>>> Stashed changes
 
 session_start();
 
@@ -129,28 +125,27 @@ $charge = new Charge;
 
 
 
-        <<<<<<< Updated upstream=======>>>>>>> Stashed changes
-            <label for="court_fee">Court Fee:</label>
-            <input type="text" name="court_fee" required
-                value="<?php echo isset($_GET['court_fee']) ? htmlspecialchars($_GET['court_fee']) : ''; ?>"><br>
+        <label for="court_fee">Court Fee:</label>
+        <input type="text" name="court_fee" required
+            value="<?php echo isset($_GET['court_fee']) ? htmlspecialchars($_GET['court_fee']) : ''; ?>"><br>
 
 
-            <label for="amount_paid">Fine Paid:</label>
-            <input type="text" name="amount_paid" required
-                value="<?php echo isset($_GET['amount_paid']) ? htmlspecialchars($_GET['amount_paid']) : ''; ?>"><br>
+        <label for="amount_paid">Fine Paid:</label>
+        <input type="text" name="amount_paid" required
+            value="<?php echo isset($_GET['amount_paid']) ? htmlspecialchars($_GET['amount_paid']) : ''; ?>"><br>
 
 
-            <label for="pay_due_date">Fine Due:</label>
-            <input type="date" name="pay_due_date" required
-                value="<?php echo isset($_GET['pay_due_date']) ? htmlspecialchars($_GET['pay_due_date']) : ''; ?>"><br>
+        <label for="pay_due_date">Fine Due:</label>
+        <input type="date" name="pay_due_date" required
+            value="<?php echo isset($_GET['pay_due_date']) ? htmlspecialchars($_GET['pay_due_date']) : ''; ?>"><br>
 
 
-            <button type="submit">Submit</button>
+        <button type="submit">Submit</button>
 
-            <button type="button">
-                <a href="popup.php?criminal_ID=<?php echo $criminal_ID; ?>"
-                    style="text-decoration: none; color: inherit;">Go Back</a>
-            </button>
+        <button type="button">
+            <a href="popup.php?criminal_ID=<?php echo $criminal_ID; ?>"
+                style="text-decoration: none; color: inherit;">Go Back</a>
+        </button>
 
     </form>
 

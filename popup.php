@@ -275,6 +275,7 @@ if (isset($_REQUEST['criminal_ID'])) {
                         echo '<form method="post" action="addco_functions.php">'; //form 1 
                         echo '<input type="hidden" name="crime_ID" value="' . $crime['crime_ID'] . '">';
                         echo '<input type="hidden" name="officer_ID" value="' . $officerID . '">';
+                        echo '<input type="hidden" name="criminal_ID" value="' . $criminal_id . '">';
                         echo '<input type="hidden" name="m" value="d">'; //u &m idk when and where this will be important 
                         echo '<button type="submit" id="coDelete" onclick="return confirm(\'Are you sure you want to delete this crime officer?\')">Delete</button>';
                         echo '</form>';

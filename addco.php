@@ -58,7 +58,7 @@ if (isset($_GET['officer_ID'])) {
     <form method="post" action="addco_functions.php" onsubmit="return check(this);">
         <input type="hidden" name="m" value="<?php echo $method; ?>" />
         <input type="hidden" name="criminal_ID" value="<?php echo $criminal_ID; ?>" />
-        <input type="hidden" name="crime_ID" value="<?php echo $crime_ID; ?>" />
+        <input type="hidden" name="crime_ID" value="<?php echo $_GET['crime_ID']; ?>" />
 
 
         <label for="crime_officers">Crime Officer:</label>

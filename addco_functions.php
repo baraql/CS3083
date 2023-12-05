@@ -77,6 +77,9 @@ function update_co() {
     $sql = "UPDATE `crime_officers` SET `crime_ID`= ?, `officer_ID`= ?";
     $crimeOfficer = crimeOfficer::fromArrayOrResult($_POST);
 
+    $crime_ID = $_POST['crime_ID'];
+    $officer_ID = $_POST['officer_ID'];
+
     try {
         $con->begin_transaction();
         $stmt = $con->prepare($sql);
@@ -102,13 +105,13 @@ function delete_co() {
     $officer_ID = array_key_exists('officer_ID', $_POST) ? $_POST['officer_ID'] : die("Officer ID required!");
     // $criminal_ID = array_key_exists('criminal_ID', $_GET) ? $_GET['criminal_ID'] : die("Criminal ID required!");
     $criminal_ID = $_POST['criminal_ID'];
-
-    $sql = "DELETE FROM crime_officers WHERE crime_ID = ?";
+    $crime_ID = $_POST['crime_ID'];
+    $sql = "DELETE FROM crime_officers WHERE crime_ID = ? AND officer_ID = ?";
 
     $con->begin_transaction();
     try {
         $stmt = $con->prepare($sql);
-        $stmt->bind_param("i", $crime_ID);
+        $stmt->bind_param("ii", $crime_ID, $officer_ID);
         $stmt->execute();
         $con->commit();
         header("location:popup.php?criminal_ID=$criminal_ID");
@@ -124,6 +127,7 @@ if (isset($_POST['m'])) {
 } else {
     return;
 }
+var_dump($_POST);
 
 if ($method == 'a') {
     add_co();
@@ -134,10 +138,6 @@ if ($method == 'a') {
 } elseif ($method == 'd') {
     delete_co();
 }
-
-
-
-
 
 
 

@@ -75,6 +75,10 @@ if (isset($_REQUEST['criminal_ID'])) {
                     <a href="addalias.php?criminal_ID=<?php echo $criminal_id; ?>"><button>Add Alias</button></a>
                 </h2>
 
+                <img src="https://media.licdn.com/dms/image/C4E03AQHRJDL0ibHPUA/profile-displayphoto-shrink_400_400/0/1630948274940?e=1704326400&v=beta&t=pbDkVODbliOweODttd_LVg_yVxYE5xpXVLUHxAH5z8g"
+                    alt="Profile Image" style="width: 200px;">
+
+
                 <?php
 
         $sql = "SELECT * FROM criminals WHERE criminal_ID = '" . mysqli_real_escape_string($con, $criminal_id) . "'";
@@ -400,7 +404,7 @@ if (isset($_REQUEST['criminal_ID'])) {
     }
 
     .box {
-        height: 300px;
+        height: 500px;
         padding: 20px;
         background: #EEE0C9;
         max-width: 100%;
